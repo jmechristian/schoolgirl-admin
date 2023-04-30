@@ -34,33 +34,35 @@ export const GridItem = ({
   };
 
   return (
-    <AnimatePresence>
-      <motion.div
-        className='w-full h-full min-h-[220px] flex flex-col'
-        variants={variants}
-        initial='hide'
-        animate={inView ? 'show' : 'hide'}
-        ref={itemRef}
-        onClick={() => window.open(link, '_blank')}
-      >
-        <Image src={image} width={330} height={330} alt={alt} />
+    image && (
+      <AnimatePresence>
         <motion.div
-          className={`${
-            background ? 'bg-khaki' : ''
-          } text-center flex flex-col justify-center items-center overflow-hidden py-3 px-5 h-16`}
+          className='w-full h-full min-h-[220px] flex flex-col'
+          variants={variants}
+          initial='hide'
+          animate={inView ? 'show' : 'hide'}
+          ref={itemRef}
+          onClick={() => window.open(link, '_blank')}
         >
-          <motion.div className={`font-brown-bold tracking-wide ${text}`}>
-            {headline}
-          </motion.div>
-          {job && (
-            <motion.div
-              className={`font-brown tracking-wide text-gray-500/80 text-sm leading-tight`}
-            >
-              {job}
+          <Image src={image} width={330} height={330} alt={alt} />
+          <motion.div
+            className={`${
+              background ? 'bg-khaki' : ''
+            } text-center flex flex-col justify-center items-center overflow-hidden py-3 px-5 h-16`}
+          >
+            <motion.div className={`font-brown-bold tracking-wide ${text}`}>
+              {headline}
             </motion.div>
-          )}
+            {job && (
+              <motion.div
+                className={`font-brown tracking-wide text-gray-500/80 text-sm leading-tight`}
+              >
+                {job}
+              </motion.div>
+            )}
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </AnimatePresence>
+      </AnimatePresence>
+    )
   );
 };

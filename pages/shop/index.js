@@ -1,6 +1,7 @@
 import React from 'react';
 // import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { shopifyClient, parseShopifyResponse } from '../../lib/shopify';
+import { createClient } from '@supabase/supabase-js';
 import Hero from '../../components/shared/Hero';
 import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
 import ScrollerWithHeadline from '../../components/shared/ScrollerWithHeadline';
@@ -9,6 +10,10 @@ import VideoPlayer from '../../components/shared/VideoPlayer';
 import HeadlineWithSpan from '../../components/shared/HeadlineWithSpan';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
+
+const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+const supabaseKey = process.env.VITE_SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const subNav = [
   {
@@ -150,7 +155,7 @@ const collectionItems = [
   },
 ];
 
-const Index = ({ products, picks, decor }) => {
+const Index = ({ products, picks, decor, pageData }) => {
   return (
     <main className='pb-16 relative' id='home'>
       <InnerPageSubNav subNav={subNav} />

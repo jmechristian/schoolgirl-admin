@@ -8,6 +8,7 @@ const FourColGridWithHeading = ({
   itemTextStyle,
   background,
 }) => {
+  console.log(items != undefined && 'items', items);
   return (
     <div className='w-full flex flex-col items-center gap-8 cursor-pointer'>
       <div className='text-3xl md:text-5xl px-6 text-center font-canela text-gray-600 font-light pb-2 mb-2'>
@@ -16,11 +17,11 @@ const FourColGridWithHeading = ({
       <div className='grid grid-cols-2 md:grid-cols-4 w-full max-w-7xl px-6 mx-auto gap-9 overflow-hidden'>
         {items &&
           items.map((it, i) => (
-            <div key={it.headline}>
+            <div key={i}>
               <GridItem
                 image={it.image}
-                alt={it.alt}
-                headline={it.headline}
+                alt={it.title}
+                headline={it.title}
                 text={itemTextStyle}
                 background={background}
                 link={it.link}

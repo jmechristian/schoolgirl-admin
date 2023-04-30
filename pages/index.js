@@ -1,11 +1,27 @@
+import { useState, useContext, useEffect } from 'react';
 import EmailSubscription from '../components/shared/EmailSubscription';
 import FourColGridWithHeading from '../components/shared/FourColGridWithHeading';
 import Hero from '../components/shared/Hero';
 import InstagramGrid from '../components/shared/InstagramGrid';
 import ThreeColGridNoHeading from '../components/shared/ThreeColGridNoHeading';
 import { shopifyClient, parseShopifyResponse } from '../lib/shopify';
+import { createClient } from '@supabase/supabase-js';
+import { HomeContext } from '../lib/HomeContext';
 
-export default function Home() {
+const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+const supabaseKey = process.env.VITE_SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+export default function Home({ pageData }) {
+  const [currentPageData, setCurrentPageData] = useState({ data: null });
+
+  useEffect(() => {
+    if (pageData) {
+      setCurrentPageData({ data: pageData.data });
+      console.log(pageData.data);
+    }
+  }, [pageData]);
+
   const collectionItems = [
     {
       image:
@@ -158,124 +174,148 @@ export default function Home() {
   ];
 
   return (
-    <div className='flex flex-col gap-12 md:gap-16 pb-16'>
-      <Hero
-        side='md:bg-gradient-to-l'
-        heading='Shop'
-        headline='Spring Dream'
-        subtext='Shop fantastic floral designs, vibrant colors, whimsical patterns, and more inside our seasonal classroom décor!'
-        buttonText='Shop The Season'
-        buttonColor='bg-sweet-green'
-        bg='bg-hero-one'
-        textSide='right-10'
-        textColor='text-sweet-green'
-        bodyColor='text-gray-700'
-        link='https://shopschoolgirlstyle.com/collections/glorious-spring-cue-the-sunshine-flowers'
-      />
-      <FourColGridWithHeading
-        items={seasonItems}
-        headline='Shop the Season'
-        itemTextStyle='uppercase text-gray-500/80 text-base md:text-lg'
-        background={true}
-      />
-      <Hero
-        side='md:bg-gradient-to-r'
-        heading='Shop'
-        headline='Boho Beauty'
-        subtext='Transform your classroom into a bohemian fantasy with tasseled pillows, chic polka dots, and pastel rainbows!'
-        buttonText="See What's New"
-        buttonColor='bg-gray-900'
-        bg='bg-hero-two'
-        textSide='left-10'
-        textColor='text-gray-900'
-        bodyColor='text-gray-700'
-        link='https://shopschoolgirlstyle.com/collections/boho-rainbow-surprise-makeover'
-      />
-      <FourColGridWithHeading
-        items={collectionItems}
-        headline='Shop the Collection'
-        itemTextStyle='text-gray-500/80 text-sm'
-        background={true}
-      />
-      <Hero
-        side='md:bg-none'
-        heading='Shop'
-        headingColor='text-gray-700 md:text-white'
-        headline="Mel's Picks"
-        subtext='From rainbow borders to verdant green décor, Mel’s picks of the week are a true celebration of spring!'
-        buttonText='Shop Her Picks'
-        buttonColor='bg-white'
-        buttonTextColor='text-gray-700'
-        bg='bg-hero-three'
-        textSide='right-10'
-        textColor='text-gray-700 md:text-white'
-        bodyColor='text-gray-700 md:text-white'
-        link='https://shopschoolgirlstyle.com/collections/mels-picks'
-      />
-      <FourColGridWithHeading
-        items={pickItems}
-        headline='Picks of the Week'
-        itemTextStyle='text-gray-500/80 text-sm'
-        background={true}
-      />
-      <Hero
-        side='md:bg-gradient-to-r'
-        heading='Blog'
-        headingColor='text-warm-brown'
-        headline='Good Vibes'
-        subtext='From statement-making murals to retro influences and  pretty pastels, see why this collection brings all the smiles!'
-        buttonText='Read All About It'
-        buttonColor='bg-warm-brown'
-        buttonTextColor='text-white'
-        bg='bg-hero-goodvibes'
-        textSide='left-10'
-        textColor='text-warm-brown'
-        bodyColor='text-gray-700'
-        link='https://schoolgirlstyle.com/2022/09/08/good-vibes-collection/'
-      />
-      <FourColGridWithHeading
-        items={styleItems}
-        headline='Style In Session'
-        itemTextStyle='text-gray-500/80 text-sm'
-      />
-      <div className='bg-khaki w-full py-16 px-6 flex justify-center'>
-        <div className='w-full flex flex-col justify-center items-center px-6 max-w-7xl gap-16'>
-          <Hero
-            side='md:bg-gradient-to-r md:from-white/30'
-            heading='Watch'
-            headingColor='text-gray-700'
-            headline='Classroom Makeover'
-            subtext='We celebrate Megan with a 
-            new classroom filled with florals, muted pinks, and retro accents, 
-            for a space bursting with whimsy!'
-            buttonText='Watch Now'
-            buttonColor='bg-gray-700'
-            buttonTextColor='text-white'
-            bg='bg-hero-makeover'
-            textSide='left-0 md:left-10'
-            textColor='text-gray-700'
-            bodyColor='text-gray-700'
-            link='https://youtu.be/6Aqu5bC4XEk'
-          />
-          <ThreeColGridNoHeading
-            items={makeoverItems}
-            itemTextStyle='text-gray-700'
-          />
+    <HomeContext.Provider value={currentPageData}>
+      <div className='flex flex-col gap-12 md:gap-16 pb-16'>
+        <Hero
+          side='md:bg-gradient-to-l'
+          heading={pageData.data[0].hero_main.heading}
+          headline={pageData.data[0].hero_main.headline}
+          subtext={pageData.data[0].hero_main.subheadline}
+          buttonText={pageData.data[0].hero_main.cta_text}
+          buttonColor='bg-sweet-green'
+          bg={pageData.data[0].hero_main.image}
+          textSide='right-10'
+          textColor='text-sweet-green'
+          bodyColor='text-gray-700'
+          link={pageData.data[0].hero_main.cta_link}
+        />
+        <FourColGridWithHeading
+          items={[
+            pageData.data[0].headline_one.row_items[0].grid_item,
+            pageData.data[0].headline_one.row_items[1].grid_item,
+            pageData.data[0].headline_one.row_items[2].grid_item,
+            pageData.data[0].headline_one.row_items[3].grid_item,
+          ]}
+          headline={pageData.data[0].headline_one.title}
+          itemTextStyle='uppercase text-gray-500/80 text-base md:text-lg'
+          background={true}
+        />
+        <Hero
+          side='md:bg-gradient-to-r'
+          heading={pageData.data[0].hero_two.heading}
+          headline={pageData.data[0].hero_two.headline}
+          subtext={pageData.data[0].hero_two.subheadline}
+          buttonText={pageData.data[0].hero_two.cta_text}
+          buttonColor='bg-gray-900'
+          bg={pageData.data[0].hero_two.image}
+          textSide='left-10'
+          textColor='text-gray-900'
+          bodyColor='text-gray-700'
+          link={pageData.data[0].hero_two.cta_link}
+        />
+        <FourColGridWithHeading
+          items={[
+            pageData.data[0].headline_two.row_items[0].grid_item,
+            pageData.data[0].headline_two.row_items[1].grid_item,
+            pageData.data[0].headline_two.row_items[2].grid_item,
+            pageData.data[0].headline_two.row_items[3].grid_item,
+          ]}
+          headline={pageData.data[0].headline_two.title}
+          itemTextStyle='text-gray-500/80 text-sm'
+          background={true}
+        />
+        <Hero
+          side='md:bg-none'
+          heading={pageData.data[0].hero_three.heading}
+          headline={pageData.data[0].hero_three.headline}
+          subtext={pageData.data[0].hero_three.subheadline}
+          buttonText={pageData.data[0].hero_three.cta_text}
+          buttonColor='bg-white'
+          buttonTextColor='text-gray-700'
+          bg={pageData.data[0].hero_three.image}
+          textSide='right-10'
+          textColor='text-gray-700 md:text-white'
+          bodyColor='text-gray-700 md:text-white'
+          link='https://shopschoolgirlstyle.com/collections/mels-picks'
+        />
+        <FourColGridWithHeading
+          items={[
+            pageData.data[0].headline_three.row_items[0].grid_item,
+            pageData.data[0].headline_three.row_items[1].grid_item,
+            pageData.data[0].headline_three.row_items[2].grid_item,
+            pageData.data[0].headline_three.row_items[3].grid_item,
+          ]}
+          headline={pageData.data[0].headline_three.title}
+          itemTextStyle='text-gray-500/80 text-sm'
+          background={true}
+        />
+        <Hero
+          side='md:bg-gradient-to-r'
+          heading={pageData.data[0].hero_four.heading}
+          headline={pageData.data[0].hero_four.headline}
+          subtext={pageData.data[0].hero_four.subheadline}
+          buttonText={pageData.data[0].hero_four.cta_text}
+          buttonColor='bg-warm-brown'
+          buttonTextColor='text-white'
+          bg={pageData.data[0].hero_four.image}
+          textSide='left-10'
+          textColor='text-warm-brown'
+          bodyColor='text-gray-700'
+          link='https://schoolgirlstyle.com/2022/09/08/good-vibes-collection/'
+        />
+        <FourColGridWithHeading
+          items={[
+            pageData.data[0].headline_four.row_items[0].grid_item,
+            pageData.data[0].headline_four.row_items[1].grid_item,
+            pageData.data[0].headline_four.row_items[2].grid_item,
+            pageData.data[0].headline_four.row_items[3].grid_item,
+          ]}
+          headline={pageData.data[0].headline_four.title}
+          itemTextStyle='text-gray-500/80 text-sm'
+        />
+        <div className='bg-khaki w-full py-16 px-6 flex justify-center'>
+          <div className='w-full flex flex-col justify-center items-center px-6 max-w-7xl gap-16'>
+            <Hero
+              side='md:bg-gradient-to-r md:from-white/30'
+              heading={pageData.data[0].watch_hero.heading}
+              headline={pageData.data[0].watch_hero.headline}
+              subtext={pageData.data[0].watch_hero.subheadline}
+              buttonText={pageData.data[0].watch_hero.cta_text}
+              buttonColor='bg-gray-700'
+              buttonTextColor='text-white'
+              bg={pageData.data[0].watch_hero.image}
+              textSide='left-0 md:left-10'
+              textColor='text-gray-700'
+              bodyColor='text-gray-700'
+              link='https://youtu.be/6Aqu5bC4XEk'
+            />
+            <ThreeColGridNoHeading
+              items={[
+                pageData.data[0].watch_items.row_items[0].grid_item,
+                pageData.data[0].watch_items.row_items[1].grid_item,
+                pageData.data[0].watch_items.row_items[2].grid_item,
+              ]}
+              itemTextStyle='text-gray-700'
+            />
+          </div>
         </div>
+        <InstagramGrid />
+        <EmailSubscription />
       </div>
-      <InstagramGrid />
-      <EmailSubscription />
-    </div>
+    </HomeContext.Provider>
   );
 }
 
 export async function getServerSideProps() {
-  // Fetch all the products
-  const products = await shopifyClient.product.fetchAll();
+  const pageData = await supabase
+    .from('home')
+    .select(
+      '*, hero_four:home_hero_four_fkey(*), hero_two:home_hero_two_fkey(*), hero_three:home_hero_three_fkey(*), hero_main:home_hero_main_fkey(*), watch_hero:home_watch_hero_fkey(*), headline_one(id, title, row_items(grid_item(*))), headline_two(id, title, row_items(grid_item(*))), headline_three(id, title, row_items(grid_item(*))), headline_four(id, title, row_items(grid_item(*))), watch_items(id, title, row_items(grid_item(*)))'
+    );
 
   return {
     props: {
-      products: parseShopifyResponse(products),
+      pageData,
     },
   };
 }
