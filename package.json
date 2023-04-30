@@ -1,0 +1,37 @@
+{
+  "name": "schoolgirl-style",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.9",
+    "@heroicons/react": "^2.0.16",
+    "@next/font": "13.1.6",
+    "@shopify/shopify-api": "^6.2.0",
+    "eslint": "8.33.0",
+    "eslint-config-next": "13.1.6",
+    "framer-motion": "^9.0.2",
+    "next": "13.1.6",
+    "next-seo": "^5.15.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-instagram-authless-feed": "github:jamesmoriarty/react-instagram-authless-feed",
+    "react-mailchimp-form": "^1.0.2",
+    "react-player": "^2.11.2",
+    "react-share": "^4.4.1",
+    "react-social-icons": "^5.15.0",
+    "shopify-buy": "^2.18.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.9",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4"
+  }
+}
