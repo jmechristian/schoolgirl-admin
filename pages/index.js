@@ -236,7 +236,7 @@ export default function Home({ pageData }) {
           textSide='right-10'
           textColor='text-gray-700 md:text-white'
           bodyColor='text-gray-700 md:text-white'
-          link='https://shopschoolgirlstyle.com/collections/mels-picks'
+          link={pageData.data[0].hero_three.cta_link}
         />
         <FourColGridWithHeading
           items={[
@@ -261,7 +261,7 @@ export default function Home({ pageData }) {
           textSide='left-10'
           textColor='text-warm-brown'
           bodyColor='text-gray-700'
-          link='https://schoolgirlstyle.com/2022/09/08/good-vibes-collection/'
+          link={pageData.data[0].hero_four.cta_link}
         />
         <FourColGridWithHeading
           items={[

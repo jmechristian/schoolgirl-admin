@@ -1,23 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { shopifyClient, parseShopifyResponse } from '../../lib/shopify';
 import { createClient } from '@supabase/supabase-js';
 import Hero from '../../components/shared/Hero';
 import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
-import ScrollerWithHeadline from '../../components/shared/ScrollerWithHeadline';
 import ShopScrollerWithHeadline from '../../components/shared/ShopScrollerWithHeadline';
 import VideoPlayer from '../../components/shared/VideoPlayer';
 import HeadlineWithSpan from '../../components/shared/HeadlineWithSpan';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
 
-const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-const supabaseKey = process.env.VITE_SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
-
 const subNav = [
   {
-    name: 'Home',
+    name: 'shop',
     link: '#home',
   },
   {
@@ -155,22 +150,23 @@ const collectionItems = [
   },
 ];
 
-const Index = ({ products, picks, decor, pageData }) => {
+const Index = ({ pageData, products, decor, picks }) => {
+  console.log(pageData);
   return (
     <main className='pb-16 relative' id='home'>
       <InnerPageSubNav subNav={subNav} />
       <Hero
-        side='md:bg-gradient-to-l'
-        heading='Shop'
-        headline='Simply Safari'
-        subtext='Explore the wild whimsy of this beloved collection, featuring bold animal prints and a warm, nature-inspired palette.'
-        buttonText='Shop Collection'
+        side='md:bg-gradient-to-r'
+        heading={pageData.data[0].hero_main.heading}
+        headline={pageData.data[0].hero_main.headline}
+        subtext={pageData.data[0].hero_main.subheadline}
+        buttonText={pageData.data[0].hero_main.cta_text}
         buttonColor='bg-gray-900'
-        bg='bg-hero-shop-safari'
+        bg={pageData.data[0].hero_main.image}
         textSide='right-10'
         textColor='text-gray-900'
         bodyColor='text-gray-700'
-        link='https://shopschoolgirlstyle.com/collections/schoolgirl-style-wild-and-free-classroom-transformation'
+        link={pageData.data[0].hero_main.cta_link}
       />
       <div
         className='flex flex-col pt-16 gap-10 md:gap-16 scroll-mt-24'
@@ -185,16 +181,16 @@ const Index = ({ products, picks, decor, pageData }) => {
         <div className='scroll-mt-24' id='new'>
           <Hero
             side='md:bg-gradient-to-r'
-            heading='Shop'
-            headline="What's New?"
-            subtext='Shop fantastic floral designs, vibrant colors, whimsical patterns, and more inside our seasonal classroom décor!'
-            buttonText='Shop The Season'
+            heading={pageData.data[0].hero_two.heading}
+            headline={pageData.data[0].hero_two.headline}
+            subtext={pageData.data[0].hero_two.subheadline}
+            buttonText={pageData.data[0].hero_two.cta_text}
             buttonColor='bg-neutral-brown'
-            bg='bg-hero-shop-new'
+            bg={pageData.data[0].hero_two.image}
             textSide='left-10'
             textColor='text-neutral-brown'
             bodyColor='text-gray-700'
-            link='https://shopschoolgirlstyle.com/collections/schoolgirl-style-seasonal-products'
+            link={pageData.data[0].hero_two.cta_link}
           />
         </div>
         <ShopScrollerWithHeadline
@@ -205,22 +201,27 @@ const Index = ({ products, picks, decor, pageData }) => {
         <div className='scroll-mt-24' id='furniture design'>
           <Hero
             side='md:bg-gradient-to-l'
-            heading='Shop'
-            headline='SGS Design'
-            subtext='Your one-stop shop for design, furniture, flooring, organizational systems, storage, décor and more!'
-            buttonText='Learn More'
+            heading={pageData.data[0].hero_three.heading}
+            headline={pageData.data[0].hero_three.headline}
+            subtext={pageData.data[0].hero_three.subheadline}
+            buttonText={pageData.data[0].hero_three.cta_text}
             buttonColor='bg-gray-900'
-            bg='bg-hero-sgs-design'
+            bg={pageData.data[0].hero_three.image}
             textSide='right-10'
             textColor='text-gray-900'
             bodyColor='text-gray-700'
-            link='https://shopschoolgirlstyle.com/pages/sgs-design'
+            link={pageData.data[0].hero_three.cta_link}
           />
         </div>
         <div className='scroll-mt-24' id='design'>
           <FourColGridWithHeading
-            items={sgsDesignItems}
-            headline='Shop SGS Design'
+            items={[
+              pageData.data[0].headline_three.row_items[0].grid_item,
+              pageData.data[0].headline_three.row_items[1].grid_item,
+              pageData.data[0].headline_three.row_items[2].grid_item,
+              pageData.data[0].headline_three.row_items[3].grid_item,
+            ]}
+            headline={pageData.data[0].headline_three.title}
             itemTextStyle='uppercase text-gray-500/80 text-base md:text-lg'
             background={true}
           />
@@ -228,16 +229,16 @@ const Index = ({ products, picks, decor, pageData }) => {
         <div className='scroll-mt-24' id='melspicks'>
           <Hero
             side='md:bg-gradient-to-r'
-            heading='Shop'
-            headline="Mel's Picks"
-            subtext='From rainbow borders to verdant green décor, Mel’s picks of the week are a true celebration of spring!'
-            buttonText='Shop Her Picks'
+            heading={pageData.data[0].hero_four.heading}
+            headline={pageData.data[0].hero_four.headline}
+            subtext={pageData.data[0].hero_four.subheadline}
+            buttonText={pageData.data[0].hero_four.cta_text}
             buttonColor='bg-neutral-brown'
-            bg='bg-hero-shop-picks'
+            bg={pageData.data[0].hero_four.image}
             textSide='left-10'
             textColor='text-neutral-brown'
             bodyColor='text-gray-700'
-            link='https://shopschoolgirlstyle.com/collections/mels-picks'
+            link={pageData.data[0].hero_four.cta_link}
           />
         </div>
         <ShopScrollerWithHeadline
@@ -265,6 +266,10 @@ const Index = ({ products, picks, decor, pageData }) => {
 };
 
 export async function getServerSideProps() {
+  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+  const supabaseKey = process.env.VITE_SUPABASE_KEY;
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
   const safari = 'gid://shopify/Collection/286718034077';
   // Fetch all the products
   const products = await shopifyClient.collection.fetchWithProducts(safari, {
@@ -284,11 +289,18 @@ export async function getServerSideProps() {
     productsFirst: 10,
   });
 
+  const pageData = await supabase
+    .from('shop')
+    .select(
+      '*, hero_main:shop_hero_main_fkey(*), hero_two:shop_hero_two_fkey(*), hero_three:shop_hero_three_fkey(*), hero_four:shop_hero_four_fkey(*), headline_three(id, title, row_items(grid_item(*)))'
+    );
+
   return {
     props: {
       products: parseShopifyResponse(products),
       picks: parseShopifyResponse(melspicks),
       decor: parseShopifyResponse(classDecor),
+      pageData,
     },
   };
 }

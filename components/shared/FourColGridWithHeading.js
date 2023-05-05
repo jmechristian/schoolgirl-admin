@@ -8,7 +8,6 @@ const FourColGridWithHeading = ({
   itemTextStyle,
   background,
 }) => {
-  console.log(items != undefined && 'items', items);
   return (
     <div className='w-full flex flex-col items-center gap-8 cursor-pointer'>
       <div className='text-3xl md:text-5xl px-6 text-center font-canela text-gray-600 font-light pb-2 mb-2'>

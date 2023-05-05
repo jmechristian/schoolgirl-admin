@@ -7,7 +7,7 @@ const ThreeColGridNoHeading = ({ items, itemTextStyle }) => {
       <div className='grid md:grid-cols-3 w-full max-w-7xl px-6 sm:px-0 mx-auto gap-12 overflow-hidden'>
         {items &&
           items.map((it, i) => (
-            <div key={it.headline}>
+            <div key={i}>
               <FlexGridItem
                 image={it.image}
                 alt={it.alt}
