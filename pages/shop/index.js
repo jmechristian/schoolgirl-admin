@@ -250,10 +250,8 @@ const Index = ({ pageData, products, decor, picks }) => {
         />
         <div className='flex flex-col'>
           <VideoPlayer
-            placeholder={
-              'https://res.cloudinary.com/designadg/image/upload/v1677779526/SGS/shop_video_placeholder_go1clz.webp'
-            }
-            url='https://youtu.be/6Aqu5bC4XEk'
+            placeholder={pageData.data[0].shop_video_placeholder}
+            url={pageData.data[0].shop_video}
           />
           <div className='bg-gradient-to-b from-khaki space-y-16'>
             <HeadlineWithSpan link='https://shopschoolgirlstyle.com/pages/sgs-lookbook' />
@@ -270,30 +268,36 @@ export async function getServerSideProps() {
   const supabaseKey = process.env.VITE_SUPABASE_KEY;
   const supabase = createClient(supabaseUrl, supabaseKey);
 
-  const safari = 'gid://shopify/Collection/286718034077';
-  // Fetch all the products
-  const products = await shopifyClient.collection.fetchWithProducts(safari, {
-    productsFirst: 10,
-  });
-
-  const collectionId = 'gid://shopify/Collection/438218719523';
-  // Fetch all the products
-
-  const melspicks = await shopifyClient.collection.fetchWithProducts(
-    collectionId,
-    { productsFirst: 10 }
-  );
-
-  const decor = 'gid://shopify/Collection/433233494307';
-  const classDecor = await shopifyClient.collection.fetchWithProducts(decor, {
-    productsFirst: 10,
-  });
-
   const pageData = await supabase
     .from('shop')
     .select(
       '*, hero_main:shop_hero_main_fkey(*), hero_two:shop_hero_two_fkey(*), hero_three:shop_hero_three_fkey(*), hero_four:shop_hero_four_fkey(*), headline_three(id, title, row_items(grid_item(*)))'
     );
+
+  const safari = 'gid://shopify/Collection/286718034077';
+  // Fetch all the products
+  const products = await shopifyClient.collection.fetchWithProducts(
+    pageData.data[0].shop_collection_1,
+    {
+      productsFirst: 10,
+    }
+  );
+
+  // const collectionId = 'gid://shopify/Collection/438218719523';
+  // Fetch all the products
+
+  const melspicks = await shopifyClient.collection.fetchWithProducts(
+    pageData.data[0].shop_collection_2,
+    { productsFirst: 10 }
+  );
+
+  // const decor = 'gid://shopify/Collection/433233494307';
+  const classDecor = await shopifyClient.collection.fetchWithProducts(
+    pageData.data[0].shop_collection_3,
+    {
+      productsFirst: 10,
+    }
+  );
 
   return {
     props: {
