@@ -7,9 +7,8 @@ import Hero from '../../components/shared/Hero';
 import FourColStaffGrid from '../../components/shared/FourColStaffGrid';
 import InstagramGrid from '../../components/shared/InstagramGrid';
 import EmailSubscription from '../../components/shared/EmailSubscription';
-import PerfectPairing from '../../components/shared/PerfectPairing';
 
-const Page = () => {
+const Page = ({ pageData }) => {
   const polkaItems = [
     {
       heading: 'Founder',

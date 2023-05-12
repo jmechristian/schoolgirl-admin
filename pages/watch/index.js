@@ -1,6 +1,7 @@
 import React from 'react';
 import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
 import Hero from '../../components/shared/Hero';
+import { createClient } from '@supabase/supabase-js';
 import ThreeColumWithHeadline from '../../components/shared/ThreeColumWithHeadline';
 
 const subNav = [
@@ -126,18 +127,19 @@ const classroomItems = [
   },
 ];
 
-const Index = () => {
+const Index = ({ pageData }) => {
+  console.log(pageData);
   return (
     <main className='relative' id='home'>
       <InnerPageSubNav subNav={subNav} />
       <Hero
         side='md:bg-gradient-to-r md:from-white/30'
-        heading='Watch'
-        headline='Classroom Makeover'
-        subtext='We celebrate Megan with a new classroom filled with florals, muted pinks, and retro accents, for a space bursting with whimsy'
-        buttonText='Watch Now'
+        heading={pageData.data[0].hero_main.heading}
+        headline={pageData.data[0].hero_main.headline}
+        subtext={pageData.data[0].hero_main.subheadline}
+        buttonText={pageData.data[0].hero_main.cta_text}
         buttonColor='bg-gray-700'
-        bg='bg-hero-makeover'
+        bg={pageData.data[0].hero_main.image}
         textSide='left-10'
         textColor='text-gray-700'
         bodyColor='text-gray-700'
@@ -145,28 +147,45 @@ const Index = () => {
       />
       <div className='flex flex-col pt-16 gap-10 md:gap-16'>
         <ThreeColumWithHeadline
-          headline='New Kids on the Block'
-          items={makeoverItems}
+          items={[
+            pageData.data[0].headline_one.row_items[0].grid_item,
+            pageData.data[0].headline_one.row_items[1].grid_item,
+            pageData.data[0].headline_one.row_items[2].grid_item,
+          ]}
+          headline={pageData.data[0].headline_one.title}
           itemTextStyle='text-gray-700'
         />
         <div className='flex flex-col gap-16 py-16 bg-khaki'>
           <div id='makeovers' className=' scroll-m-32'>
             <ThreeColumWithHeadline
-              headline='Makeover Magic'
-              items={magicItems}
+              items={[
+                pageData.data[0].headline_two.row_items[0].grid_item,
+                pageData.data[0].headline_two.row_items[1].grid_item,
+                pageData.data[0].headline_two.row_items[2].grid_item,
+              ]}
+              headline={pageData.data[0].headline_two.title}
               itemTextStyle='text-gray-700'
+              su
             />
           </div>
           <div id='sgs' className=' scroll-m-32'>
             <ThreeColumWithHeadline
-              headline='Schoolgirl Style Scenes'
-              items={sgsItems}
+              items={[
+                pageData.data[0].headline_three.row_items[0].grid_item,
+                pageData.data[0].headline_three.row_items[1].grid_item,
+                pageData.data[0].headline_three.row_items[2].grid_item,
+              ]}
+              headline={pageData.data[0].headline_three.title}
               itemTextStyle='text-gray-700'
             />
           </div>
           <ThreeColumWithHeadline
-            headline='Classroom Creations'
-            items={classroomItems}
+            items={[
+              pageData.data[0].headline_four.row_items[0].grid_item,
+              pageData.data[0].headline_four.row_items[1].grid_item,
+              pageData.data[0].headline_four.row_items[2].grid_item,
+            ]}
+            headline={pageData.data[0].headline_four.title}
             itemTextStyle='text-gray-700'
           />
         </div>
@@ -174,5 +193,23 @@ const Index = () => {
     </main>
   );
 };
+
+export async function getServerSideProps() {
+  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+  const supabaseKey = process.env.VITE_SUPABASE_KEY;
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  const pageData = await supabase
+    .from('watch')
+    .select(
+      '*, hero_main:watch_hero_main_fkey(*), headline_one(id, title, row_items(grid_item(*))), headline_two(id, title, row_items(grid_item(*))), headline_three(id, title, row_items(grid_item(*))), headline_four(id, title, row_items(grid_item(*)))'
+    );
+
+  return {
+    props: {
+      pageData,
+    },
+  };
+}
 
 export default Index;

@@ -15,7 +15,7 @@ const ThreeColumWithHeadline = ({ items, itemTextStyle, headline }) => {
               <FlexGridItem
                 image={it.image}
                 alt={it.alt}
-                headline={it.headline}
+                headline={it.title}
                 text={itemTextStyle}
                 subheadline={it.subheadline}
                 link={it.link}
