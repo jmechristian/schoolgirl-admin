@@ -7,6 +7,7 @@ import StoreList from '../../components/shared/StoreList';
 import Hero from '../../components/shared/Hero';
 import InstagramGrid from '../../components/shared/InstagramGrid';
 import EmailSubscription from '../../components/shared/EmailSubscription';
+import { createClient } from '@supabase/supabase-js';
 
 const subNav = [
   {
@@ -79,37 +80,41 @@ const seasonItems = [
   },
 ];
 
-const Index = () => {
+const Index = ({ pageData, locations }) => {
+  console.log(pageData);
   return (
     <main className='relative' id='home'>
       <InnerPageSubNav subNav={subNav} />
       <VideoPlayer
-        placeholder={
-          'https://res.cloudinary.com/designadg/image/upload/q_60/v1678053562/SGS/visit_video_hero_yp0owm.webp'
-        }
-        url='https://youtu.be/Vbz4xoAEkOY'
+        placeholder={pageData.data[0].hero_main_placeholder}
+        url={pageData.data[0].hero_main_link}
       />
       <div className='flex flex-col gap-16'>
         <PolkaTwoRows items={polkaItems} />
         <FourColGridWithHeading
-          items={seasonItems}
-          headline='Shop Schoolgirl Style'
+          items={[
+            pageData.data[0].headline_one.row_items[0].grid_item,
+            pageData.data[0].headline_one.row_items[1].grid_item,
+            pageData.data[0].headline_one.row_items[2].grid_item,
+            pageData.data[0].headline_one.row_items[3].grid_item,
+          ]}
+          headline={pageData.data[0].headline_one.title}
           itemTextStyle='uppercase text-gray-500/80 text-base md:text-lg'
           background={true}
         />
       </div>
       <div className='scroll-m-8 flex flex-col pt-16' id='store'>
-        <StoreList headline='At a Store Near You' />
+        <StoreList headline='At a Store Near You' locations={locations.data} />
       </div>
       <div className='scroll-m-8 flex flex-col' id='events'>
         <Hero
           side='md:bg-gradient-to-r'
-          heading='Events'
-          headline='Field Trip'
-          subtext='Don’t miss the bus on all of the fun upcoming events and Schoolgirl Style happenings, plus news on the latest teacher discounts inside our newsletter!'
-          buttonText='Stay in the Loop'
+          heading={pageData.data[0].hero_one.heading}
+          headline={pageData.data[0].hero_one.headline}
+          subtext={pageData.data[0].hero_one.subheadline}
+          buttonText={pageData.data[0].hero_one.cta_text}
           buttonColor='bg-sweet-green'
-          bg='bg-visit-events'
+          bg={pageData.data[0].hero_one.image}
           textSide='left-10'
           textColor='text-sweet-green'
           bodyColor='text-gray-600'
@@ -136,5 +141,26 @@ const Index = () => {
     </main>
   );
 };
+
+export async function getServerSideProps() {
+  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+  const supabaseKey = process.env.VITE_SUPABASE_KEY;
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  const pageData = await supabase
+    .from('visit')
+    .select(
+      '*, hero_one:visit_hero_one_fkey(*), headline_one(id, title, row_items(grid_item(*)))'
+    );
+
+  const locations = await supabase.from('locations').select('*');
+
+  return {
+    props: {
+      pageData,
+      locations,
+    },
+  };
+}
 
 export default Index;

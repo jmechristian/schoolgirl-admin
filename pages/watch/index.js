@@ -128,7 +128,6 @@ const classroomItems = [
 ];
 
 const Index = ({ pageData }) => {
-  console.log(pageData);
   return (
     <main className='relative' id='home'>
       <InnerPageSubNav subNav={subNav} />

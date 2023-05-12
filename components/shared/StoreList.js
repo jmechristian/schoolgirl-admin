@@ -63,8 +63,8 @@ export const DummyBlock = ({ locations }) => {
     <div className='flex flex-col gap-1' key={loc.name}>
       <div className='text-gray-500 font-brown-bold'>{loc.name}</div>
       <div className='flex flex-col'>
-        <div className='text-gray-500 font-brown'>{loc.location}</div>
-        <div className='text-gray-500 font-brown'>{loc.locationTwo}</div>
+        <div className='text-gray-500 font-brown'>{loc.address}</div>
+        <div className='text-gray-500 font-brown'>{loc.address_extra}</div>
       </div>
     </div>
   ));
@@ -78,7 +78,7 @@ const StoreList = ({ headline, locations }) => {
           <HeadlineMotion>{headline}</HeadlineMotion>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-16'>
-          <DummyBlock locations={locationsOne} />
+          <DummyBlock locations={locations} />
         </div>
       </div>
     </div>
