@@ -74,7 +74,6 @@ const collectionItems = [
 ];
 
 const Index = ({ posts, inspo, pageData }) => {
-  console.log(pageData);
   return (
     <main className='relative pb-16' id='home'>
       <InnerPageSubNav subNav={subNav} />

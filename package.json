@@ -12,7 +12,10 @@
     "@headlessui/react": "^1.7.9",
     "@heroicons/react": "^2.0.16",
     "@next/font": "13.1.6",
+    "@reduxjs/toolkit": "^1.9.5",
     "@shopify/shopify-api": "^6.2.0",
+    "@supabase/auth-helpers-nextjs": "^0.6.1",
+    "@supabase/auth-helpers-react": "^0.3.1",
     "@supabase/supabase-js": "^2.21.0",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
@@ -24,6 +27,7 @@
     "react-instagram-authless-feed": "github:jamesmoriarty/react-instagram-authless-feed",
     "react-mailchimp-form": "^1.0.2",
     "react-player": "^2.11.2",
+    "react-redux": "^8.0.5",
     "react-share": "^4.4.1",
     "react-social-icons": "^5.15.0",
     "shopify-buy": "^2.18.0"

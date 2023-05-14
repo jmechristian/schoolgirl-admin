@@ -1,22 +1,24 @@
 import { useEffect } from 'react';
-import EmailSubscription from '../components/shared/EmailSubscription';
-import FourColGridWithHeading from '../components/shared/FourColGridWithHeading';
-import Hero from '../components/shared/Hero';
-import InstagramGrid from '../components/shared/InstagramGrid';
-import ThreeColGridNoHeading from '../components/shared/ThreeColGridNoHeading';
-import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import EmailSubscription from '../../components/shared/EmailSubscription';
+import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
+import EditableHero from '../../components/shared/EditableHero';
+import Hero from '../../components/shared/Hero';
+import InstagramGrid from '../../components/shared/InstagramGrid';
+import ThreeColGridNoHeading from '../../components/shared/ThreeColGridNoHeading';
 import { createClient } from '@supabase/supabase-js';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from '../authSlice';
+import { setUser } from '../../authSlice';
+import { useRouter } from 'next/router';
 
 const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function Home({ pageData }) {
-  // const user = useUser();
+  console.log(pageData);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const collectionItems = [
     {
@@ -170,17 +172,15 @@ export default function Home({ pageData }) {
   ];
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN') {
-        dispatch(setUser());
-      }
-      // console.log('session', session);
-    });
+    if (!user) {
+      router.push('/admin');
+    }
   });
 
   return (
     <div className='flex flex-col gap-12 md:gap-16 pb-16'>
-      <Hero
+      <EditableHero
+        id={pageData.data[0].hero_main.id}
         side='md:bg-gradient-to-l'
         heading={pageData.data[0].hero_main.heading}
         headline={pageData.data[0].hero_main.headline}
@@ -204,7 +204,8 @@ export default function Home({ pageData }) {
         itemTextStyle='uppercase text-gray-500/80 text-base md:text-lg'
         background={true}
       />
-      <Hero
+      <EditableHero
+        id={pageData.data[0].hero_two.id}
         side='md:bg-gradient-to-r'
         heading={pageData.data[0].hero_two.heading}
         headline={pageData.data[0].hero_two.headline}
@@ -228,7 +229,8 @@ export default function Home({ pageData }) {
         itemTextStyle='text-gray-500/80 text-sm'
         background={true}
       />
-      <Hero
+      <EditableHero
+        id={pageData.data[0].hero_three.id}
         side='md:bg-none'
         heading={pageData.data[0].hero_three.heading}
         headline={pageData.data[0].hero_three.headline}
@@ -253,7 +255,8 @@ export default function Home({ pageData }) {
         itemTextStyle='text-gray-500/80 text-sm'
         background={true}
       />
-      <Hero
+      <EditableHero
+        id={pageData.data[0].hero_four.id}
         side='md:bg-gradient-to-r'
         heading={pageData.data[0].hero_four.heading}
         headline={pageData.data[0].hero_four.headline}
@@ -279,7 +282,8 @@ export default function Home({ pageData }) {
       />
       <div className='bg-khaki w-full py-16 px-6 flex justify-center'>
         <div className='w-full flex flex-col justify-center items-center px-6 max-w-7xl gap-16'>
-          <Hero
+          <EditableHero
+            id={pageData.data[0].watch_hero.id}
             side='md:bg-gradient-to-r md:from-white/30'
             heading={pageData.data[0].watch_hero.heading}
             headline={pageData.data[0].watch_hero.headline}

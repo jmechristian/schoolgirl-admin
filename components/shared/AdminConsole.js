@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const statuses = {
   Complete: 'text-green-700 bg-green-50 ring-green-600/20',
   'In progress': 'text-gray-600 bg-gray-50 ring-gray-500/10',
@@ -6,48 +8,33 @@ const statuses = {
 const projects = [
   {
     id: 1,
-    name: 'GraphQL API',
-    href: '#',
-    status: 'Complete',
-    createdBy: 'Leslie Alexander',
-    dueDate: 'March 17, 2023',
-    dueDateTime: '2023-03-17T00:00Z',
+    name: 'Home',
+    href: '/edit/home',
   },
   {
     id: 2,
-    name: 'New benefits plan',
-    href: '#',
-    status: 'In progress',
-    createdBy: 'Leslie Alexander',
-    dueDate: 'May 5, 2023',
-    dueDateTime: '2023-05-05T00:00Z',
+    name: 'Watch',
+    href: '/watch',
   },
   {
     id: 3,
-    name: 'Onboarding emails',
-    href: '#',
-    status: 'In progress',
-    createdBy: 'Courtney Henry',
-    dueDate: 'May 25, 2023',
-    dueDateTime: '2023-05-25T00:00Z',
+    name: 'Visit',
+    href: '/visit',
   },
   {
     id: 4,
-    name: 'iOS app',
-    href: '#',
-    status: 'In progress',
-    createdBy: 'Leonard Krasner',
-    dueDate: 'June 7, 2023',
-    dueDateTime: '2023-06-07T00:00Z',
+    name: 'Blog',
+    href: '/blog',
   },
   {
     id: 5,
-    name: 'Marketing site redesign',
-    href: '#',
-    status: 'Archived',
-    createdBy: 'Courtney Henry',
-    dueDate: 'June 10, 2023',
-    dueDateTime: '2023-06-10T00:00Z',
+    name: 'Giving Back',
+    href: '/giving',
+  },
+  {
+    id: 6,
+    name: 'About',
+    href: '/about',
   },
 ];
 
@@ -60,12 +47,12 @@ export default function AdminConsole() {
     <div className='pt-16 pb-28'>
       <ul
         role='list'
-        className='divide-y divide-gray-100 max-w-4xl mx-auto px-6 md:px-16 py-9 bg-slate-100 shadow-lg rounded-xl'
+        className='divide-y divide-gray-300 max-w-3xl mx-auto px-6 md:px-16 py-12 bg-slate-100 shadow-lg rounded-xl'
       >
         {projects.map((project) => (
           <li
             key={project.id}
-            className='flex items-center justify-between gap-x-6 py-5'
+            className='flex items-center justify-between gap-x-6 py-6'
           >
             <div className='min-w-0'>
               <div className='flex items-start gap-x-3'>
@@ -73,20 +60,14 @@ export default function AdminConsole() {
                   {project.name}
                 </p>
               </div>
-              <div className='mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500'>
-                <p className='whitespace-nowrap'>
-                  Due on{' '}
-                  <time dateTime={project.dueDateTime}>{project.dueDate}</time>
-                </p>
-              </div>
             </div>
             <div className='flex flex-none items-center gap-x-4'>
-              <a
+              <Link
                 href={project.href}
-                className='hidden rounded-md bg-brand-red px-3 py-2 text-lg font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block'
+                className='hidden rounded-md bg-brand-red px-3 py-2 text-lg font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-black/70 sm:block'
               >
                 Edit Page<span className='sr-only'>, {project.name}</span>
-              </a>
+              </Link>
             </div>
           </li>
         ))}
