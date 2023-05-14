@@ -13,7 +13,8 @@ const PolkaItemLeft = ({
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 bg-white md:min-h-[520px]'>
       <div
-        className={`${bground} bg-cover bg-top aspect-square md:aspect-auto`}
+        className={`bg-cover bg-top aspect-square md:aspect-auto`}
+        style={{ backgroundImage: `url(${bground})` }}
       ></div>
       <div className='flex justify-center items-center gap-4 max-w-[496px] mx-auto'>
         <div className='flex flex-col col-span-1 max-w-screen-xs gap-4 px-6 mx-auto py-12 lg:py-16'>

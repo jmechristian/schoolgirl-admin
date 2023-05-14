@@ -39,7 +39,8 @@ const PolkaItemRight = ({
         </div>
       </div>
       <div
-        className={`${bground} bg-cover bg-top aspect-square md:aspect-auto`}
+        className={`bg-cover bg-top aspect-square md:aspect-auto`}
+        style={{ backgroundImage: `url(${bground})` }}
       ></div>
     </div>
   );

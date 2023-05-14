@@ -90,7 +90,30 @@ const Index = ({ pageData, locations }) => {
         url={pageData.data[0].hero_main_link}
       />
       <div className='flex flex-col gap-16'>
-        <PolkaTwoRows items={polkaItems} />
+        <PolkaTwoRows
+          items={[
+            {
+              link: pageData.data[0].callout_one_link,
+              heading: pageData.data[0].callout_one_heading,
+              headline: pageData.data[0].callout_one_headline,
+              body: pageData.data[0].callout_one_subheadline,
+              bodyCallout: pageData.data[0].callout_one_extra,
+              background: pageData.data[0].callout_one_image,
+              cta: pageData.data[0].callout_one_text,
+              button: true,
+            },
+            {
+              link: pageData.data[0].callout_two_link,
+              heading: pageData.data[0].callout_two_heading,
+              headline: pageData.data[0].callout_two_headline,
+              body: pageData.data[0].callout_two_subheadline,
+              bodyCallout: pageData.data[0].callout_two_extra,
+              background: pageData.data[0].callout_two_image,
+              cta: pageData.data[0].callout_two_cta,
+              button: true,
+            },
+          ]}
+        />
         <FourColGridWithHeading
           items={[
             pageData.data[0].headline_one.row_items[0].grid_item,
