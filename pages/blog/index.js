@@ -7,6 +7,7 @@ import RandomScrollerWithHeadline from '../../components/shared/RandoScrollerWit
 import InstagramGrid from '../../components/shared/InstagramGrid';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import { getPostsForBlogHome, getClassroomInspoPosts } from '../../lib/API';
+import { createClient } from '@supabase/supabase-js';
 
 const subNav = [
   {
@@ -72,22 +73,23 @@ const collectionItems = [
   },
 ];
 
-const Index = ({ posts, inspo }) => {
+const Index = ({ posts, inspo, pageData }) => {
+  console.log(pageData);
   return (
     <main className='relative pb-16' id='home'>
       <InnerPageSubNav subNav={subNav} />
       <Hero
         side='md:bg-gradient-to-l'
-        heading='Blog'
-        headline='SGS Design'
-        subtext='Exciting news! My team and I spent some time at EdSpaces in November, 2022 officially expanding the Schoolgirl Style brand to hold a new branch called SGS Design.'
-        buttonText='Read More'
+        heading={pageData.data[0].hero_main.heading}
+        headline={pageData.data[0].hero_main.headline}
+        subtext={pageData.data[0].hero_main.subheadline}
+        buttonText={pageData.data[0].hero_main.cta_text}
         buttonColor='bg-salmon'
-        bg='bg-blog'
+        bg={pageData.data[0].hero_main.image}
         textSide='right-10'
         textColor='text-salmon'
         bodyColor='text-gray-600'
-        link='https://schoolgirlstyle.com/blog/introducing-sgs-design/'
+        link={pageData.data[0].hero_main.cta_link}
       />
       <div className='flex flex-col gap-16 pt-16'>
         <ScrollerWithHeadline
@@ -98,16 +100,16 @@ const Index = ({ posts, inspo }) => {
         <div id='inspiration' className='scroll-m-16'>
           <Hero
             side='md:bg-gradient-to-r md:from-white/80'
-            heading='Blog'
-            headline='Good Vibes'
-            subtext='From statement-making murals to retro influences and  pretty pastels, see why this collection brings all the smiles!'
-            buttonText='Read More'
+            heading={pageData.data[0].hero_two.heading}
+            headline={pageData.data[0].hero_two.headline}
+            subtext={pageData.data[0].hero_two.subheadline}
+            buttonText={pageData.data[0].hero_two.cta_text}
             buttonColor='bg-salmon'
-            bg='bg-blog-goodvibes'
+            bg={pageData.data[0].hero_two.image}
             textSide='left-10'
             textColor='text-salmon'
             bodyColor='text-gray-600'
-            link='https://www.schoolgirlstyle.com/blog/good-vibes-collection'
+            link={pageData.data[0].hero_two.cta_link}
           />
         </div>
         <ScrollerWithHeadline
@@ -119,31 +121,31 @@ const Index = ({ posts, inspo }) => {
         <div className='flex flex-col'>
           <Hero
             side='md:bg-gradient-to-l md:from-white/60'
-            heading='About'
-            headline='Helping Hand'
-            subtext='Welcome to Schoolgirl Style! It’s our mission to inspire teachers worldwide in their classroom decor endeavours.'
-            buttonText='Learn More'
+            heading={pageData.data[0].hero_three.heading}
+            headline={pageData.data[0].hero_three.headline}
+            subtext={pageData.data[0].hero_three.subheadline}
+            buttonText={pageData.data[0].hero_three.cta_text}
             buttonColor='bg-salmon'
-            bg='bg-blog-helping'
+            bg={pageData.data[0].hero_three.image}
             textSide='right-10'
             textColor='text-salmon'
             bodyColor='text-gray-600'
-            link='https://youtube.com/shorts/TPRwof9Kdnk?feature=share'
+            link={pageData.data[0].hero_three.cta_link}
           />
           <FullWidthQuote quote=' We believe in the power of classroom decor to turn classrooms into home-away-from-homes.' />
           <div id='dècor' className='scroll-m-16'>
             <Hero
               side='md:bg-gradient-to-r md:from-white/60'
-              heading='Shop'
-              headline='Style Shop'
-              subtext='Feeling inspired? Explore the Schoolgirl Style Shop and find your favorites to start transforming your space!'
-              buttonText='Shop Now'
+              heading={pageData.data[0].hero_four.heading}
+              headline={pageData.data[0].hero_four.headline}
+              subtext={pageData.data[0].hero_four.subheadline}
+              buttonText={pageData.data[0].hero_four.cta_text}
               buttonColor='bg-salmon'
-              bg='bg-blog-style'
+              bg={pageData.data[0].hero_four.image}
               textSide='left-10'
               textColor='text-salmon'
               bodyColor='text-gray-600'
-              link='https://shopschoolgirlstyle.com/'
+              link={pageData.data[0].hero_four.cta_link}
             />
           </div>
         </div>
@@ -162,6 +164,16 @@ const Index = ({ posts, inspo }) => {
 };
 
 export const getStaticProps = async () => {
+  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+  const supabaseKey = process.env.VITE_SUPABASE_KEY;
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  const pageData = await supabase
+    .from('blog')
+    .select(
+      '*, hero_main:blog_hero_main_fkey(*), hero_two:blog_hero_two_fkey(*), hero_three:blog_hero_three_fkey(*), hero_four:blog_hero_four_fkey(*))'
+    );
+
   const data = await getPostsForBlogHome();
   const inspo = await getClassroomInspoPosts();
 
@@ -169,6 +181,7 @@ export const getStaticProps = async () => {
     props: {
       posts: data,
       inspo: inspo,
+      pageData,
     },
     revalidate: 10,
   };

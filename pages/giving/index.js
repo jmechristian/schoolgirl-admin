@@ -6,8 +6,10 @@ import Hero from '../../components/shared/Hero';
 import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
 import FullWidthQuote from '../../components/shared/FullWidthQuote';
 import EmailSubscription from '../../components/shared/EmailSubscription';
+import { createClient } from '@supabase/supabase-js';
 
-const Page = () => {
+const Page = ({ pageData }) => {
+  console.log(pageData);
   const subNav = [
     {
       name: 'Top',
@@ -62,10 +64,8 @@ const Page = () => {
     <main className='relative pb-16' id='home'>
       {/* <InnerPageSubNav subNav={subNav} /> */}
       <VideoPlayer
-        placeholder={
-          'https://res.cloudinary.com/designadg/image/upload/v1678658621/SGS/giving_video_placeholder_ekm3dv.webp'
-        }
-        url='https://youtu.be/W0dreax2O_I'
+        placeholder={pageData.data[0].video_hero_placeholder}
+        url={pageData.data[0].video_hero_link}
       />
       <div
         className='bg-gradient-to-b from-khaki space-y-16 pt-6 scroll-mt-24'
@@ -132,5 +132,19 @@ const Page = () => {
     </main>
   );
 };
+
+export async function getServerSideProps() {
+  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+  const supabaseKey = process.env.VITE_SUPABASE_KEY;
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  const pageData = await supabase.from('giving').select('*');
+
+  return {
+    props: {
+      pageData,
+    },
+  };
+}
 
 export default Page;

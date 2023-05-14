@@ -6,22 +6,24 @@ import FullWidthQuote from '../../components/shared/FullWidthQuote';
 import Hero from '../../components/shared/Hero';
 import FourColStaffGrid from '../../components/shared/FourColStaffGrid';
 import InstagramGrid from '../../components/shared/InstagramGrid';
+import { createClient } from '@supabase/supabase-js';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 
-const Page = ({ pageData }) => {
+const Page = ({ pageData, staff }) => {
+  console.log(staff);
   const polkaItems = [
     {
-      heading: 'Founder',
-      headline: 'Meet Mel!',
-      body: 'Combining her extensive teaching background with her love of fashion, founder Melanie Ralbusky shares her passion and creativity through her beloved Schoolgirl Style brand. With thousands of vibrant designs created to enhance educational spaces, Melanie seeks to inspire a beautiful, warm, and welcoming learning environment that reflects contemporary fashion trends. ',
-      background: 'bg-hero-mel',
+      heading: pageData.data[0].polka_one_heading,
+      headline: pageData.data[0].polka_one_headline,
+      body: pageData.data[0].polka_one_subheadline,
+      background: pageData.data[0].polka_one_image,
       button: false,
     },
     {
-      heading: 'Chief Operating Officer',
-      headline: 'All About Al!',
-      body: 'With an impressive background in educational product management for brands such as Amazon and Carson-Dellosa, Schoolgirl Style’s Chief Operating Officer, Al Greco, brings his passion and expertise to the brand’s daily operations. Al’s creativity and vision has helped the Schoolgirl Style brand to grow and thrive, ensuring its classroom décor products reach teachers and students worldwide.',
-      background: 'bg-hero-al',
+      heading: pageData.data[0].polka_two_heading,
+      headline: pageData.data[0].polka_two_headline,
+      body: pageData.data[0].polka_two_subheadline,
+      background: pageData.data[0].polka_two_image,
       button: false,
     },
   ];
@@ -121,20 +123,21 @@ const Page = ({ pageData }) => {
       <FullWidthQuote quote='Teachers are heroes of the world and we love supporting them in their decorating endeavors!' />
       <Hero
         side='md:bg-gradient-to-r md:from-white/60'
-        heading=''
-        headline='Dream Team'
-        subtext='Schoolgirl Style would be nothing without the hard work and dedication of its entire team. From their brilliant ideas to their beautiful designs, the team’s passion and creativity is the heart of Schoolgirl Style.'
-        buttonText=''
+        heading={pageData.data[0].hero_one.heading}
+        headline={pageData.data[0].hero_one.headline}
+        subtext={pageData.data[0].hero_one.subheadline}
+        buttonText={pageData.data[0].hero_one.cta_text}
         buttonColor=''
-        bg='bg-hero-about-dreamteam'
+        bg={pageData.data[0].hero_one.image}
         textSide='left-10'
         textColor='text-neutral-brown'
         bodyColor='text-gray-600'
+        link={pageData.data[0].hero_one.cta_link}
       />
       <div className='bg-polka-light scroll-mt-24' id='team'>
         <div className='flex flex-col gap-12 max-w-6xl mx-auto py-16'>
           <FourColStaffGrid
-            items={seasonItems}
+            items={staff.data}
             headline='Best In Class'
             itemTextStyle=' text-gray-500/80 text-sm leading-tight'
           />
@@ -148,5 +151,24 @@ const Page = ({ pageData }) => {
     </main>
   );
 };
+
+export async function getServerSideProps() {
+  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+  const supabaseKey = process.env.VITE_SUPABASE_KEY;
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  const pageData = await supabase
+    .from('about')
+    .select('*, hero_one:about_hero_one_fkey(*)');
+
+  const staff = await supabase.from('staff').select('*');
+
+  return {
+    props: {
+      pageData,
+      staff,
+    },
+  };
+}
 
 export default Page;

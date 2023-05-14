@@ -10,19 +10,21 @@ const FourColStaffGrid = ({ items, headline, itemTextStyle, background }) => {
       </div>
       <div className='grid grid-cols-2 md:grid-cols-4 w-full max-w-7xl px-6 mx-auto gap-9 overflow-hidden'>
         {items &&
-          items.map((it, i) => (
-            <div key={it.headline}>
-              <StaffItem
-                image={it.image}
-                alt={it.alt}
-                headline={it.headline}
-                text={itemTextStyle}
-                background={background}
-                link={it.link}
-                job={it.job ? it.job : ''}
-              />
-            </div>
-          ))}
+          items
+            .sort((a, b) => a.id - b.id)
+            .map((it, i) => (
+              <div key={it.id}>
+                <StaffItem
+                  image={it.headshot}
+                  alt={it.name}
+                  headline={it.name}
+                  text={itemTextStyle}
+                  background={background}
+                  link={it.link}
+                  job={it.title ? it.title : ''}
+                />
+              </div>
+            ))}
       </div>
     </div>
   );
