@@ -1,20 +1,21 @@
 import React from 'react';
-import { FlexGridItem } from './FlexGridItem';
+import { EditableFlexGridItem } from './EditableFlexGridItem';
 
-const ThreeColGridNoHeading = ({ items, itemTextStyle }) => {
+const EditableThreeColGridNoHeading = ({ items, itemTextStyle }) => {
   return (
     <div className='w-full flex flex-col justify-center items-center'>
       <div className='grid md:grid-cols-3 w-full max-w-7xl px-6 sm:px-0 mx-auto gap-12 overflow-hidden'>
         {items &&
           items.map((it, i) => (
             <div key={i}>
-              <FlexGridItem
+              <EditableFlexGridItem
                 image={it.image}
                 alt={it.title}
                 headline={it.title}
                 text={itemTextStyle}
                 subheadline={it.subheadline}
                 link={it.link}
+                id={it.id}
               />
             </div>
           ))}
@@ -23,4 +24,4 @@ const ThreeColGridNoHeading = ({ items, itemTextStyle }) => {
   );
 };
 
-export default ThreeColGridNoHeading;
+export default EditableThreeColGridNoHeading;

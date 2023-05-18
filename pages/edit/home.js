@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
 import EmailSubscription from '../../components/shared/EmailSubscription';
-import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
 import EditableHero from '../../components/editable/EditableHero';
 import EditableFourColGridWithHeading from '../../components/editable/EditableFourColGridWithHeadling';
-import Hero from '../../components/shared/Hero';
+import EditableThreeColGridNoHeading from '../../components/editable/EditableThreeColGridNoHeadline';
 import InstagramGrid from '../../components/shared/InstagramGrid';
-import ThreeColGridNoHeading from '../../components/shared/ThreeColGridNoHeading';
 import { createClient } from '@supabase/supabase-js';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../authSlice';
@@ -302,7 +300,7 @@ export default function Home({ pageData }) {
             bodyColor='text-gray-700'
             link='https://youtu.be/6Aqu5bC4XEk'
           />
-          <ThreeColGridNoHeading
+          <EditableThreeColGridNoHeading
             items={[
               pageData.data[0].watch_items.row_items[0].grid_item,
               pageData.data[0].watch_items.row_items[1].grid_item,
