@@ -12,11 +12,11 @@ export default function TextInput({
     <div>
       <label
         htmlFor={name}
-        className='block font-medium capitalize leading-6 text-gray-900'
+        className='block font-medium text-sm capitalize leading-6 text-gray-900'
       >
         {name}
       </label>
-      <div className='relative mt-2 rounded-md shadow-sm'>
+      <div className='relative mt-1 rounded-md shadow-sm'>
         <input
           type={type}
           onChange={(e) => changeHandler(e.target.value)}
@@ -28,12 +28,6 @@ export default function TextInput({
           aria-invalid='true'
           aria-describedby='email-error'
         />
-        <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3'>
-          <ExclamationCircleIcon
-            className='h-5 w-5 text-red-500'
-            aria-hidden='true'
-          />
-        </div>
       </div>
     </div>
   );

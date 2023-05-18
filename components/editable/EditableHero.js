@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { PencilSquareIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 import { createClient } from '@supabase/supabase-js';
-import TextInput from './TextInput';
+import TextInput from '../shared/TextInput';
 
 const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -180,7 +180,7 @@ const EditableHero = ({
           </motion.div>
         )}
         <motion.div className='absolute left-6 bottom-5 z-50 shadow-lg w-16 h-16 rounded-full bg-black ring-2 ring-white flex items-center justify-center cursor-pointer'>
-          <motion.div onClick={() => setIsEditing(true)}>
+          <motion.div onClick={() => setIsEditing(true)} className='max-w-7xl'>
             <PencilSquareIcon className='w-7 h-7 fill-white' />
           </motion.div>
         </motion.div>

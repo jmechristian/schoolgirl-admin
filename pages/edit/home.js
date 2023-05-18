@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
-import EditableHero from '../../components/shared/EditableHero';
+import EditableHero from '../../components/editable/EditableHero';
+import EditableFourColGridWithHeading from '../../components/editable/EditableFourColGridWithHeadling';
 import Hero from '../../components/shared/Hero';
 import InstagramGrid from '../../components/shared/InstagramGrid';
 import ThreeColGridNoHeading from '../../components/shared/ThreeColGridNoHeading';
@@ -193,7 +194,7 @@ export default function Home({ pageData }) {
         bodyColor='text-gray-700'
         link={pageData.data[0].hero_main.cta_link}
       />
-      <FourColGridWithHeading
+      <EditableFourColGridWithHeading
         items={[
           pageData.data[0].headline_one.row_items[0].grid_item,
           pageData.data[0].headline_one.row_items[1].grid_item,
