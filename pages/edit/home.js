@@ -204,6 +204,7 @@ export default function Home({ pageData }) {
         headline={pageData.data[0].headline_one.title}
         itemTextStyle='uppercase text-gray-500/80 text-base md:text-lg'
         background={true}
+        id={pageData.data[0].headline_one.id}
       />
       <EditableHero
         id={pageData.data[0].hero_two.id}
@@ -219,7 +220,7 @@ export default function Home({ pageData }) {
         bodyColor='text-gray-700'
         link={pageData.data[0].hero_two.cta_link}
       />
-      <FourColGridWithHeading
+      <EditableFourColGridWithHeading
         items={[
           pageData.data[0].headline_two.row_items[0].grid_item,
           pageData.data[0].headline_two.row_items[1].grid_item,
@@ -229,6 +230,7 @@ export default function Home({ pageData }) {
         headline={pageData.data[0].headline_two.title}
         itemTextStyle='text-gray-500/80 text-sm'
         background={true}
+        id={pageData.data[0].headline_two.id}
       />
       <EditableHero
         id={pageData.data[0].hero_three.id}
@@ -245,7 +247,7 @@ export default function Home({ pageData }) {
         bodyColor='text-gray-700 md:text-white'
         link={pageData.data[0].hero_three.cta_link}
       />
-      <FourColGridWithHeading
+      <EditableFourColGridWithHeading
         items={[
           pageData.data[0].headline_three.row_items[0].grid_item,
           pageData.data[0].headline_three.row_items[1].grid_item,
@@ -255,6 +257,7 @@ export default function Home({ pageData }) {
         headline={pageData.data[0].headline_three.title}
         itemTextStyle='text-gray-500/80 text-sm'
         background={true}
+        id={pageData.data[0].headline_three.id}
       />
       <EditableHero
         id={pageData.data[0].hero_four.id}
@@ -271,7 +274,7 @@ export default function Home({ pageData }) {
         bodyColor='text-gray-700'
         link={pageData.data[0].hero_four.cta_link}
       />
-      <FourColGridWithHeading
+      <EditableFourColGridWithHeading
         items={[
           pageData.data[0].headline_four.row_items[0].grid_item,
           pageData.data[0].headline_four.row_items[1].grid_item,
@@ -280,6 +283,7 @@ export default function Home({ pageData }) {
         ]}
         headline={pageData.data[0].headline_four.title}
         itemTextStyle='text-gray-500/80 text-sm'
+        id={pageData.data[0].headline_four.id}
       />
       <div className='bg-khaki w-full py-16 px-6 flex justify-center'>
         <div className='w-full flex flex-col justify-center items-center px-6 max-w-7xl gap-16'>

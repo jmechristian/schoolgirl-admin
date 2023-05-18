@@ -3,8 +3,14 @@ import EditableGridItem from './EditableGridItem';
 import HeadlineMotion from '../shared/HeadlineMotion';
 import { PencilSquareIcon } from '@heroicons/react/24/solid';
 import TextInput from '../shared/TextInput';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const EditableFourColGridWithHeading = ({
+  id,
   items,
   headline,
   itemTextStyle,
@@ -14,6 +20,24 @@ const EditableFourColGridWithHeading = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+
+  const headlineSubmitHandler = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const { data, error } = await supabase
+      .from('site_row')
+      .update({
+        title: isHeadline,
+      })
+      .eq('id', id)
+      .select();
+
+    if (!error) {
+      setIsLoading(false);
+      setSubmitted(true);
+    }
+    console.log('data', id);
+  };
 
   return (
     <div className='w-full flex flex-col items-center gap-8 cursor-pointer'>
@@ -26,7 +50,10 @@ const EditableFourColGridWithHeading = ({
             </div>
           </div>
           {isEditing && (
-            <form className='grid gap-2 items-center w-full'>
+            <form
+              className='grid gap-2 items-center w-full'
+              onSubmit={(e) => headlineSubmitHandler(e)}
+            >
               <TextInput
                 type='text'
                 id='headline'
