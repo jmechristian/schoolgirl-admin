@@ -12,29 +12,34 @@ const projects = [
     href: '/edit/home',
   },
   {
+    id: 7,
+    name: 'Shop',
+    href: '/edit/shop',
+  },
+  {
     id: 2,
     name: 'Watch',
-    href: '/watch',
+    href: '/edit/watch',
   },
   {
     id: 3,
     name: 'Visit',
-    href: '/visit',
+    href: '/edit/visit',
   },
   {
     id: 4,
     name: 'Blog',
-    href: '/blog',
+    href: '/edit/blog',
   },
   {
     id: 5,
     name: 'Giving Back',
-    href: '/giving',
+    href: '/edit/giving',
   },
   {
     id: 6,
     name: 'About',
-    href: '/about',
+    href: '/edit/about',
   },
 ];
 

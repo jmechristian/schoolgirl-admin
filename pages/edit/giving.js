@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
 import VideoPlayer from '../../components/shared/VideoPlayer';
 import VariableHeadlineWithSpan from '../../components/shared/VariableHeadlineWithSpan';
@@ -58,6 +60,16 @@ const Page = ({ pageData }) => {
       link: 'https://shopschoolgirlstyle.com/collections/simply-boho/products/copy-of-schoolgirl-style-simply-boho-planner-and-organizer',
     },
   ];
+
+  const { user } = useSelector((state) => state.auth);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/admin');
+    }
+  });
 
   return (
     <main className='relative pb-16' id='home'>
