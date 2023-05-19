@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
 import VideoPlayer from '../../components/shared/VideoPlayer';
+import EditableVideoPlayer from '../../components/editable/EditableVideoPlayer';
 import VariableHeadlineWithSpan from '../../components/shared/VariableHeadlineWithSpan';
 import Hero from '../../components/shared/Hero';
 import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
@@ -74,7 +75,7 @@ const Page = ({ pageData }) => {
   return (
     <main className='relative pb-16' id='home'>
       {/* <InnerPageSubNav subNav={subNav} /> */}
-      <VideoPlayer
+      <EditableVideoPlayer
         placeholder={pageData.data[0].video_hero_placeholder}
         url={pageData.data[0].video_hero_link}
       />

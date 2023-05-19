@@ -5,6 +5,8 @@ import VariableHeadlineWithSpan from '../../components/shared/VariableHeadlineWi
 import PolkaTwoRows from '../../components/shared/PolkaTwoRows';
 import FullWidthQuote from '../../components/shared/FullWidthQuote';
 import Hero from '../../components/shared/Hero';
+import EditableHero from '../../components/editable/EditableHero';
+import EditableVideoPlayer from '../../components/editable/EditableVideoPlayer';
 import FourColStaffGrid from '../../components/shared/FourColStaffGrid';
 import InstagramGrid from '../../components/shared/InstagramGrid';
 import { createClient } from '@supabase/supabase-js';
@@ -114,9 +116,13 @@ const Page = ({ pageData, staff }) => {
 
   return (
     <main className='relative pb-16' id='home'>
-      <VideoPlayer
-        placeholder='https://res.cloudinary.com/designadg/image/upload/v1678820898/SGS/about-video-playholder_t6vwb9.webp'
-        url='https://youtu.be/Zd9nZaWYhLw'
+      <EditableVideoPlayer
+        placeholder={pageData.data[0].hero_placeholder}
+        url={pageData.data[0].hero_link}
+        field_one='hero_placeholder'
+        field_two='hero_link'
+        table='about'
+        id={1}
       />
       <div className='bg-gradient-to-b from-khaki space-y-16 pt-6'>
         <VariableHeadlineWithSpan
@@ -132,7 +138,7 @@ const Page = ({ pageData, staff }) => {
       </div>
       <PolkaTwoRows items={polkaItems} />
       <FullWidthQuote quote='Teachers are heroes of the world and we love supporting them in their decorating endeavors!' />
-      <Hero
+      <EditableHero
         side='md:bg-gradient-to-r md:from-white/60'
         heading={pageData.data[0].hero_one.heading}
         headline={pageData.data[0].hero_one.headline}
@@ -144,6 +150,7 @@ const Page = ({ pageData, staff }) => {
         textColor='text-neutral-brown'
         bodyColor='text-gray-600'
         link={pageData.data[0].hero_one.cta_link}
+        id={pageData.data[0].hero_one.id}
       />
       <div className='bg-polka-light scroll-mt-24' id='team'>
         <div className='flex flex-col gap-12 max-w-6xl mx-auto py-16'>

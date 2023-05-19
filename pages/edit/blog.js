@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import FullWidthQuote from '../../components/shared/FullWidthQuote';
 import Hero from '../../components/shared/Hero';
+import EditableHero from '../../components/editable/EditableHero';
 import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
 import ScrollerWithHeadline from '../../components/shared/ScrollerWithHeadline';
 import RandomScrollerWithHeadline from '../../components/shared/RandoScrollerWithHeadline';
@@ -87,7 +88,7 @@ const Index = ({ posts, inspo, pageData }) => {
   return (
     <main className='relative pb-16' id='home'>
       <InnerPageSubNav subNav={subNav} />
-      <Hero
+      <EditableHero
         side='md:bg-gradient-to-l'
         heading={pageData.data[0].hero_main.heading}
         headline={pageData.data[0].hero_main.headline}
@@ -99,6 +100,7 @@ const Index = ({ posts, inspo, pageData }) => {
         textColor='text-salmon'
         bodyColor='text-gray-600'
         link={pageData.data[0].hero_main.cta_link}
+        id={pageData.data[0].hero_main.id}
       />
       <div className='flex flex-col gap-16 pt-16'>
         <ScrollerWithHeadline
@@ -107,7 +109,7 @@ const Index = ({ posts, inspo, pageData }) => {
           headline='Read The Latest'
         />
         <div id='inspiration' className='scroll-m-16'>
-          <Hero
+          <EditableHero
             side='md:bg-gradient-to-r md:from-white/80'
             heading={pageData.data[0].hero_two.heading}
             headline={pageData.data[0].hero_two.headline}
@@ -119,6 +121,7 @@ const Index = ({ posts, inspo, pageData }) => {
             textColor='text-salmon'
             bodyColor='text-gray-600'
             link={pageData.data[0].hero_two.cta_link}
+            id={pageData.data[0].hero_two.id}
           />
         </div>
         <ScrollerWithHeadline
@@ -128,7 +131,7 @@ const Index = ({ posts, inspo, pageData }) => {
           price
         />
         <div className='flex flex-col'>
-          <Hero
+          <EditableHero
             side='md:bg-gradient-to-l md:from-white/60'
             heading={pageData.data[0].hero_three.heading}
             headline={pageData.data[0].hero_three.headline}
@@ -140,10 +143,11 @@ const Index = ({ posts, inspo, pageData }) => {
             textColor='text-salmon'
             bodyColor='text-gray-600'
             link={pageData.data[0].hero_three.cta_link}
+            id={pageData.data[0].hero_three.id}
           />
           <FullWidthQuote quote=' We believe in the power of classroom decor to turn classrooms into home-away-from-homes.' />
           <div id='dècor' className='scroll-m-16'>
-            <Hero
+            <EditableHero
               side='md:bg-gradient-to-r md:from-white/60'
               heading={pageData.data[0].hero_four.heading}
               headline={pageData.data[0].hero_four.headline}
@@ -155,6 +159,7 @@ const Index = ({ posts, inspo, pageData }) => {
               textColor='text-salmon'
               bodyColor='text-gray-600'
               link={pageData.data[0].hero_four.cta_link}
+              id={pageData.data[0].hero_four.id}
             />
           </div>
         </div>

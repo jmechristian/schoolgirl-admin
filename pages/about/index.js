@@ -104,8 +104,8 @@ const Page = ({ pageData, staff }) => {
   return (
     <main className='relative pb-16' id='home'>
       <VideoPlayer
-        placeholder='https://res.cloudinary.com/designadg/image/upload/v1678820898/SGS/about-video-playholder_t6vwb9.webp'
-        url='https://youtu.be/Zd9nZaWYhLw'
+        placeholder={pageData.data[0].hero_placeholder}
+        url={pageData.data[0].hero_link}
       />
       <div className='bg-gradient-to-b from-khaki space-y-16 pt-6'>
         <VariableHeadlineWithSpan
