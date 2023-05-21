@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import VideoPlayer from '../../components/shared/VideoPlayer';
 import VariableHeadlineWithSpan from '../../components/shared/VariableHeadlineWithSpan';
@@ -8,10 +8,15 @@ import Hero from '../../components/shared/Hero';
 import EditableHero from '../../components/editable/EditableHero';
 import EditableVideoPlayer from '../../components/editable/EditableVideoPlayer';
 import FourColStaffGrid from '../../components/shared/FourColStaffGrid';
+import EditableFourColStaffGrid from '../../components/editable/EditableFourColStaffGrid';
 import InstagramGrid from '../../components/shared/InstagramGrid';
 import { createClient } from '@supabase/supabase-js';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import { useSelector } from 'react-redux';
+
+const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Page = ({ pageData, staff }) => {
   const polkaItems = [
@@ -108,10 +113,34 @@ const Page = ({ pageData, staff }) => {
 
   const router = useRouter();
 
+  const [isStaff, setIsStaff] = useState(staff && staff.data);
+
   useEffect(() => {
     if (!user) {
       router.push('/admin');
     }
+  });
+
+  const getStaff = async () => {
+    const staff = await supabase.from('staff').select('*');
+    setIsStaff(staff.data);
+  };
+
+  useEffect(() => {
+    const sub = supabase
+      .channel('staff-db-changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'staff' },
+        (payload) => {
+          getStaff();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      sub.unsubscribe();
+    };
   });
 
   return (
@@ -154,8 +183,8 @@ const Page = ({ pageData, staff }) => {
       />
       <div className='bg-polka-light scroll-mt-24' id='team'>
         <div className='flex flex-col gap-12 max-w-6xl mx-auto py-16'>
-          <FourColStaffGrid
-            items={staff.data}
+          <EditableFourColStaffGrid
+            items={isStaff}
             headline='Best In Class'
             itemTextStyle=' text-gray-500/80 text-sm leading-tight'
           />

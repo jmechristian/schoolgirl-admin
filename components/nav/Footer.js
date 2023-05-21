@@ -7,6 +7,7 @@ import { SocialIcon } from 'react-social-icons';
 const listOne = [
   {
     title: 'shop',
+    link: '/shop',
     items: [
       {
         name: 'New Arrivals',
@@ -47,6 +48,7 @@ const listOne = [
 const listTwo = [
   {
     title: 'watch',
+    link: '/watch',
     items: [
       {
         name: 'Makeovers',
@@ -63,6 +65,7 @@ const listTwo = [
 const listThree = [
   {
     title: 'visit',
+    link: '/visit',
     items: [
       {
         name: 'Michigan Store',
@@ -87,6 +90,7 @@ const listThree = [
 const listFour = [
   {
     title: 'blog',
+    link: '/blog',
     items: [
       {
         name: 'Makeovers',
@@ -103,6 +107,7 @@ const listFour = [
 const listFive = [
   {
     title: 'Giving Back',
+    link: '/giving',
     items: [
       {
         name: 'Makeovers',
@@ -127,6 +132,7 @@ const listFive = [
 const listSix = [
   {
     title: 'about',
+    link: '/about',
     items: [
       {
         name: 'Founder Melanie',
@@ -143,6 +149,7 @@ const listSix = [
 const listSeven = [
   {
     title: 'help',
+    link: '/about',
     items: [
       {
         name: 'Contact Us',

@@ -1,6 +1,7 @@
 import { Fragment, useRef } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import {
   Bars3Icon,
   XMarkIcon,
@@ -16,6 +17,8 @@ function classNames(...classes) {
 }
 
 export default function Header() {
+  const router = useRouter();
+
   const variants = {
     show: {
       opacity: 1,
@@ -34,6 +37,8 @@ export default function Header() {
       },
     },
   };
+
+  console.log(router.route);
 
   return (
     <Popover className='relative bg-white'>
@@ -58,40 +63,64 @@ export default function Header() {
           </Popover.Button>
           <Popover.Overlay className='fixed inset-0 bg-black opacity-50 z-[60]' />
         </motion.div>
-        <nav className='hidden space-x-7 xl:space-x-8 xl:flex uppercase'>
+        <nav className='hidden space-x-7 xl:space-x-12 xl:flex uppercase'>
           <Link
             href='/shop'
-            className='text-sm font-medium text-gray-500 hover:text-gray-900 font-brown'
+            className={`font-medium ${
+              router.route === '/shop'
+                ? 'text-brand-red font-bold font-brown-bold'
+                : 'text-gray-500 font-brown'
+            } hover:text-gray-900  tracking-wider text-sm`}
           >
             Shop
           </Link>
           <Link
             href='/watch'
-            className='text-sm font-medium text-gray-500 hover:text-gray-900 font-brown'
+            className={`font-medium ${
+              router.route === '/watch'
+                ? 'text-brand-red font-bold font-brown-bold'
+                : 'text-gray-500 font-brown'
+            } hover:text-gray-900  tracking-wider text-sm`}
           >
             Watch
           </Link>
           <Link
             href='/visit'
-            className='text-sm font-medium text-gray-500 hover:text-gray-900 font-brown'
+            className={`font-medium ${
+              router.route === '/visit'
+                ? 'text-brand-red font-bold font-brown-bold'
+                : 'text-gray-500 font-brown'
+            } hover:text-gray-900  tracking-wider text-sm`}
           >
             Visit
           </Link>
           <Link
             href='/blog'
-            className='text-sm font-medium text-gray-500 hover:text-gray-900 font-brown'
+            className={`font-medium ${
+              router.route === '/blog'
+                ? 'text-brand-red font-bold font-brown-bold'
+                : 'text-gray-500 font-brown'
+            } hover:text-gray-900  tracking-wider text-sm`}
           >
             Blog
           </Link>
           <Link
             href='/giving'
-            className='text-sm font-medium text-gray-500 hover:text-gray-900 font-brown'
+            className={`font-medium ${
+              router.route === '/giving'
+                ? 'text-brand-red font-bold font-brown-bold'
+                : 'text-gray-500 font-brown'
+            } hover:text-gray-900  tracking-wider text-sm`}
           >
             Giving Back
           </Link>
           <Link
             href='/about'
-            className='text-sm font-medium text-gray-500 hover:text-gray-900 font-brown'
+            className={`font-medium ${
+              router.route === '/about'
+                ? 'text-brand-red font-bold font-brown-bold'
+                : 'text-gray-500 font-brown'
+            } hover:text-gray-900  tracking-wider text-sm`}
           >
             About
           </Link>

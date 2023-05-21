@@ -5,7 +5,11 @@ const FooterNavList = ({ links }) => {
   return (
     <div className='w-full flex flex-col'>
       <div className='text-brand-red font-brown uppercase tracking-wider'>
-        {links[0].title}
+        <Link href={links[0].link}>
+          <span className='text-brand-red font-brown uppercase tracking-wider'>
+            {links[0].title}
+          </span>
+        </Link>
       </div>
       {links[0] &&
         links[0].items.map((it, i) => (

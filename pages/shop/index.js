@@ -155,7 +155,7 @@ const Index = ({ pageData, products, decor, picks }) => {
     <main className='pb-16 relative' id='home'>
       <InnerPageSubNav subNav={subNav} />
       <Hero
-        side='md:bg-gradient-to-r'
+        side='md:bg-gradient-to-l'
         heading={pageData.data[0].hero_main.heading}
         headline={pageData.data[0].hero_main.headline}
         subtext={pageData.data[0].hero_main.subheadline}
