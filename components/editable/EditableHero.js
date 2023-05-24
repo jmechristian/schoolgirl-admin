@@ -92,7 +92,7 @@ const EditableHero = ({
         ref={heroRef}
       >
         {isEditing && (
-          <motion.div className='absolute z-30 top-0 left-0 bottom-0 right-0 bg-black/40 backdrop-blur flex justify-center items-center py-8'>
+          <motion.div className='absolute z-30 top-0 left-12 bottom-0 right-0 bg-black/40 backdrop-blur flex justify-center items-center py-8'>
             <motion.div className='bg-white/80 max-w-3xl w-full h-full rounded-lg p-9 flex justify-center items-center'>
               <motion.form
                 className='flex flex-col gap-4 w-full'
