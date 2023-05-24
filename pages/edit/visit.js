@@ -3,10 +3,13 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
 import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
+import EditableFourColGridWithHeading from '../../components/editable/EditableFourColGridWithHeadling';
 import VideoPlayer from '../../components/shared/VideoPlayer';
-import PolkaTwoRows from '../../components/shared/PolkaTwoRows';
+import EditableVideoPlayer from '../../components/editable/EditableVideoPlayer';
+import EditablePolkaTwoRows from '../../components/editable/EditablePolkaTwoRows';
 import StoreList from '../../components/shared/StoreList';
 import Hero from '../../components/shared/Hero';
+import EditableHero from '../../components/editable/EditableHero';
 import InstagramGrid from '../../components/shared/InstagramGrid';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import { createClient } from '@supabase/supabase-js';
@@ -95,12 +98,12 @@ const Index = ({ pageData, locations }) => {
   return (
     <main className='relative' id='home'>
       <InnerPageSubNav subNav={subNav} />
-      <VideoPlayer
+      <EditableVideoPlayer
         placeholder={pageData.data[0].hero_main_placeholder}
         url={pageData.data[0].hero_main_link}
       />
       <div className='flex flex-col gap-16'>
-        <PolkaTwoRows
+        <EditablePolkaTwoRows
           items={[
             {
               link: pageData.data[0].callout_one_link,
@@ -111,6 +114,15 @@ const Index = ({ pageData, locations }) => {
               background: pageData.data[0].callout_one_image,
               cta: pageData.data[0].callout_one_text,
               button: true,
+              fields: [
+                'callout_one_heading',
+                'callout_one_headline',
+                'callout_one_subheadline',
+                'callout_one_extra',
+                'callout_one_link',
+                'callout_one_text',
+                'callout_one_image',
+              ],
             },
             {
               link: pageData.data[0].callout_two_link,
@@ -121,10 +133,21 @@ const Index = ({ pageData, locations }) => {
               background: pageData.data[0].callout_two_image,
               cta: pageData.data[0].callout_two_cta,
               button: true,
+              fields: [
+                'callout_two_heading',
+                'callout_two_headline',
+                'callout_two_subheadline',
+                'callout_two_extra',
+                'callout_two_link',
+                'callout_two_cta',
+                'callout_two_image',
+              ],
             },
           ]}
+          table='visit'
+          id={1}
         />
-        <FourColGridWithHeading
+        <EditableFourColGridWithHeading
           items={[
             pageData.data[0].headline_one.row_items[0].grid_item,
             pageData.data[0].headline_one.row_items[1].grid_item,
@@ -140,7 +163,7 @@ const Index = ({ pageData, locations }) => {
         <StoreList headline='At a Store Near You' locations={locations.data} />
       </div>
       <div className='scroll-m-8 flex flex-col' id='events'>
-        <Hero
+        <EditableHero
           side='md:bg-gradient-to-r'
           heading={pageData.data[0].hero_one.heading}
           headline={pageData.data[0].hero_one.headline}

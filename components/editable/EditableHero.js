@@ -113,6 +113,7 @@ const EditableHero = ({
                     id='headline'
                     placeholder='new headline...'
                     value={isHeadline}
+                    changeHandler={(val) => setIsHeadline(val)}
                   />
                 </motion.div>
                 <TextInput
@@ -121,6 +122,7 @@ const EditableHero = ({
                   id='subheadline'
                   placeholder='new subheadline...'
                   value={isSubtext}
+                  changeHandler={(val) => setIsSubtext(val)}
                 />
                 <TextInput
                   type='text'
@@ -128,6 +130,7 @@ const EditableHero = ({
                   id='image'
                   placeholder='new image...'
                   value={isBg}
+                  changeHandler={(val) => setIsBg(val)}
                 />
                 <motion.div className='grid grid-cols-2 gap-6'>
                   <TextInput
@@ -136,6 +139,7 @@ const EditableHero = ({
                     id='CTA'
                     placeholder='new cta...'
                     value={isButtonText}
+                    changeHandler={(val) => setIsButtonText(val)}
                   />
                   <TextInput
                     type='text'
@@ -143,6 +147,7 @@ const EditableHero = ({
                     id='link'
                     placeholder='new link...'
                     value={isLink}
+                    changeHandler={(val) => setIsLink(val)}
                   />
                 </motion.div>
                 <motion.div className='flex justify-between items-center w-full'>

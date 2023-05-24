@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import VideoPlayer from '../../components/shared/VideoPlayer';
 import VariableHeadlineWithSpan from '../../components/shared/VariableHeadlineWithSpan';
 import PolkaTwoRows from '../../components/shared/PolkaTwoRows';
+import EditablePolkaTwoRows from '../../components/editable/EditablePolkaTwoRows';
 import FullWidthQuote from '../../components/shared/FullWidthQuote';
 import Hero from '../../components/shared/Hero';
 import EditableHero from '../../components/editable/EditableHero';
@@ -26,6 +27,15 @@ const Page = ({ pageData, staff }) => {
       body: pageData.data[0].polka_one_subheadline,
       background: pageData.data[0].polka_one_image,
       button: false,
+      fields: [
+        'polka_one_heading',
+        'polka_one_headline',
+        'polka_one_subheadline',
+        'polka_one_extra',
+        'polka_one_link',
+        'polka_one_text',
+        'polka_one_image',
+      ],
     },
     {
       heading: pageData.data[0].polka_two_heading,
@@ -33,6 +43,15 @@ const Page = ({ pageData, staff }) => {
       body: pageData.data[0].polka_two_subheadline,
       background: pageData.data[0].polka_two_image,
       button: false,
+      fields: [
+        'polka_two_heading',
+        'polka_two_headline',
+        'polka_two_subheadline',
+        'polka_two_extra',
+        'polka_two_link',
+        'polka_two_text',
+        'polka_two_image',
+      ],
     },
   ];
 
@@ -165,7 +184,7 @@ const Page = ({ pageData, staff }) => {
           buttonText='Melanie'
         />
       </div>
-      <PolkaTwoRows items={polkaItems} />
+      <EditablePolkaTwoRows items={polkaItems} table={'about'} id={1} />
       <FullWidthQuote quote='Teachers are heroes of the world and we love supporting them in their decorating endeavors!' />
       <EditableHero
         side='md:bg-gradient-to-r md:from-white/60'

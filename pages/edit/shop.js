@@ -6,6 +6,7 @@ import { shopifyClient, parseShopifyResponse } from '../../lib/shopify';
 import { createClient } from '@supabase/supabase-js';
 import Hero from '../../components/shared/Hero';
 import EditableHero from '../../components/editable/EditableHero';
+import EditableVideoPlayer from '../../components/editable/EditableVideoPlayer';
 import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
 import EditableFourColGridWithHeading from '../../components/editable/EditableFourColGridWithHeadling';
 import ShopScrollerWithHeadline from '../../components/shared/ShopScrollerWithHeadline';
@@ -260,7 +261,7 @@ const Index = ({ pageData, products, decor, picks }) => {
           price
         />
         <div className='flex flex-col'>
-          <VideoPlayer
+          <EditableVideoPlayer
             placeholder={pageData.data[0].shop_video_placeholder}
             url={pageData.data[0].shop_video}
           />
