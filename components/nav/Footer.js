@@ -183,6 +183,12 @@ const Footer = () => {
             &ldquo;Classroom&ensp;decor&ensp;positively&ensp;transforms&ensp;the&ensp;classroom,&ensp;creating&ensp;beautiful&ensp;learning&ensp;spaces&ensp;for&ensp;students!&rdquo;
           </div>
         );
+      case '/about':
+        return (
+          <div>
+            &ldquo;Beginning&ensp;the&ensp;year&ensp;with&ensp;a&ensp;decorated&ensp;space&ensp;that&ensp;supports&ensp;organization,&ensp;can&ensp;change&ensp;the&ensp;trajectory&ensp;of&ensp;your&ensp;year&rdquo;
+          </div>
+        );
       default:
         return (
           <div>
