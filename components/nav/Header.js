@@ -38,8 +38,6 @@ export default function Header() {
     },
   };
 
-  console.log(router.route);
-
   return (
     <Popover className='relative bg-white'>
       <motion.div

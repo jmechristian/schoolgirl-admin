@@ -10,7 +10,6 @@ import { createClient } from '@supabase/supabase-js';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 
 const Page = ({ pageData, staff }) => {
-  console.log(staff);
   const polkaItems = [
     {
       heading: pageData.data[0].polka_one_heading,

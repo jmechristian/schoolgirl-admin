@@ -51,7 +51,7 @@ const ScrollerItem = ({
           <Image
             src={image}
             fill
-            alt={alt}
+            alt={headline}
             className='object-cover'
             draggable={false}
           />

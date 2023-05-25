@@ -81,7 +81,6 @@ const seasonItems = [
 ];
 
 const Index = ({ pageData, locations }) => {
-  console.log(pageData);
   return (
     <main className='relative' id='home'>
       <InnerPageSubNav subNav={subNav} />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import FooterNavList from '../shared/FooterNavList';
 import Logo from '../shared/Logo';
 import QuoteBlock from '../shared/QuoteBlock';
@@ -172,6 +173,25 @@ const listSeven = [
 ];
 
 const Footer = () => {
+  const router = useRouter();
+
+  const getQuote = () => {
+    switch (router.route) {
+      case '/watch':
+        return (
+          <div>
+            &ldquo;Classroom&ensp;decor&ensp;positively&ensp;transforms&ensp;the&ensp;classroom,&ensp;creating&ensp;beautiful&ensp;learning&ensp;spaces&ensp;for&ensp;students!&rdquo;
+          </div>
+        );
+      default:
+        return (
+          <div>
+            &ldquo;Our&ensp;hope&ensp;is&ensp;to&ensp;provide&ensp;an&ensp;easy&ensp;and&ensp;inspirational&ensp;avenue&ensp;for&ensp;teachers&ensp;to&ensp;create&ensp;inviting&ensp;spaces&ensp;conducive&ensp;to&ensp;learning&rdquo;
+          </div>
+        );
+    }
+  };
+
   return (
     <div className='relative w-full h-full flex bg-light-grey overflow-hidden'>
       <div className='max-w-7xl mx-auto w-full px-6 py-16 relative'>
@@ -214,7 +234,7 @@ const Footer = () => {
               </div>
             </div>
             <div className='col-span-2 mt-8 md:mt-0'>
-              <QuoteBlock />
+              <QuoteBlock quote={getQuote()} />
             </div>
           </div>
           <div className='border border-t-gray-300' />
