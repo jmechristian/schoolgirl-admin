@@ -22,7 +22,7 @@ const subNav = [
     link: '#inspiration',
   },
   {
-    name: 'Dècor',
+    name: 'Decor',
     link: '#dècor',
   },
   {

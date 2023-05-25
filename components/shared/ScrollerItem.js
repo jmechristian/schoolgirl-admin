@@ -41,13 +41,13 @@ const ScrollerItem = ({
   return (
     <AnimatePresence>
       <motion.div
-        className='w-full h-full flex flex-col snap-start cursor-grab'
+        className='w-full h-full flex flex-col snap-start cursor-pointer'
         variants={variants}
         initial='hide'
         animate={inView ? 'show' : 'hide'}
         ref={itemRef}
       >
-        <motion.div className='block relative aspect-square cursor-grabbing'>
+        <motion.div className='block relative aspect-square cursor-pointer'>
           <Image
             src={image}
             fill
