@@ -25,7 +25,7 @@ const EmailSubscription = () => {
                       required: true,
                     },
                   ]}
-                  className='mc-form'
+                  className='mc-form w-full flex flex-col lg:flex-row gap-2'
                 />
               </div>
             </div>

@@ -112,7 +112,7 @@
 }
 
 .mc-form > input {
-  width: 70%;
+  width: 100%;
   padding: 12px 12px 8px 12px;
 }
 
@@ -122,4 +122,15 @@
   color: white;
   text-transform: uppercase;
   font-family: brown-bold;
+  width: 100%;
+}
+
+@media screen and (min-width: 500px) {
+  .mc-form > input {
+    width: 70%;
+  }
+
+  .mc-form > button {
+    width: fit-content;
+  }
 }
