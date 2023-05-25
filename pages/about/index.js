@@ -120,7 +120,7 @@ const Page = ({ pageData, staff }) => {
         />
       </div>
       <PolkaTwoRows items={polkaItems} />
-      <FullWidthQuote quote='Teachers are heroes of the world and we love supporting them in their decorating endeavors!' />
+      <FullWidthQuote quote='Teachers&ensp;are&ensp;heroes&ensp;of&ensp;the&ensp;world&ensp;and&ensp;we&ensp;love&ensp;supporting&ensp;them&ensp;in&ensp;their&ensp;decorating&ensp;endeavors!' />
       <Hero
         side='md:bg-gradient-to-r md:from-white/60'
         heading={pageData.data[0].hero_one.heading}
@@ -139,7 +139,7 @@ const Page = ({ pageData, staff }) => {
           <FourColStaffGrid
             items={staff.data}
             headline='Best In Class'
-            itemTextStyle=' text-gray-500/80 text-sm leading-tight'
+            itemTextStyle='text-gray-500/80 text-sm leading-tight'
           />
         </div>
       </div>

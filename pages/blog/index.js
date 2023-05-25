@@ -131,7 +131,7 @@ const Index = ({ posts, inspo, pageData }) => {
             bodyColor='text-gray-600'
             link={pageData.data[0].hero_three.cta_link}
           />
-          <FullWidthQuote quote=' We believe in the power of classroom decor to turn classrooms into home-away-from-homes.' />
+          <FullWidthQuote quote='We&ensp;believe&ensp;in&ensp;the&ensp;power&ensp;of&ensp;classroom&ensp;decor&ensp;to&ensp;turn&ensp;classrooms&ensp;into&ensp;home-away-from-homes.' />
           <div id='dècor' className='scroll-m-16'>
             <Hero
               side='md:bg-gradient-to-r md:from-white/60'
