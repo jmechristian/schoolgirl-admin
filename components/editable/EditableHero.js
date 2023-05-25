@@ -92,7 +92,7 @@ const EditableHero = ({
         ref={heroRef}
       >
         {isEditing && (
-          <motion.div className='absolute z-30 top-0 left-12 bottom-0 right-0 bg-black/40 backdrop-blur flex justify-center items-center py-8'>
+          <motion.div className='absolute z-30 top-0 left-0 bottom-0 right-0 bg-black/40 backdrop-blur flex justify-center items-center py-8'>
             <motion.div className='bg-white/80 max-w-3xl w-full h-full rounded-lg p-9 flex justify-center items-center'>
               <motion.form
                 className='flex flex-col gap-4 w-full'
@@ -184,13 +184,13 @@ const EditableHero = ({
             </motion.div>
           </motion.div>
         )}
-        <motion.div className='absolute left-6 bottom-5 z-50 shadow-lg w-16 h-16 rounded-full bg-black ring-2 ring-white flex items-center justify-center cursor-pointer'>
+        <motion.div className='absolute left-28 bottom-5 z-50 shadow-lg w-16 h-16 rounded-full bg-black ring-2 ring-white flex items-center justify-center cursor-pointer'>
           <motion.div onClick={() => setIsEditing(true)} className='max-w-7xl'>
             <PencilSquareIcon className='w-7 h-7 fill-white' />
           </motion.div>
         </motion.div>
         <motion.div
-          className={`absolute bottom-0 right-0 left-0 w-full h-full bg-gradient-to-r via-white/80 from-white/30 to-white/30 ${side} md:from-white z-10 `}
+          className={`absolute bottom-0 right-0 left-0 w-full h-full bg-gradient-to-r via-white/80 from-white/30 to-white/30 ${side} md:from-white md:to-white/40 z-10 `}
         ></motion.div>
         <motion.div
           className={`h-96 relative md:h-[543px] flex max-w-[1440px] mx-auto bg-cover bg-center bg-no-repeat`}
