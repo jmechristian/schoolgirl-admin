@@ -17,6 +17,7 @@ const EditableShopScrollerWithHeadline = ({
   itemTextStyle,
   background,
   shopID,
+  fieldID,
 }) => {
   const [isHeadline, setIsHeadline] = useState(headline && headline);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +33,7 @@ const EditableShopScrollerWithHeadline = ({
     const { data, error } = await supabase
       .from('shop')
       .update({
-        shop_collection_1_title: isHeadline,
+        [fieldID]: isHeadline,
       })
       .eq('id', 1)
       .select();

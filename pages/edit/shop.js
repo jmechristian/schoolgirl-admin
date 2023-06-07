@@ -92,6 +92,7 @@ const Index = ({ pageData, products, decor, picks }) => {
           itemTextStyle='text-gray-700'
           headline={pageData.data[0].shop_collection_1_title}
           shopID={pageData.data[0].shop_collection_1}
+          fieldID={'shop_collection_1_title'}
         />
         <div className='scroll-mt-24' id='new'>
           <EditableHero
@@ -112,6 +113,7 @@ const Index = ({ pageData, products, decor, picks }) => {
           itemTextStyle='text-gray-700'
           headline={pageData.data[0].shop_collection_2_title}
           shopID={pageData.data[0].shop_collection_2}
+          fieldID={'shop_collection_2_title'}
         />
         <div className='scroll-mt-24' id='furniture design'>
           <EditableHero
@@ -160,6 +162,7 @@ const Index = ({ pageData, products, decor, picks }) => {
           itemTextStyle='text-gray-700'
           headline={pageData.data[0].shop_collection_3_title}
           shopID={pageData.data[0].shop_collection_3}
+          fieldID={'shop_collection_3_title'}
         />
         <div className='flex flex-col'>
           <EditableVideoPlayer

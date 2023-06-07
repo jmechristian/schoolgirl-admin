@@ -53,103 +53,6 @@ const subNav = [
   },
 ];
 
-const seasonItems = [
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_1_pksyrm.webp',
-    alt: 'Shop Rugs',
-    headline: 'Rugs',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_2_rsktoz.webp',
-    alt: 'Shop Borders',
-    headline: 'Borders',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_3_i4gea7.webp',
-    alt: 'Shop Pillows',
-    headline: 'Pillows',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_4_airqen.webp',
-    alt: 'Shop Décor',
-    headline: 'Décor',
-  },
-];
-
-const sgsDesignItems = [
-  {
-    image:
-      'https://res.cloudinary.com/designadg/image/upload/q_99/v1677720975/SGS/sgs_design_item1_qfx3lk.webp',
-    alt: 'FOUNDATIONS & FRAMES',
-    headline: 'FOUNDATIONS & FRAMES',
-    link: 'https://shopschoolgirlstyle.com/collections/schoolgirl-style-borders',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/designadg/image/upload/q_98/v1677720975/SGS/sgs_design_item2_yknmfy.webp',
-    alt: 'COORDINATING RUGS',
-    headline: 'COORDINATING RUGS',
-    link: 'https://shopschoolgirlstyle.com/collections/schoolgirl-style-classroom-area-rugs',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/designadg/image/upload/v1677720975/SGS/sgs_design_item3_losi6c.webp',
-    alt: 'FINISHING TOUCHES',
-    headline: 'FINISHING TOUCHES',
-    link: 'https://shopschoolgirlstyle.com/pages/accessories',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/designadg/image/upload/v1677720975/SGS/sgs_design_item4_ghqjjr.webp',
-    alt: 'STORAGE SOLUTIONS',
-    headline: 'STORAGE SOLUTIONS',
-    link: 'https://shopschoolgirlstyle.com/pages/classroom-storage',
-  },
-];
-
-const collectionItems = [
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_1_pksyrm.webp',
-    alt: 'Shop Rugs',
-    headline: 'Rugs',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_2_rsktoz.webp',
-    alt: 'Shop Borders',
-    headline: 'Borders',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_3_i4gea7.webp',
-    alt: 'Shop Pillows',
-    headline: 'Pillows',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_4_airqen.webp',
-    alt: 'Shop Décor',
-    headline: 'Décor1',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_4_airqen.webp',
-    alt: 'Shop Décor',
-    headline: 'Décor2',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_4_airqen.webp',
-    alt: 'Shop Décor',
-    headline: 'Décor3',
-  },
-];
-
 const Index = ({ pageData, products, decor, picks }) => {
   return (
     <main className='pb-16 relative' id='home'>
@@ -195,7 +98,7 @@ const Index = ({ pageData, products, decor, picks }) => {
         <ShopScrollerWithHeadline
           items={decor.products}
           itemTextStyle='uppercase text-gray-700'
-          headline='Shop Classroom Decor Bundles'
+          headline={pageData.data[0].shop_collection_2_title}
         />
         <div className='scroll-mt-24' id='furniture design'>
           <Hero
@@ -243,7 +146,7 @@ const Index = ({ pageData, products, decor, picks }) => {
         <ShopScrollerWithHeadline
           items={picks.products}
           itemTextStyle='text-gray-700'
-          headline='Picks of the Week'
+          headline={pageData.data[0].shop_collection_3_title}
           bookmark={true}
           price
         />
