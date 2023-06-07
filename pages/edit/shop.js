@@ -10,6 +10,7 @@ import EditableVideoPlayer from '../../components/editable/EditableVideoPlayer';
 import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
 import EditableFourColGridWithHeading from '../../components/editable/EditableFourColGridWithHeadling';
 import ShopScrollerWithHeadline from '../../components/shared/ShopScrollerWithHeadline';
+import EditableShopScrollerWithHeadline from '../../components/editable/EditableShopScrollerWithHeadline';
 import VideoPlayer from '../../components/shared/VideoPlayer';
 import HeadlineWithSpan from '../../components/shared/HeadlineWithSpan';
 import EmailSubscription from '../../components/shared/EmailSubscription';
@@ -58,103 +59,6 @@ const subNav = [
   },
 ];
 
-const seasonItems = [
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_1_pksyrm.webp',
-    alt: 'Shop Rugs',
-    headline: 'Rugs',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_2_rsktoz.webp',
-    alt: 'Shop Borders',
-    headline: 'Borders',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_3_i4gea7.webp',
-    alt: 'Shop Pillows',
-    headline: 'Pillows',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_4_airqen.webp',
-    alt: 'Shop Décor',
-    headline: 'Décor',
-  },
-];
-
-const sgsDesignItems = [
-  {
-    image:
-      'https://res.cloudinary.com/designadg/image/upload/q_99/v1677720975/SGS/sgs_design_item1_qfx3lk.webp',
-    alt: 'FOUNDATIONS & FRAMES',
-    headline: 'FOUNDATIONS & FRAMES',
-    link: 'https://shopschoolgirlstyle.com/collections/schoolgirl-style-borders',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/designadg/image/upload/q_98/v1677720975/SGS/sgs_design_item2_yknmfy.webp',
-    alt: 'COORDINATING RUGS',
-    headline: 'COORDINATING RUGS',
-    link: 'https://shopschoolgirlstyle.com/collections/schoolgirl-style-classroom-area-rugs',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/designadg/image/upload/v1677720975/SGS/sgs_design_item3_losi6c.webp',
-    alt: 'FINISHING TOUCHES',
-    headline: 'FINISHING TOUCHES',
-    link: 'https://shopschoolgirlstyle.com/pages/accessories',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/designadg/image/upload/v1677720975/SGS/sgs_design_item4_ghqjjr.webp',
-    alt: 'STORAGE SOLUTIONS',
-    headline: 'STORAGE SOLUTIONS',
-    link: 'https://shopschoolgirlstyle.com/pages/classroom-storage',
-  },
-];
-
-const collectionItems = [
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_1_pksyrm.webp',
-    alt: 'Shop Rugs',
-    headline: 'Rugs',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_2_rsktoz.webp',
-    alt: 'Shop Borders',
-    headline: 'Borders',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_3_i4gea7.webp',
-    alt: 'Shop Pillows',
-    headline: 'Pillows',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_4_airqen.webp',
-    alt: 'Shop Décor',
-    headline: 'Décor1',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_4_airqen.webp',
-    alt: 'Shop Décor',
-    headline: 'Décor2',
-  },
-  {
-    image:
-      'https://res.cloudinary.com/jmechristian/image/upload/v1675819579/shop_4_airqen.webp',
-    alt: 'Shop Décor',
-    headline: 'Décor3',
-  },
-];
-
 const Index = ({ pageData, products, decor, picks }) => {
   const { user } = useSelector((state) => state.auth);
   const router = useRouter();
@@ -168,7 +72,7 @@ const Index = ({ pageData, products, decor, picks }) => {
     <main className='pb-16 relative' id='home'>
       <InnerPageSubNav subNav={subNav} />
       <EditableHero
-        side='md:bg-gradient-to-r'
+        side='md:bg-gradient-to-l'
         heading={pageData.data[0].hero_main.heading}
         headline={pageData.data[0].hero_main.headline}
         subtext={pageData.data[0].hero_main.subheadline}
@@ -184,11 +88,10 @@ const Index = ({ pageData, products, decor, picks }) => {
         className='flex flex-col pt-16 gap-10 md:gap-16 scroll-mt-24'
         id='collections'
       >
-        <ShopScrollerWithHeadline
-          items={products.products}
+        <EditableShopScrollerWithHeadline
           itemTextStyle='text-gray-700'
-          headline='Shop The Collection'
-          bookmark={true}
+          headline={pageData.data[0].shop_collection_1_title}
+          shopID={pageData.data[0].shop_collection_1}
         />
         <div className='scroll-mt-24' id='new'>
           <EditableHero
@@ -205,10 +108,10 @@ const Index = ({ pageData, products, decor, picks }) => {
             link={pageData.data[0].hero_two.cta_link}
           />
         </div>
-        <ShopScrollerWithHeadline
-          items={decor.products}
-          itemTextStyle='uppercase text-gray-700'
-          headline='Shop Classroom Decor Bundles'
+        <EditableShopScrollerWithHeadline
+          itemTextStyle='text-gray-700'
+          headline={pageData.data[0].shop_collection_2_title}
+          shopID={pageData.data[0].shop_collection_2}
         />
         <div className='scroll-mt-24' id='furniture design'>
           <EditableHero
@@ -253,12 +156,10 @@ const Index = ({ pageData, products, decor, picks }) => {
             link={pageData.data[0].hero_four.cta_link}
           />
         </div>
-        <ShopScrollerWithHeadline
-          items={picks.products}
+        <EditableShopScrollerWithHeadline
           itemTextStyle='text-gray-700'
-          headline='Picks of the Week'
-          bookmark={true}
-          price
+          headline={pageData.data[0].shop_collection_3_title}
+          shopID={pageData.data[0].shop_collection_3}
         />
         <div className='flex flex-col'>
           <EditableVideoPlayer
@@ -286,36 +187,8 @@ export async function getServerSideProps() {
       '*, hero_main:shop_hero_main_fkey(*), hero_two:shop_hero_two_fkey(*), hero_three:shop_hero_three_fkey(*), hero_four:shop_hero_four_fkey(*), headline_three(id, title, row_items(grid_item(*)))'
     );
 
-  const safari = 'gid://shopify/Collection/286718034077';
-  // Fetch all the products
-  const products = await shopifyClient.collection.fetchWithProducts(
-    pageData.data[0].shop_collection_1,
-    {
-      productsFirst: 10,
-    }
-  );
-
-  // const collectionId = 'gid://shopify/Collection/438218719523';
-  // Fetch all the products
-
-  const melspicks = await shopifyClient.collection.fetchWithProducts(
-    pageData.data[0].shop_collection_2,
-    { productsFirst: 10 }
-  );
-
-  // const decor = 'gid://shopify/Collection/433233494307';
-  const classDecor = await shopifyClient.collection.fetchWithProducts(
-    pageData.data[0].shop_collection_3,
-    {
-      productsFirst: 10,
-    }
-  );
-
   return {
     props: {
-      products: parseShopifyResponse(products),
-      picks: parseShopifyResponse(melspicks),
-      decor: parseShopifyResponse(classDecor),
       pageData,
     },
   };

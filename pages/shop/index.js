@@ -174,7 +174,7 @@ const Index = ({ pageData, products, decor, picks }) => {
         <ShopScrollerWithHeadline
           items={products.products}
           itemTextStyle='text-gray-700'
-          headline='Shop The Collection'
+          headline={pageData.data[0].shop_collection_1_title}
           bookmark={true}
         />
         <div className='scroll-mt-24' id='new'>
