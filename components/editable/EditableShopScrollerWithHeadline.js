@@ -18,6 +18,7 @@ const EditableShopScrollerWithHeadline = ({
   background,
   shopID,
   fieldID,
+  fieldID2,
 }) => {
   const [isHeadline, setIsHeadline] = useState(headline && headline);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +27,8 @@ const EditableShopScrollerWithHeadline = ({
   const [collection, setCollection] = useState(shopID && shopID);
   const [collectionProducts, setCollectionProducts] = useState([]);
   const [allCollections, setAllCollections] = useState([]);
+  const [collectionTitle, setCollectionTitle] = useState(undefined);
+  const [newCollection, setNewCollection] = useState(shopID);
 
   const headlineSubmitHandler = async (e) => {
     e.preventDefault();
@@ -34,6 +37,7 @@ const EditableShopScrollerWithHeadline = ({
       .from('shop')
       .update({
         [fieldID]: isHeadline,
+        [fieldID2]: newCollection,
       })
       .eq('id', 1)
       .select();
@@ -48,23 +52,24 @@ const EditableShopScrollerWithHeadline = ({
     const getProducts = async () => {
       // Fetch all the products
       const products = await shopifyClient.collection.fetchWithProducts(
-        shopID,
+        `gid://shopify/Collection/${newCollection}`,
         {
           productsFirst: 10,
         }
       );
       setCollectionProducts(parseShopifyResponse(products.products));
+      setCollectionTitle(parseShopifyResponse(products.title));
     };
 
-    const getAllCollections = async () => {
-      const allCollections = await shopifyClient.collection
-        .fetchAll()
-        .then((collection) => setAllCollections(collection));
-    };
+    // const getAllCollections = async () => {
+    //   const allCollections = await shopifyClient.collection
+    //     .fetchAll(250)
+    //     .then((collection) => setAllCollections(collection));
+    // };
 
     getProducts();
-    getAllCollections();
-  }, [shopID]);
+    // getAllCollections();
+  }, [newCollection]);
 
   return (
     <div className='relative w-full mx-auto flex flex-col gap-6'>
@@ -84,10 +89,18 @@ const EditableShopScrollerWithHeadline = ({
               <TextInput
                 type='text'
                 id='headline'
+                placeholder={'Enter Collection ID'}
+                value={newCollection}
+                changeHandler={(val) => setNewCollection(val)}
+              />
+              <TextInput
+                type='text'
+                id='collection'
                 value={isHeadline}
+                placeholder={'Enter Headline'}
                 changeHandler={(val) => setIsHeadline(val)}
               />
-              <select></select>
+
               <button
                 type='submit'
                 className={`${

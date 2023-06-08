@@ -179,7 +179,7 @@ export async function getServerSideProps() {
   const safari = 'gid://shopify/Collection/286718034077';
   // Fetch all the products
   const products = await shopifyClient.collection.fetchWithProducts(
-    pageData.data[0].shop_collection_1,
+    `gid://shopify/Collection/${pageData.data[0].shop_collection_1}`,
     {
       productsFirst: 10,
     }
@@ -189,13 +189,13 @@ export async function getServerSideProps() {
   // Fetch all the products
 
   const melspicks = await shopifyClient.collection.fetchWithProducts(
-    pageData.data[0].shop_collection_2,
+    `gid://shopify/Collection/${pageData.data[0].shop_collection_3}`,
     { productsFirst: 10 }
   );
 
   // const decor = 'gid://shopify/Collection/433233494307';
   const classDecor = await shopifyClient.collection.fetchWithProducts(
-    pageData.data[0].shop_collection_3,
+    `gid://shopify/Collection/${pageData.data[0].shop_collection_2}`,
     {
       productsFirst: 10,
     }
