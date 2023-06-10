@@ -190,7 +190,7 @@ const EditableHero = ({
           </motion.div>
         </motion.div>
         <motion.div
-          className={`absolute bottom-0 right-0 left-0 w-full h-full bg-gradient-to-r via-white/80 from-white/30 to-white/30 ${side} md:from-white md:to-white/40 z-10 `}
+          className={`absolute bottom-0 right-0 left-0 w-full h-full bg-gradient-to-r via-white/80 from-white/30 to-white/30 ${side} md:from-white md:to-white/10 z-10 `}
         ></motion.div>
         <motion.div
           className={`h-96 relative md:h-[543px] flex max-w-[1440px] mx-auto bg-cover bg-center bg-no-repeat`}

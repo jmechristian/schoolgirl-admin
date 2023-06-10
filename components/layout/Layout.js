@@ -3,15 +3,18 @@ import Header from '../nav/Header';
 import Footer from '../nav/Footer';
 import Banner from '../nav/Banner';
 import Head from 'next/head';
+import { useSelector } from 'react-redux';
+import EditableBanner from '../editable/EditableBanner';
 
 const Layout = ({ children }) => {
+  const { user } = useSelector((state) => state.auth);
   return (
     <div className='w-full'>
       <Head>
         <title>Schoolgirl Style</title>
         <meta property='og:title' content='Schoolgirl Style' key='title' />
       </Head>
-      <Banner />
+      {user ? <EditableBanner /> : <Banner />}
       <Header />
       {children}
       <Footer />

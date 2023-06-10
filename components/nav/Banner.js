@@ -1,9 +1,34 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Banner = () => {
   const bannerRef = useRef();
   const inView = useInView(bannerRef);
+
+  const [isHeadline, setIsHeadline] = useState('');
+  const [isLink, setLink] = useState('');
+
+  useEffect(() => {
+    const getHeader = async () => {
+      let { data: salesbar, error } = await supabase
+        .from('salesbar')
+        .select('*');
+
+      setIsHeadline(salesbar[0].value);
+      setLink(salesbar[0].link);
+
+      if (error) {
+        console.log(error);
+      }
+    };
+
+    getHeader();
+  }, []);
 
   const variants = {
     show: {
@@ -37,17 +62,9 @@ const Banner = () => {
       >
         <motion.div className='text-neutral-500 font-brown'>
           <motion.h3 className='px-8 sm:px-0'>
-            <motion.a
-              href='https://shopschoolgirlstyle.com/'
-              className='underline'
-              target='_blank'
-              rel='noreferrer'
-            >
-              Style Week
-            </motion.a>{' '}
-            is coming! The magic starts{' '}
-            <span className='font-brown-bold'>March 31.</span> Exclusive
-            back-to-school collections revealed.
+            <motion.a href={isLink} target='_blank' rel='noreferrer'>
+              {isHeadline}
+            </motion.a>
           </motion.h3>
         </motion.div>
       </motion.div>
