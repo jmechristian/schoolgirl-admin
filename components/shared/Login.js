@@ -5,6 +5,8 @@ import { createClient } from '@supabase/supabase-js';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isError, setError] = useState(false);
+  const [isErrorMessage, setErrorMessage] = useState('');
 
   const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
@@ -17,7 +19,10 @@ export default function Login() {
       password: password,
     });
 
-    // console.log('data', data);
+    if (error) {
+      setErrorMessage(error.message);
+      setError(true);
+    }
   };
   return (
     <>
@@ -113,6 +118,11 @@ export default function Login() {
                   Sign in
                 </button>
               </div>
+              {isError && (
+                <div>
+                  <span>{isErrorMessage}</span>
+                </div>
+              )}
             </form>
 
             {/* <div>
