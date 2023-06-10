@@ -135,7 +135,7 @@ const EditableShopScrollerWithHeadline = ({
                   subheadline={it.subheadline}
                   background={background}
                   price={it.variants[0].price.amount}
-                  slug={it.slug ? it.slug : '/#'}
+                  slug={it.onlineStoreUrl}
                 />
               </motion.div>
             ))}

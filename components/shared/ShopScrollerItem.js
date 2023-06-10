@@ -48,7 +48,10 @@ const ScrollerItem = ({
         animate={inView ? 'show' : 'hide'}
         ref={itemRef}
       >
-        <motion.div className='block relative aspect-square cursor-pointer'>
+        <motion.div
+          className='block relative aspect-square cursor-pointer'
+          onClick={() => window.open(`${slug}`)}
+        >
           <Image
             src={image}
             fill
@@ -64,7 +67,7 @@ const ScrollerItem = ({
         >
           <motion.div
             className='flex flex-col cursor-pointer'
-            onClick={() => window.open(`${link}`)}
+            onClick={() => window.open(`${slug}`)}
           >
             <motion.div
               className={`font-brown-bold tracking-wide ${text} line-clamp-2`}
