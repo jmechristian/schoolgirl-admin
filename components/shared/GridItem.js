@@ -50,7 +50,7 @@ export const GridItem = ({
               background ? 'bg-khaki' : ''
             } text-center flex flex-col justify-center items-center overflow-hidden py-3 px-5 h-16`}
           >
-            <motion.div className={`font-brown-bold tracking-wide ${text}`}>
+            <motion.div className={`font-brown-bold tracking-wider ${text}`}>
               {headline}
             </motion.div>
             {job && (
