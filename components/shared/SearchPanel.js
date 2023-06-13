@@ -46,7 +46,7 @@ export default function SearchPanel({ open, setClose }) {
               <Dialog.Panel className='relative transform overflow-hidden rounded-lg bg-light-grey px-4 pb-4 pt-5 shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-5xl sm:p-6 w-full'>
                 <TextInput
                   id='search'
-                  placeholder={'Discover new inspiration...'}
+                  placeholder={'Discover new inspiration....'}
                   changeHandler={(val) => setSearchTerm(val)}
                 />
                 <div className='mt-1 sm:mt-6'>
