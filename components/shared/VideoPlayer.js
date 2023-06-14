@@ -62,7 +62,7 @@ const VideoPlayer = ({ placeholder, url }) => {
           width='auto'
           height='100%'
           playsinline
-          light={<Image fill src={placeholder} alt='Thumbnail' />}
+          light={placeholder}
           playIcon={<PlayerIcon />}
           controls={true}
           muted
