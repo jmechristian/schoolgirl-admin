@@ -83,6 +83,7 @@ const Index = ({ pageData, products, decor, picks }) => {
         textColor='text-gray-900'
         bodyColor='text-gray-700'
         link={pageData.data[0].hero_main.cta_link}
+        id={pageData.data[0].hero_main.id}
       />
       <div
         className='flex flex-col pt-16 gap-10 md:gap-16 scroll-mt-24'
@@ -108,6 +109,7 @@ const Index = ({ pageData, products, decor, picks }) => {
             textColor='text-neutral-brown'
             bodyColor='text-gray-700'
             link={pageData.data[0].hero_two.cta_link}
+            id={pageData.data[0].hero_two.id}
           />
         </div>
         <EditableShopScrollerWithHeadline
@@ -130,6 +132,7 @@ const Index = ({ pageData, products, decor, picks }) => {
             textColor='text-gray-900'
             bodyColor='text-gray-700'
             link={pageData.data[0].hero_three.cta_link}
+            id={pageData.data[0].hero_three.id}
           />
         </div>
         <div className='scroll-mt-24' id='design'>
@@ -158,6 +161,7 @@ const Index = ({ pageData, products, decor, picks }) => {
             textColor='text-neutral-brown'
             bodyColor='text-gray-700'
             link={pageData.data[0].hero_four.cta_link}
+            id={pageData.data[0].hero_four.id}
           />
         </div>
         <EditableShopScrollerWithHeadline
