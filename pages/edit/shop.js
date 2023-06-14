@@ -171,6 +171,10 @@ const Index = ({ pageData, products, decor, picks }) => {
           <EditableVideoPlayer
             placeholder={pageData.data[0].shop_video_placeholder}
             url={pageData.data[0].shop_video}
+            field_one='shop_video_placeholder'
+            field_two='shop_video'
+            table='shop'
+            id={1}
           />
           <div className='bg-gradient-to-b from-khaki space-y-16'>
             <HeadlineWithSpan link='https://shopschoolgirlstyle.com/pages/sgs-lookbook' />

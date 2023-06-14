@@ -78,6 +78,10 @@ const Page = ({ pageData }) => {
       <EditableVideoPlayer
         placeholder={pageData.data[0].video_hero_placeholder}
         url={pageData.data[0].video_hero_link}
+        field_one='video_hero_placeholder'
+        field_two='video_hero_link'
+        table='giving'
+        id={1}
       />
       <div
         className='bg-gradient-to-b from-khaki space-y-16 pt-6 scroll-mt-24'

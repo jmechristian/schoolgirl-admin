@@ -101,6 +101,10 @@ const Index = ({ pageData, locations }) => {
       <EditableVideoPlayer
         placeholder={pageData.data[0].hero_main_placeholder}
         url={pageData.data[0].hero_main_link}
+        field_one='hero_main_placeholder'
+        field_two='hero_main_link'
+        table='visit'
+        id={1}
       />
       <div className='flex flex-col gap-16'>
         <EditablePolkaTwoRows
