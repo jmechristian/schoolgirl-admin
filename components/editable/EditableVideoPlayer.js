@@ -173,12 +173,7 @@ const EditableVideoPlayer = ({
           width='auto'
           height='100%'
           playsinline
-          light={
-            <div
-              className='bg-cover bg-center'
-              style={{ backgroundImage: `url(${placeholder})` }}
-            />
-          }
+          light={placeholder}
           playIcon={<PlayerIcon />}
           controls={true}
           muted
