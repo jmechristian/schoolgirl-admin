@@ -53,7 +53,7 @@ const subNav = [
   },
 ];
 
-const Index = ({ pageData, products, decor, picks }) => {
+const Index = ({ pageData, products, decor, picks, subnav }) => {
   return (
     <main className='pb-16 relative' id='home'>
       <InnerPageSubNav subNav={subNav} />
@@ -201,12 +201,15 @@ export async function getServerSideProps() {
     }
   );
 
+  const subnav = await supabase.from('shop_subnav').select('*');
+
   return {
     props: {
       products: parseShopifyResponse(products),
       picks: parseShopifyResponse(melspicks),
       decor: parseShopifyResponse(classDecor),
       pageData,
+      subnav,
     },
   };
 }

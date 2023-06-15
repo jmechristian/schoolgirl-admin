@@ -55,7 +55,6 @@ const subNav = [
 ];
 
 const Index = ({ pageData, subnav }) => {
-  console.log(subnav);
   const { user } = useSelector((state) => state.auth);
   const router = useRouter();
 
