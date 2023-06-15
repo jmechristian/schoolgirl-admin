@@ -1,12 +1,12 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { CheckIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import SearchPanel from './SearchPanel';
+import SearchPanel from '../shared/SearchPanel';
 
-const InnerPageSubNav = ({ subNav, search }) => {
+const EditableInnerPageSubNav = ({ subNav, search }) => {
   const [searchOpen, setSearchOpen] = useState(false);
   return (
-    <div className='w-full flex justify-center gap-12 py-3 md:py-8 bg-khaki sticky top-0 z-50 drop-shadow-sm'>
+    <div className='w-full flex justify-center gap-12 py-3 md:py-8 bg-khaki sticky top-0 z-[90] drop-shadow-sm'>
       <div
         className='flex lgjustify-center items-center gap-12 w-full max-w-7xl mx-auto px-6 overflow-auto'
         id='scrollers'
@@ -16,7 +16,7 @@ const InnerPageSubNav = ({ subNav, search }) => {
             className='font-sm font-brown text-gray-600 uppercase text-sm'
             key={item.name}
           >
-            <a href={item.link}>{item.name}</a>
+            <a href={item.link}>{item.value}</a>
           </div>
         ))}
         {search && (
@@ -34,4 +34,4 @@ const InnerPageSubNav = ({ subNav, search }) => {
   );
 };
 
-export default InnerPageSubNav;
+export default EditableInnerPageSubNav;

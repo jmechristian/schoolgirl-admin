@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
-// import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { shopifyClient, parseShopifyResponse } from '../../lib/shopify';
 import { createClient } from '@supabase/supabase-js';
-import Hero from '../../components/shared/Hero';
 import EditableHero from '../../components/editable/EditableHero';
 import EditableVideoPlayer from '../../components/editable/EditableVideoPlayer';
-import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
 import EditableFourColGridWithHeading from '../../components/editable/EditableFourColGridWithHeadling';
-import ShopScrollerWithHeadline from '../../components/shared/ShopScrollerWithHeadline';
 import EditableShopScrollerWithHeadline from '../../components/editable/EditableShopScrollerWithHeadline';
-import VideoPlayer from '../../components/shared/VideoPlayer';
 import HeadlineWithSpan from '../../components/shared/HeadlineWithSpan';
 import EmailSubscription from '../../components/shared/EmailSubscription';
-import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
+import EditableInnerPageSubNav from '../../components/editable/EditableInnerPageSubNav';
+import { LinkIcon } from '@heroicons/react/24/outline';
 
 const subNav = [
   {
@@ -59,7 +54,8 @@ const subNav = [
   },
 ];
 
-const Index = ({ pageData, products, decor, picks }) => {
+const Index = ({ pageData, subnav }) => {
+  console.log(subnav);
   const { user } = useSelector((state) => state.auth);
   const router = useRouter();
 
@@ -68,9 +64,18 @@ const Index = ({ pageData, products, decor, picks }) => {
       router.push('/admin');
     }
   });
+
   return (
-    <main className='pb-16 relative' id='home'>
-      <InnerPageSubNav subNav={subNav} />
+    <main className='pb-16 relative' id='one'>
+      <EditableInnerPageSubNav subNav={subnav.data} />
+      <div className='relative w-full'>
+        <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+          <div>
+            <LinkIcon className='w-6 h-6 text-gray-800' />
+          </div>
+          <div className='text-lg'>One</div>
+        </div>
+      </div>
       <EditableHero
         side='md:bg-gradient-to-l'
         heading={pageData.data[0].hero_main.heading}
@@ -87,8 +92,16 @@ const Index = ({ pageData, products, decor, picks }) => {
       />
       <div
         className='flex flex-col pt-16 gap-10 md:gap-16 scroll-mt-24'
-        id='collections'
+        id='two'
       >
+        <div className='relative w-full'>
+          <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+            <div>
+              <LinkIcon className='w-5 h-5 text-gray-800' />
+            </div>
+            <div>Two</div>
+          </div>
+        </div>
         <EditableShopScrollerWithHeadline
           itemTextStyle='text-gray-700'
           headline={pageData.data[0].shop_collection_1_title}
@@ -96,7 +109,15 @@ const Index = ({ pageData, products, decor, picks }) => {
           fieldID={'shop_collection_1_title'}
           fieldID2={'shop_collection_1'}
         />
-        <div className='scroll-mt-24' id='new'>
+        <div className='scroll-mt-24' id='three'>
+          <div className='relative w-full'>
+            <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+              <div>
+                <LinkIcon className='w-5 h-5 text-gray-800 ' />
+              </div>
+              <div>Three</div>
+            </div>
+          </div>
           <EditableHero
             side='md:bg-gradient-to-r'
             heading={pageData.data[0].hero_two.heading}
@@ -112,14 +133,32 @@ const Index = ({ pageData, products, decor, picks }) => {
             id={pageData.data[0].hero_two.id}
           />
         </div>
-        <EditableShopScrollerWithHeadline
-          itemTextStyle='text-gray-700'
-          headline={pageData.data[0].shop_collection_2_title}
-          shopID={pageData.data[0].shop_collection_2}
-          fieldID={'shop_collection_2_title'}
-          fieldID2={'shop_collection_2'}
-        />
-        <div className='scroll-mt-24' id='furniture design'>
+        <div className='scroll-mt-24' id='four'>
+          <div className='relative w-full'>
+            <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+              <div>
+                <LinkIcon className='w-6 h-6 text-gray-800' />
+              </div>
+              <div>Four</div>
+            </div>
+          </div>
+          <EditableShopScrollerWithHeadline
+            itemTextStyle='text-gray-700'
+            headline={pageData.data[0].shop_collection_2_title}
+            shopID={pageData.data[0].shop_collection_2}
+            fieldID={'shop_collection_2_title'}
+            fieldID2={'shop_collection_2'}
+          />
+        </div>
+        <div className='scroll-mt-24' id='five'>
+          <div className='relative w-full'>
+            <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+              <div>
+                <LinkIcon className='w-6 h-6 text-gray-800' />
+              </div>
+              <div>Five</div>
+            </div>
+          </div>
           <EditableHero
             side='md:bg-gradient-to-l'
             heading={pageData.data[0].hero_three.heading}
@@ -135,7 +174,15 @@ const Index = ({ pageData, products, decor, picks }) => {
             id={pageData.data[0].hero_three.id}
           />
         </div>
-        <div className='scroll-mt-24' id='design'>
+        <div className='scroll-mt-24' id='six'>
+          <div className='relative w-full'>
+            <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+              <div>
+                <LinkIcon className='w-6 h-6 text-gray-800' />
+              </div>
+              <div>Six</div>
+            </div>
+          </div>
           <EditableFourColGridWithHeading
             items={[
               pageData.data[0].headline_three.row_items[0].grid_item,
@@ -148,7 +195,15 @@ const Index = ({ pageData, products, decor, picks }) => {
             background={true}
           />
         </div>
-        <div className='scroll-mt-24' id='melspicks'>
+        <div className='scroll-mt-24' id='seven'>
+          <div className='relative w-full'>
+            <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+              <div>
+                <LinkIcon className='w-6 h-6 text-gray-800' />
+              </div>
+              <div>Seven</div>
+            </div>
+          </div>
           <EditableHero
             side='md:bg-gradient-to-r'
             heading={pageData.data[0].hero_four.heading}
@@ -164,14 +219,32 @@ const Index = ({ pageData, products, decor, picks }) => {
             id={pageData.data[0].hero_four.id}
           />
         </div>
-        <EditableShopScrollerWithHeadline
-          itemTextStyle='text-gray-700'
-          headline={pageData.data[0].shop_collection_3_title}
-          shopID={pageData.data[0].shop_collection_3}
-          fieldID={'shop_collection_3_title'}
-          fieldID2={'shop_collection_3'}
-        />
-        <div className='flex flex-col'>
+        <div className='scroll-mt-24' id='eight'>
+          <div className='relative w-full'>
+            <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+              <div>
+                <LinkIcon className='w-6 h-6 text-gray-800' />
+              </div>
+              <div>Eight</div>
+            </div>
+          </div>
+          <EditableShopScrollerWithHeadline
+            itemTextStyle='text-gray-700'
+            headline={pageData.data[0].shop_collection_3_title}
+            shopID={pageData.data[0].shop_collection_3}
+            fieldID={'shop_collection_3_title'}
+            fieldID2={'shop_collection_3'}
+          />
+        </div>
+        <div className='flex flex-col' id='nine'>
+          <div className='relative w-full'>
+            <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+              <div>
+                <LinkIcon className='w-6 h-6 text-gray-800' />
+              </div>
+              <div>Nine</div>
+            </div>
+          </div>
           <EditableVideoPlayer
             placeholder={pageData.data[0].shop_video_placeholder}
             url={pageData.data[0].shop_video}
@@ -180,7 +253,15 @@ const Index = ({ pageData, products, decor, picks }) => {
             table='shop'
             id={1}
           />
-          <div className='bg-gradient-to-b from-khaki space-y-16'>
+          <div className='bg-gradient-to-b from-khaki space-y-16' id='ten'>
+            <div className='relative w-full'>
+              <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+                <div>
+                  <LinkIcon className='w-6 h-6 text-gray-800' />
+                </div>
+                <div>Ten</div>
+              </div>
+            </div>
             <HeadlineWithSpan link='https://shopschoolgirlstyle.com/pages/sgs-lookbook' />
             <EmailSubscription />
           </div>
@@ -195,6 +276,8 @@ export async function getServerSideProps() {
   const supabaseKey = process.env.VITE_SUPABASE_KEY;
   const supabase = createClient(supabaseUrl, supabaseKey);
 
+  const subnav = await supabase.from('shop_subnav').select('*');
+
   const pageData = await supabase
     .from('shop')
     .select(
@@ -204,6 +287,7 @@ export async function getServerSideProps() {
   return {
     props: {
       pageData,
+      subnav,
     },
   };
 }
