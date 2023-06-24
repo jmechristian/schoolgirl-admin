@@ -69,7 +69,7 @@ const Hero = ({
                 {heading}
               </motion.div>
               <motion.div
-                className={`font-canela text-5xl md:text-7xl ${textColor} leading-none`}
+                className={`font-canela text-5xl md:text-7xl ${textColor}`}
               >
                 {headline}
               </motion.div>

@@ -188,7 +188,7 @@ export default function Home({ pageData }) {
         buttonColor='bg-sweet-green'
         bg={pageData.data[0].hero_main.image}
         textSide='right-10'
-        textColor='text-sweet-green'
+        textColor='text-black'
         bodyColor='text-gray-700'
         link={pageData.data[0].hero_main.cta_link}
       />
