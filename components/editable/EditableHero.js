@@ -24,6 +24,7 @@ const EditableHero = ({
   link,
   bodyColor,
   buttonTextColor,
+  theme,
 }) => {
   const heroRef = useRef();
   const inView = useInView(heroRef);
@@ -37,8 +38,39 @@ const EditableHero = ({
   const [isLink, setIsLink] = useState(link && link);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
+  const [isTheme, setIsTheme] = useState(theme && theme);
+  const [isTextColor, setIsTextColor] = useState(textColor && textColor);
+  const [isButtonColor, setIsButtonColor] = useState(
+    buttonColor && buttonColor
+  );
+  const [isButtonTextColor, setIsButtonTextColor] = useState(
+    buttonTextColor && buttonTextColor
+  );
 
   const router = useRouter();
+
+  const getTheme = (theme) => {
+    switch (theme) {
+      case 'black':
+        setIsTheme({
+          headlineColor: 'text-black',
+          buttonColor: 'bg-black',
+          buttonText: 'text-white',
+        });
+      case 'gray':
+        setIsTheme({
+          headlineColor: 'text-gray-900',
+          buttonColor: 'bg-gray-900',
+          buttonText: 'text-white',
+        });
+      case 'gray':
+        setIsTheme({
+          headlineColor: 'text-gray-900',
+          buttonColor: 'bg-gray-900',
+          buttonText: 'text-white',
+        });
+    }
+  };
 
   const variants = {
     show: {
@@ -103,7 +135,7 @@ const EditableHero = ({
                     type='text'
                     name='heading'
                     id='heading'
-                    placeholder='new header...'
+                    placeholder='new heading...'
                     value={isHeading}
                     changeHandler={(val) => setIsHeading(val)}
                   />
@@ -208,7 +240,7 @@ const EditableHero = ({
                 {isHeading}
               </motion.div>
               <motion.div
-                className={`font-canela text-5xl md:text-7xl ${textColor} leading-none`}
+                className={`font-canela text-5xl md:text-7xl ${isTextColor} leading-none`}
               >
                 {isHeadline}
               </motion.div>
@@ -218,8 +250,8 @@ const EditableHero = ({
                 {isSubtext}
               </motion.div>
               <motion.button
-                className={`font-sweet-bold text-sm md:text-base tracking-widest uppercase mt-2 ${buttonColor} ${
-                  buttonTextColor ? buttonTextColor : 'text-white'
+                className={`font-sweet-bold text-sm md:text-base tracking-widest uppercase mt-2 ${isButtonColor} ${
+                  isButtonTextColor ? isButtonTextColor : 'text-white'
                 } py-3 px-5 w-fit mx-auto`}
                 onClick={() => window.open(link, '_blank')}
               >

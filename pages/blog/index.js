@@ -76,7 +76,7 @@ const collectionItems = [
 const Index = ({ posts, inspo, pageData }) => {
   return (
     <main className='relative pb-16' id='home'>
-      <InnerPageSubNav subNav={subNav} />
+      <InnerPageSubNav subNav={subNav} search={true} />
       <Hero
         side='md:bg-gradient-to-l'
         heading={pageData.data[0].hero_main.heading}

@@ -88,6 +88,7 @@ const Index = ({ pageData, subnav }) => {
         bodyColor='text-gray-700'
         link={pageData.data[0].hero_main.cta_link}
         id={pageData.data[0].hero_main.id}
+        theme={pageData.data[0].hero_main.theme}
       />
       <div
         className='flex flex-col pt-16 gap-10 md:gap-16 scroll-mt-24'
@@ -130,6 +131,7 @@ const Index = ({ pageData, subnav }) => {
             bodyColor='text-gray-700'
             link={pageData.data[0].hero_two.cta_link}
             id={pageData.data[0].hero_two.id}
+            theme={pageData.data[0].hero_two.theme}
           />
         </div>
         <div className='scroll-mt-24' id='four'>
@@ -171,6 +173,7 @@ const Index = ({ pageData, subnav }) => {
             bodyColor='text-gray-700'
             link={pageData.data[0].hero_three.cta_link}
             id={pageData.data[0].hero_three.id}
+            theme={pageData.data[0].hero_three.theme}
           />
         </div>
         <div className='scroll-mt-24' id='six'>
@@ -216,6 +219,7 @@ const Index = ({ pageData, subnav }) => {
             bodyColor='text-gray-700'
             link={pageData.data[0].hero_four.cta_link}
             id={pageData.data[0].hero_four.id}
+            theme={pageData.data[0].hero_four.theme}
           />
         </div>
         <div className='scroll-mt-24' id='eight'>

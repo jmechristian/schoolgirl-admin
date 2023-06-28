@@ -33,7 +33,7 @@ export default function SearchPanel({ open, setClose }) {
         </Transition.Child>
 
         <div className='fixed inset-0 z-10 overflow-y-auto'>
-          <div className='flex min-h-full items-start justify-center p-4 text-center sm:items-center sm:p-0'>
+          <div className='flex min-h-full items-start justify-center p-6 text-center sm:items-center sm:p-0'>
             <Transition.Child
               as={Fragment}
               enter='ease-out duration-300'
@@ -51,7 +51,7 @@ export default function SearchPanel({ open, setClose }) {
                 />
                 <div className='mt-1 sm:mt-6'>
                   <div
-                    className='font-sweet-bold text-sm md:text-base tracking-widest uppercase mt-2 bg-black text-white w-full px-3 py-2'
+                    className='font-sweet-bold cursor-pointer text-sm md:text-base tracking-widest uppercase mt-2 bg-black text-white w-full px-3 py-2'
                     onClick={searchClickHandler}
                   >
                     {isSending ? 'Searching...' : 'Search Blogs'}
@@ -60,7 +60,10 @@ export default function SearchPanel({ open, setClose }) {
                     {isResults.map((post) => (
                       <div
                         key={post.node.slug}
-                        className='flex flex-col gap-3 pt-6'
+                        className='flex flex-col gap-3 pt-6 cursor-pointer hover:bg-slate-200'
+                        onClick={() =>
+                          window.open(`/blog/${post.node.slug}`, '_blank')
+                        }
                       >
                         <div className='flex gap-3'>
                           <div>
@@ -75,9 +78,12 @@ export default function SearchPanel({ open, setClose }) {
                             {post.node.title}
                           </div>
                         </div>
-                        <div className='font-brown line-clamp-3 text-sm'>
-                          {post.node.content}
-                        </div>
+                        <div
+                          className='font-brown line-clamp-3 text-sm'
+                          dangerouslySetInnerHTML={{
+                            __html: post.node.excerpt,
+                          }}
+                        ></div>
                       </div>
                     ))}
                   </div>
