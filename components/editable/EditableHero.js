@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { PencilSquareIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 import { createClient } from '@supabase/supabase-js';
 import TextInput from '../shared/TextInput';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -38,7 +39,7 @@ const EditableHero = ({
   const [isLink, setIsLink] = useState(link && link);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
-  const [isTheme, setIsTheme] = useState(theme && theme);
+  const [isTheme, setIsTheme] = useState({});
   const [isTextColor, setIsTextColor] = useState(textColor && textColor);
   const [isButtonColor, setIsButtonColor] = useState(
     buttonColor && buttonColor
@@ -52,55 +53,67 @@ const EditableHero = ({
   const getTheme = (theme) => {
     switch (theme) {
       case 'black':
-        setIsTheme({
-          headlineColor: 'text-black',
-          buttonColor: 'bg-black',
-          buttonText: 'text-white',
-        });
-      case 'gray':
-        setIsTheme({
+        return setIsTheme({
+          color: 'black',
           headlineColor: 'text-gray-900',
           buttonColor: 'bg-gray-900',
           buttonText: 'text-white',
         });
+      case 'gray':
+        return setIsTheme({
+          color: 'gray',
+          headlineColor: 'text-gray-700',
+          buttonColor: 'bg-gray-700',
+          buttonText: 'text-white',
+        });
       case 'white':
-        setIsTheme({
+        return setIsTheme({
+          color: 'white',
           headlineColor: 'text-white',
           buttonColor: 'bg-white',
           buttonText: 'text-gray-700',
         });
       case 'brand':
-        setIsTheme({
+        return setIsTheme({
+          color: 'brand',
           headlineColor: 'text-brand-red',
           buttonColor: 'bg-brand-red',
           buttonText: 'text-white',
         });
-      case 'peach':
-        setIsTheme({
+      case 'salmon':
+        return setIsTheme({
+          color: 'salmon',
           headlineColor: 'text-salmon',
           buttonColor: 'bg-salmon',
           buttonText: 'text-white',
         });
       case 'green':
-        setIsTheme({
-          headlineColor: 'text-sweet-green',
-          buttonColor: 'bg-sweet-green',
-          buttonText: 'text-white',
-        });
-      case 'green':
-        setIsTheme({
+        return setIsTheme({
+          color: 'green',
           headlineColor: 'text-sweet-green',
           buttonColor: 'bg-sweet-green',
           buttonText: 'text-white',
         });
       case 'brown':
-        setIsTheme({
+        return setIsTheme({
+          color: 'brown',
           headlineColor: 'text-neutral-brown',
           buttonColor: 'bg-neutral-brown',
           buttonText: 'text-white',
         });
+      default:
+        setIsTheme({
+          color: 'black',
+          headlineColor: 'text-black',
+          buttonColor: 'bg-black',
+          buttonText: 'text-white',
+        });
     }
   };
+
+  useEffect(() => {
+    getTheme(theme);
+  }, [theme]);
 
   const variants = {
     show: {
@@ -133,6 +146,7 @@ const EditableHero = ({
         cta_text: isButtonText,
         cta_link: isLink,
         image: isBg,
+        theme: isTheme.color,
       })
       .eq('id', id)
       .select();
@@ -157,7 +171,7 @@ const EditableHero = ({
           <motion.div className='absolute z-30 top-0 left-0 bottom-0 right-0 bg-black/40 backdrop-blur flex justify-center items-center py-8'>
             <motion.div className='bg-white/80 max-w-3xl w-full h-full rounded-lg p-9 flex justify-center items-center'>
               <motion.form
-                className='flex flex-col gap-4 w-full'
+                className='flex flex-col gap-3 w-full'
                 onSubmit={(event) => heroSubmitHandler(event)}
               >
                 <motion.div className='grid grid-cols-2 gap-6'>
@@ -203,15 +217,95 @@ const EditableHero = ({
                     value={isButtonText}
                     changeHandler={(val) => setIsButtonText(val)}
                   />
-                  <TextInput
-                    type='text'
-                    name='link'
-                    id='link'
-                    placeholder='new link...'
-                    value={isLink}
-                    changeHandler={(val) => setIsLink(val)}
-                  />
+                  <div>
+                    <label
+                      htmlFor={'theme'}
+                      className='block font-medium text-sm capitalize leading-6 text-gray-900'
+                    >
+                      Theme
+                    </label>
+                    <div className='relative mt-1 rounded-md shadow-sm w-full grid grid-cols-7 gap-3'>
+                      <div
+                        className='aspect-[1] bg-gray-900 rounded-full flex justify-center items-center'
+                        onClick={() => getTheme('black')}
+                      >
+                        {isTheme.color === 'black' ? (
+                          <XMarkIcon className='w-5 h-5 text-white' />
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                      <div
+                        className='aspect-[1] bg-gray-700 rounded-full flex justify-center items-center'
+                        onClick={() => getTheme('gray')}
+                      >
+                        {isTheme.color === 'gray' ? (
+                          <XMarkIcon className='w-5 h-5 text-white' />
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                      <div
+                        className='aspect-[1] bg-brand-red rounded-full flex justify-center items-center'
+                        onClick={() => getTheme('brand')}
+                      >
+                        {isTheme.color === 'brand' ? (
+                          <XMarkIcon className='w-5 h-5 text-white' />
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                      <div
+                        className='aspect-[1] bg-salmon rounded-full flex justify-center items-center'
+                        onClick={() => getTheme('salmon')}
+                      >
+                        {isTheme.color === 'salmon' ? (
+                          <XMarkIcon className='w-5 h-5 text-white' />
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                      <div
+                        className='aspect-[1] bg-neutral-brown rounded-full flex justify-center items-center'
+                        onClick={() => getTheme('brown')}
+                      >
+                        {isTheme.color === 'brown' ? (
+                          <XMarkIcon className='w-5 h-5 text-white' />
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                      <div
+                        className='aspect-[1] bg-sweet-green rounded-full flex justify-center items-center'
+                        onClick={() => getTheme('green')}
+                      >
+                        {isTheme.color === 'green' ? (
+                          <XMarkIcon className='w-5 h-5 text-white' />
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                      <div
+                        className='aspect-[1] bg-white rounded-full flex justify-center items-center'
+                        onClick={() => getTheme('white')}
+                      >
+                        {isTheme.color === 'white' ? (
+                          <XMarkIcon className='w-5 h-5 text-black' />
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </motion.div>
+                <TextInput
+                  type='text'
+                  name='link'
+                  id='link'
+                  placeholder='new link...'
+                  value={isLink}
+                  changeHandler={(val) => setIsLink(val)}
+                />
                 <motion.div className='flex justify-between items-center w-full'>
                   <motion.div className='flex justify-end items-center mt-4 gap-4'>
                     <motion.div className='font-medium text-green-700 text-lg'>
@@ -229,7 +323,7 @@ const EditableHero = ({
                       onClick={() => setIsEditing(false)}
                     >
                       <motion.div className='text-white font-bold cursor-pointer'>
-                        Cancel
+                        Close
                       </motion.div>
                     </motion.div>
                     <motion.button
@@ -270,7 +364,9 @@ const EditableHero = ({
                 {isHeading}
               </motion.div>
               <motion.div
-                className={`font-canela text-5xl md:text-7xl ${isTextColor} leading-none`}
+                className={`font-canela text-5xl md:text-7xl ${
+                  isTheme && isTheme.headlineColor
+                } md:leading-[0.9]`}
               >
                 {isHeadline}
               </motion.div>
@@ -279,14 +375,16 @@ const EditableHero = ({
               >
                 {isSubtext}
               </motion.div>
-              <motion.button
-                className={`font-sweet-bold text-sm md:text-base tracking-widest uppercase mt-2 ${isButtonColor} ${
-                  isButtonTextColor ? isButtonTextColor : 'text-white'
-                } py-3 px-5 w-fit mx-auto`}
-                onClick={() => window.open(link, '_blank')}
-              >
-                {isButtonText}
-              </motion.button>
+              {buttonText && (
+                <motion.button
+                  className={`font-sweet-bold text-sm md:text-base tracking-widest uppercase mt-2 ${
+                    isTheme && isTheme.buttonColor
+                  } ${isTheme && isTheme.buttonText} py-3 px-5 w-fit mx-auto`}
+                  onClick={() => window.open(link, '_blank')}
+                >
+                  {isButtonText}
+                </motion.button>
+              )}
             </motion.div>
           </motion.div>
         </motion.div>

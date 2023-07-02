@@ -101,6 +101,7 @@ const Index = ({ posts, inspo, pageData }) => {
         bodyColor='text-gray-600'
         link={pageData.data[0].hero_main.cta_link}
         id={pageData.data[0].hero_main.id}
+        theme={pageData.data[0].hero_main.theme}
       />
       <div className='flex flex-col gap-16 pt-16'>
         <ScrollerWithHeadline
@@ -122,6 +123,7 @@ const Index = ({ posts, inspo, pageData }) => {
             bodyColor='text-gray-600'
             link={pageData.data[0].hero_two.cta_link}
             id={pageData.data[0].hero_two.id}
+            theme={pageData.data[0].hero_two.theme}
           />
         </div>
         <ScrollerWithHeadline
@@ -144,6 +146,7 @@ const Index = ({ posts, inspo, pageData }) => {
             bodyColor='text-gray-600'
             link={pageData.data[0].hero_three.cta_link}
             id={pageData.data[0].hero_three.id}
+            theme={pageData.data[0].hero_three.theme}
           />
           <FullWidthQuote quote=' We believe in the power of classroom decor to turn classrooms into home-away-from-homes.' />
           <div id='dècor' className='scroll-m-16'>
@@ -160,6 +163,7 @@ const Index = ({ posts, inspo, pageData }) => {
               bodyColor='text-gray-600'
               link={pageData.data[0].hero_four.cta_link}
               id={pageData.data[0].hero_four.id}
+              theme={pageData.data[0].hero_four.theme}
             />
           </div>
         </div>

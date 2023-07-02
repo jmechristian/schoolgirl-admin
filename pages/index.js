@@ -192,6 +192,7 @@ export default function Home({ pageData }) {
         textColor='text-gray-900'
         bodyColor='text-gray-700'
         link={pageData.data[0].hero_main.cta_link}
+        theme={pageData.data[0].hero_main.theme}
       />
       <FourColGridWithHeading
         items={[
@@ -216,6 +217,7 @@ export default function Home({ pageData }) {
         textColor='text-gray-900'
         bodyColor='text-gray-700'
         link={pageData.data[0].hero_two.cta_link}
+        theme={pageData.data[0].hero_two.theme}
       />
       <FourColGridWithHeading
         items={[
@@ -241,6 +243,7 @@ export default function Home({ pageData }) {
         textColor='text-gray-700 md:text-white'
         bodyColor='text-gray-700 md:text-white'
         link={pageData.data[0].hero_three.cta_link}
+        theme={pageData.data[0].hero_three.theme}
       />
       <FourColGridWithHeading
         items={[
@@ -266,6 +269,7 @@ export default function Home({ pageData }) {
         textColor='text-warm-brown'
         bodyColor='text-gray-700'
         link={pageData.data[0].hero_four.cta_link}
+        theme={pageData.data[0].hero_four.theme}
       />
       <FourColGridWithHeading
         items={[
@@ -292,6 +296,7 @@ export default function Home({ pageData }) {
             textColor='text-gray-700'
             bodyColor='text-gray-700'
             link='https://youtu.be/6Aqu5bC4XEk'
+            theme={pageData.data[0].watch_hero.theme}
           />
           <ThreeColGridNoHeading
             items={[

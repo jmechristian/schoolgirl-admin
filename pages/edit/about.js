@@ -199,6 +199,7 @@ const Page = ({ pageData, staff }) => {
         bodyColor='text-gray-600'
         link={pageData.data[0].hero_one.cta_link}
         id={pageData.data[0].hero_one.id}
+        theme={pageData.data[0].hero_one.theme}
       />
       <div className='bg-polka-light scroll-mt-24' id='team'>
         <div className='flex flex-col gap-12 max-w-6xl mx-auto py-16'>

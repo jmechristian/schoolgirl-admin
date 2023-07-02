@@ -180,6 +180,7 @@ const Index = ({ pageData, locations }) => {
           bodyColor='text-gray-600'
           link='https://mailchi.mp/7e9313ff47e7/rollcall'
           id={pageData.data[0].hero_one.id}
+          theme={pageData.data[0].hero_one.theme}
         />
         <div className='w-full cursor-pointer h-full bg-gradient-to-r from-sweet-green to-sweet-green/70 font-canela text-white py-12'>
           <div

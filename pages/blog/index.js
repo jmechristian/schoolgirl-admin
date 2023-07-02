@@ -89,6 +89,7 @@ const Index = ({ posts, inspo, pageData }) => {
         textColor='text-salmon'
         bodyColor='text-gray-600'
         link={pageData.data[0].hero_main.cta_link}
+        theme={pageData.data[0].hero_main.theme}
       />
       <div className='flex flex-col gap-16 pt-16'>
         <ScrollerWithHeadline
@@ -109,6 +110,7 @@ const Index = ({ posts, inspo, pageData }) => {
             textColor='text-salmon'
             bodyColor='text-gray-600'
             link={pageData.data[0].hero_two.cta_link}
+            theme={pageData.data[0].hero_two.theme}
           />
         </div>
         <ScrollerWithHeadline
@@ -130,6 +132,7 @@ const Index = ({ posts, inspo, pageData }) => {
             textColor='text-salmon'
             bodyColor='text-gray-600'
             link={pageData.data[0].hero_three.cta_link}
+            theme={pageData.data[0].hero_three.theme}
           />
           <FullWidthQuote quote='We&ensp;believe&ensp;in&ensp;the&ensp;power&ensp;of&ensp;classroom&ensp;decor&ensp;to&ensp;turn&ensp;classrooms&ensp;into&ensp;home-away-from-homes.' />
           <div id='dècor' className='scroll-m-16'>
@@ -145,6 +148,7 @@ const Index = ({ posts, inspo, pageData }) => {
               textColor='text-salmon'
               bodyColor='text-gray-600'
               link={pageData.data[0].hero_four.cta_link}
+              theme={pageData.data[0].hero_four.theme}
             />
           </div>
         </div>

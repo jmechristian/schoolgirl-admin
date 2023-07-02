@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useRouter } from 'next/router';
 
@@ -16,11 +16,74 @@ const Hero = ({
   link,
   bodyColor,
   buttonTextColor,
+  theme,
 }) => {
   const heroRef = useRef();
   const inView = useInView(heroRef);
+  const [isTheme, setIsTheme] = useState({});
 
   const router = useRouter();
+
+  const getTheme = (theme) => {
+    switch (theme) {
+      case 'black':
+        return setIsTheme({
+          color: 'black',
+          headlineColor: 'text-gray-900',
+          buttonColor: 'bg-gray-900',
+          buttonText: 'text-white',
+        });
+      case 'gray':
+        return setIsTheme({
+          color: 'gray',
+          headlineColor: 'text-gray-700',
+          buttonColor: 'bg-gray-700',
+          buttonText: 'text-white',
+        });
+      case 'white':
+        return setIsTheme({
+          color: 'white',
+          headlineColor: 'text-white',
+          buttonColor: 'bg-white',
+          buttonText: 'text-gray-700',
+        });
+      case 'brand':
+        return setIsTheme({
+          color: 'brand',
+          headlineColor: 'text-brand-red',
+          buttonColor: 'bg-brand-red',
+          buttonText: 'text-white',
+        });
+      case 'salmon':
+        return setIsTheme({
+          color: 'salmon',
+          headlineColor: 'text-salmon',
+          buttonColor: 'bg-salmon',
+          buttonText: 'text-white',
+        });
+      case 'green':
+        return setIsTheme({
+          color: 'green',
+          headlineColor: 'text-sweet-green',
+          buttonColor: 'bg-sweet-green',
+          buttonText: 'text-white',
+        });
+      case 'brown':
+        return setIsTheme({
+          color: 'brown',
+          headlineColor: 'text-neutral-brown',
+          buttonColor: 'bg-neutral-brown',
+          buttonText: 'text-white',
+        });
+      default:
+        setIsTheme({
+          color: 'black',
+          headlineColor: 'text-black',
+          buttonColor: 'bg-black',
+          buttonText: 'text-white',
+        });
+    }
+  };
 
   const variants = {
     show: {
@@ -40,6 +103,10 @@ const Hero = ({
       },
     },
   };
+
+  useEffect(() => {
+    getTheme(theme);
+  }, [theme]);
 
   return (
     <AnimatePresence>
@@ -69,7 +136,7 @@ const Hero = ({
                 {heading}
               </motion.div>
               <motion.div
-                className={`font-canela text-5xl md:text-7xl ${textColor}`}
+                className={`font-canela text-5xl md:text-7xl md:leading-[0.9] ${isTheme.headlineColor}`}
               >
                 {headline}
               </motion.div>
@@ -78,14 +145,14 @@ const Hero = ({
               >
                 {subtext}
               </motion.div>
-              <motion.button
-                className={`font-sweet-bold text-sm md:text-base tracking-widest uppercase mt-2 ${buttonColor} ${
-                  buttonTextColor ? buttonTextColor : 'text-white'
-                } py-3 px-5 w-fit mx-auto`}
-                onClick={() => window.open(link, '_blank')}
-              >
-                {buttonText}
-              </motion.button>
+              {buttonText && (
+                <motion.button
+                  className={`font-sweet-bold text-sm md:text-base tracking-widest uppercase mt-2 ${isTheme.buttonColor} ${isTheme.buttonText} py-3 px-5 w-fit mx-auto`}
+                  onClick={() => window.open(link, '_blank')}
+                >
+                  {buttonText}
+                </motion.button>
+              )}
             </motion.div>
           </motion.div>
         </motion.div>

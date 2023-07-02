@@ -143,6 +143,7 @@ const Index = ({ pageData }) => {
         textColor='text-gray-700'
         bodyColor='text-gray-700'
         link='https://youtu.be/6Aqu5bC4XEk'
+        theme={pageData.data[0].hero_main.theme}
       />
       <div className='flex flex-col pt-16 gap-10 md:gap-16'>
         <ThreeColumWithHeadline
