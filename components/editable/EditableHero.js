@@ -63,10 +63,40 @@ const EditableHero = ({
           buttonColor: 'bg-gray-900',
           buttonText: 'text-white',
         });
-      case 'gray':
+      case 'white':
         setIsTheme({
-          headlineColor: 'text-gray-900',
-          buttonColor: 'bg-gray-900',
+          headlineColor: 'text-white',
+          buttonColor: 'bg-white',
+          buttonText: 'text-gray-700',
+        });
+      case 'brand':
+        setIsTheme({
+          headlineColor: 'text-brand-red',
+          buttonColor: 'bg-brand-red',
+          buttonText: 'text-white',
+        });
+      case 'peach':
+        setIsTheme({
+          headlineColor: 'text-salmon',
+          buttonColor: 'bg-salmon',
+          buttonText: 'text-white',
+        });
+      case 'green':
+        setIsTheme({
+          headlineColor: 'text-sweet-green',
+          buttonColor: 'bg-sweet-green',
+          buttonText: 'text-white',
+        });
+      case 'green':
+        setIsTheme({
+          headlineColor: 'text-sweet-green',
+          buttonColor: 'bg-sweet-green',
+          buttonText: 'text-white',
+        });
+      case 'brown':
+        setIsTheme({
+          headlineColor: 'text-neutral-brown',
+          buttonColor: 'bg-neutral-brown',
           buttonText: 'text-white',
         });
     }
