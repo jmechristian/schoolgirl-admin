@@ -224,7 +224,7 @@ const EditableHero = ({
                     >
                       Theme
                     </label>
-                    <div className='relative mt-1 rounded-md shadow-sm w-full grid grid-cols-7 gap-3'>
+                    <div className='relative mt-1 rounded-md w-full grid grid-cols-7 gap-3'>
                       <div
                         className='aspect-[1] bg-gray-900 rounded-full flex justify-center items-center'
                         onClick={() => getTheme('black')}
