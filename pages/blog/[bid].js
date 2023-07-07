@@ -73,7 +73,6 @@ const Index = ({ post, latest }) => {
 
   return (
     <main className='relative pb-16' id='home'>
-      <InnerPageSubNav subNav={subNav} />
       <div className='flex flex-col pt-20'>
         <div className='lg:max-w-6xl w-full mx-auto flex flex-col gap-16'>
           <div className='flex flex-col gap-3 max-w-3xl mx-auto px-6 lg:px-0'>
