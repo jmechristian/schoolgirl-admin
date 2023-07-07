@@ -128,7 +128,7 @@ export const getServerSideProps = async ({ params }) => {
   const data = await getPostBySlug(params?.bid);
   const latest = await getPostsForBlogHome();
 
-  if (!post) {
+  if (!data.post) {
     return {
       notFound: true,
     };
