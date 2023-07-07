@@ -128,6 +128,12 @@ export const getServerSideProps = async ({ params }) => {
   const data = await getPostBySlug(params?.bid);
   const latest = await getPostsForBlogHome();
 
+  if (!post) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       post: data.post,
