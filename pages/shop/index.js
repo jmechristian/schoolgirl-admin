@@ -56,7 +56,7 @@ const subNav = [
 const Index = ({ pageData, products, decor, picks, subnav }) => {
   return (
     <main className='pb-16 relative' id='one'>
-      <InnerPageSubNav subNav={subnav.data} />
+      <InnerPageSubNav subNav={subNav} />
       <Hero
         side='md:bg-gradient-to-l'
         heading={pageData.data[0].hero_main.heading}

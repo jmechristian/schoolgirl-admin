@@ -11,16 +11,14 @@ const InnerPageSubNav = ({ subNav, search }) => {
         className='flex lg:justify-center items-center gap-12 w-full max-w-7xl mx-auto px-6 overflow-auto'
         id='scrollers'
       >
-        {subNav
-          .sort((a, b) => a.order - b.order)
-          .map((item, i) => (
-            <div
-              className='font-sm font-brown text-gray-600 uppercase text-sm'
-              key={item.id}
-            >
-              <a href={item.link}>{item.value}</a>
-            </div>
-          ))}
+        {subNav.map((item, i) => (
+          <div
+            className='font-sm font-brown text-gray-600 uppercase text-sm'
+            key={item.name}
+          >
+            <a href={item.link}>{item.name}</a>
+          </div>
+        ))}
         {search && (
           <div
             className='flex gap-2 items-center cursor-pointer'
