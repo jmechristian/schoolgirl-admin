@@ -9,6 +9,7 @@ import VideoPlayer from '../../components/shared/VideoPlayer';
 import HeadlineWithSpan from '../../components/shared/HeadlineWithSpan';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
+import NewSubnav from '../../components/shared/NewSubnav';
 
 const subNav = [
   {
@@ -56,7 +57,7 @@ const subNav = [
 const Index = ({ pageData, products, decor, picks, subnav }) => {
   return (
     <main className='pb-16 relative' id='one'>
-      <InnerPageSubNav subNav={subNav} />
+      <NewSubnav subNav={subnav.data} />
       <Hero
         side='md:bg-gradient-to-l'
         heading={pageData.data[0].hero_main.heading}
