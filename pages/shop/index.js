@@ -55,8 +55,8 @@ const subNav = [
 
 const Index = ({ pageData, products, decor, picks, subnav }) => {
   return (
-    <main className='pb-16 relative' id='home'>
-      <InnerPageSubNav subNav={subNav} />
+    <main className='pb-16 relative' id='one'>
+      <InnerPageSubNav subNav={subnav.data} />
       <Hero
         side='md:bg-gradient-to-l'
         heading={pageData.data[0].hero_main.heading}
@@ -73,7 +73,7 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
       />
       <div
         className='flex flex-col pt-16 gap-10 md:gap-16 scroll-mt-24'
-        id='collections'
+        id='two'
       >
         <ShopScrollerWithHeadline
           items={products.products}
@@ -81,7 +81,7 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
           headline={pageData.data[0].shop_collection_1_title}
           bookmark={true}
         />
-        <div className='scroll-mt-24' id='new'>
+        <div className='scroll-mt-24' id='three'>
           <Hero
             side='md:bg-gradient-to-r'
             heading={pageData.data[0].hero_two.heading}
@@ -97,12 +97,14 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
             theme={pageData.data[0].hero_two.theme}
           />
         </div>
-        <ShopScrollerWithHeadline
-          items={decor.products}
-          itemTextStyle='uppercase text-gray-700'
-          headline={pageData.data[0].shop_collection_2_title}
-        />
-        <div className='scroll-mt-24' id='furniture design'>
+        <div className='scroll-mt-24' id='four'>
+          <ShopScrollerWithHeadline
+            items={decor.products}
+            itemTextStyle='uppercase text-gray-700'
+            headline={pageData.data[0].shop_collection_2_title}
+          />
+        </div>
+        <div className='scroll-mt-24' id='five'>
           <Hero
             side='md:bg-gradient-to-l'
             heading={pageData.data[0].hero_three.heading}
@@ -118,7 +120,7 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
             theme={pageData.data[0].hero_three.theme}
           />
         </div>
-        <div className='scroll-mt-24' id='design'>
+        <div className='scroll-mt-24' id='six'>
           <FourColGridWithHeading
             items={[
               pageData.data[0].headline_three.row_items[0].grid_item,
@@ -131,7 +133,7 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
             background={true}
           />
         </div>
-        <div className='scroll-mt-24' id='melspicks'>
+        <div className='scroll-mt-24' id='seven'>
           <Hero
             side='md:bg-gradient-to-r'
             heading={pageData.data[0].hero_four.heading}
@@ -147,19 +149,24 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
             theme={pageData.data[0].hero_four.theme}
           />
         </div>
-        <ShopScrollerWithHeadline
-          items={picks.products}
-          itemTextStyle='text-gray-700'
-          headline={pageData.data[0].shop_collection_3_title}
-          bookmark={true}
-          price
-        />
-        <div className='flex flex-col'>
+        <div className='scroll-mt-24' id='eight'>
+          <ShopScrollerWithHeadline
+            items={picks.products}
+            itemTextStyle='text-gray-700'
+            headline={pageData.data[0].shop_collection_3_title}
+            bookmark={true}
+            price
+          />
+        </div>
+        <div className='flex flex-col scroll-mt-24' id='nine'>
           <VideoPlayer
             placeholder={pageData.data[0].shop_video_placeholder}
             url={pageData.data[0].shop_video}
           />
-          <div className='bg-gradient-to-b from-khaki space-y-16'>
+          <div
+            className='bg-gradient-to-b from-khaki space-y-16 scroll-mt-24'
+            id='ten'
+          >
             <HeadlineWithSpan link='https://shopschoolgirlstyle.com/pages/sgs-lookbook' />
             <EmailSubscription />
           </div>

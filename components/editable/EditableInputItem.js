@@ -8,13 +8,14 @@ const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-const EditableInputItem = ({ id, value, link, order }) => {
+const EditableInputItem = ({ id, value, link, order, table }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isValue, setIsValue] = useState(value);
   const [isLink, setIsLink] = useState(link);
 
   const deleteNavItemHandler = async () => {
-    await supabase.from('shop_subnav').delete().eq('id', id);
+    await supabase.from(table).delete().eq('id', id);
+    g;
   };
 
   const addNavItemHandler = async () => {
@@ -46,7 +47,7 @@ const EditableInputItem = ({ id, value, link, order }) => {
     };
 
     await supabase
-      .from('shop_subnav')
+      .from(table)
       .update([{ value: isValue, link: isLink, order: isOrder() }])
       .eq('id', id);
 
@@ -74,7 +75,7 @@ const EditableInputItem = ({ id, value, link, order }) => {
           <select
             className='w-full h-full py-3 rounded-md border-0 pl-3 pr-10 text-slate-600 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6'
             onChange={(e) => setIsLink(e.target.value)}
-            defaultValue={isLink}
+            defaultValue={isLink ? isLink : '#one'}
           >
             <option value='#one' className='uppercase'>
               #one

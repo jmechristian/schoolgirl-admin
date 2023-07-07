@@ -14,7 +14,7 @@ const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-const EditableInnerPageSubNav = ({ subNav, search }) => {
+const WatchInnerNav = ({ subNav, search }) => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [isSubnav, setIsSubnav] = useState(subNav && subNav);
   const [isEditing, setIsEditing] = useState(false);
@@ -24,19 +24,21 @@ const EditableInnerPageSubNav = ({ subNav, search }) => {
 
   useEffect(() => {
     supabase
-      .channel('custom-all-channel')
+      .channel('new-channel')
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'shop_subnav' },
+        { event: '*', schema: 'public', table: 'watch_subnav' },
         () => {
           getAndSetNewSubNav();
+          console.log('new watch');
         }
       )
       .subscribe();
   });
 
   const getAndSetNewSubNav = async () => {
-    const subnav = await supabase.from('shop_subnav').select('*');
+    const subnav = await supabase.from('watch_subnav').select('*');
+    console.log('getAndSet');
     setIsSubnav(subnav.data);
   };
 
@@ -67,9 +69,12 @@ const EditableInnerPageSubNav = ({ subNav, search }) => {
           return 1;
       }
     };
+
     await supabase
-      .from('shop_subnav')
+      .from('watch_subnav')
       .insert([{ value: isItemValue, link: isItemLink, order: isOrder() }]);
+
+    getAndSetNewSubNav();
   };
 
   return (
@@ -112,7 +117,7 @@ const EditableInnerPageSubNav = ({ subNav, search }) => {
                   value={item.value}
                   key={item.id}
                   link={item.link}
-                  table={'shop_subnav'}
+                  table={'watch_subnav'}
                 />
               ))}
             {isSubnav.length < 10 && (
@@ -164,7 +169,7 @@ const EditableInnerPageSubNav = ({ subNav, search }) => {
                   </select>
                 </div>
                 <div
-                  className=' col-span-2 w-full rounded-lg bg-indigo-600 h-full flex justify-center items-center text-white font-semibold cursor-pointer'
+                  className=' col-span-2 w-full rounded-lg bg-slate-600 h-full flex justify-center items-center text-white font-semibold cursor-pointer'
                   onClick={addLinkHandler}
                 >
                   Add
@@ -179,4 +184,4 @@ const EditableInnerPageSubNav = ({ subNav, search }) => {
   );
 };
 
-export default EditableInnerPageSubNav;
+export default WatchInnerNav;
