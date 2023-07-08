@@ -44,7 +44,7 @@ const Index = ({ pageData, subnav }) => {
       />
       <div
         className='flex flex-col pt-16 gap-10 md:gap-16 scroll-mt-24'
-        id='#two'
+        id='two'
       >
         <div className='relative w-full'>
           <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
