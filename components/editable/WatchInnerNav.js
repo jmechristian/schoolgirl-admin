@@ -71,7 +71,13 @@ const WatchInnerNav = ({ subNav, search }) => {
 
     await supabase
       .from('watch_subnav')
-      .insert([{ value: isItemValue, link: isItemLink, order: isOrder() }]);
+      .insert([
+        {
+          value: isItemValue,
+          link: isItemLink ? isItemLink : '#one',
+          order: isOrder(),
+        },
+      ]);
 
     getAndSetNewSubNav();
   };

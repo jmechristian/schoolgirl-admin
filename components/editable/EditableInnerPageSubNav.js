@@ -69,7 +69,13 @@ const EditableInnerPageSubNav = ({ subNav, search }) => {
     };
     await supabase
       .from('shop_subnav')
-      .insert([{ value: isItemValue, link: isItemLink, order: isOrder() }]);
+      .insert([
+        {
+          value: isItemValue,
+          link: isItemLink ? isItemLink : '#one',
+          order: isOrder(),
+        },
+      ]);
   };
 
   return (
