@@ -7,7 +7,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { PencilSquareIcon, PencilIcon } from '@heroicons/react/24/solid';
 import SearchPanel from '../shared/SearchPanel';
-import EditableInputItem from './EditableInputItem';
+import NewEditableInputItem from './NewEditableInput';
 import TextInput from '../shared/TextInput';
 
 const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
@@ -24,13 +24,12 @@ const WatchInnerNav = ({ subNav, search }) => {
 
   useEffect(() => {
     supabase
-      .channel('new-channel')
+      .channel('custom-all-channel')
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'watch_subnav' },
         () => {
           getAndSetNewSubNav();
-          console.log('new watch');
         }
       )
       .subscribe();
@@ -112,12 +111,13 @@ const WatchInnerNav = ({ subNav, search }) => {
             {isSubnav
               .sort((a, b) => a.order - b.order)
               .map((item, i) => (
-                <EditableInputItem
+                <NewEditableInputItem
                   id={item.id}
                   value={item.value}
                   key={item.id}
                   link={item.link}
                   table={'watch_subnav'}
+                  setNew={() => getAndSetNewSubNav()}
                 />
               ))}
             {isSubnav.length < 10 && (
@@ -134,7 +134,7 @@ const WatchInnerNav = ({ subNav, search }) => {
                   <select
                     className='w-full h-full py-3 rounded-md border-0 pl-3 pr-10 text-slate-600 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6'
                     onChange={(e) => setIsItemLink(e.target.value)}
-                    defaultValue={isItemLink}
+                    defaultValue={isItemLink ? isItemLink : '#one'}
                   >
                     <option value='#one' className='uppercase'>
                       #one

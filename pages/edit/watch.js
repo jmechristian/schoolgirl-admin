@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
-import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
 import EditableHero from '../../components/editable/EditableHero';
 import EditableThreeColumWithHeadline from '../../components/editable/EditableThreeColumWithHeadline';
-import EditableInnerPageSubNav from '../../components/editable/EditableInnerPageSubNav';
-import Hero from '../../components/shared/Hero';
 import { createClient } from '@supabase/supabase-js';
-import ThreeColumWithHeadline from '../../components/shared/ThreeColumWithHeadline';
 import WatchInnerNav from '../../components/editable/WatchInnerNav';
+import { LinkIcon } from '@heroicons/react/24/outline';
 
 const Index = ({ pageData, subnav }) => {
   const { user } = useSelector((state) => state.auth);
@@ -20,11 +17,17 @@ const Index = ({ pageData, subnav }) => {
     }
   });
 
-  console.log(subnav.data);
-
   return (
-    <main className='relative' id='home'>
+    <main className='relative' id='one'>
       <WatchInnerNav subNav={subnav.data} />
+      <div className='relative w-full'>
+        <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+          <div>
+            <LinkIcon className='w-6 h-6 text-gray-800' />
+          </div>
+          <div className='text-lg'>One</div>
+        </div>
+      </div>
       <EditableHero
         side='md:bg-gradient-to-r md:from-white/30'
         heading={pageData.data[0].hero_main.heading}
@@ -39,7 +42,18 @@ const Index = ({ pageData, subnav }) => {
         link='https://youtu.be/6Aqu5bC4XEk'
         id={pageData.data[0].hero_main.id}
       />
-      <div className='flex flex-col pt-16 gap-10 md:gap-16'>
+      <div
+        className='flex flex-col pt-16 gap-10 md:gap-16 scroll-mt-24'
+        id='#two'
+      >
+        <div className='relative w-full'>
+          <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+            <div>
+              <LinkIcon className='w-6 h-6 text-gray-800' />
+            </div>
+            <div className='text-lg'>Two</div>
+          </div>
+        </div>
         <EditableThreeColumWithHeadline
           items={[
             pageData.data[0].headline_one.row_items[0].grid_item,
@@ -51,7 +65,15 @@ const Index = ({ pageData, subnav }) => {
           itemTextStyle='text-gray-700'
         />
         <div className='flex flex-col gap-16 py-16 bg-khaki'>
-          <div id='makeovers' className=' scroll-m-32'>
+          <div id='three' className=' scroll-m-32'>
+            <div className='relative w-full'>
+              <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+                <div>
+                  <LinkIcon className='w-6 h-6 text-gray-800' />
+                </div>
+                <div className='text-lg'>Three</div>
+              </div>
+            </div>
             <EditableThreeColumWithHeadline
               items={[
                 pageData.data[0].headline_two.row_items[0].grid_item,
@@ -63,7 +85,15 @@ const Index = ({ pageData, subnav }) => {
               id={pageData.data[0].headline_two.id}
             />
           </div>
-          <div id='sgs' className=' scroll-m-32'>
+          <div id='four' className=' scroll-m-32'>
+            <div className='relative w-full'>
+              <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+                <div>
+                  <LinkIcon className='w-6 h-6 text-gray-800' />
+                </div>
+                <div className='text-lg'>Four</div>
+              </div>
+            </div>
             <EditableThreeColumWithHeadline
               items={[
                 pageData.data[0].headline_three.row_items[0].grid_item,
@@ -75,16 +105,26 @@ const Index = ({ pageData, subnav }) => {
               id={pageData.data[0].headline_three.id}
             />
           </div>
-          <EditableThreeColumWithHeadline
-            items={[
-              pageData.data[0].headline_four.row_items[0].grid_item,
-              pageData.data[0].headline_four.row_items[1].grid_item,
-              pageData.data[0].headline_four.row_items[2].grid_item,
-            ]}
-            headline={pageData.data[0].headline_four.title}
-            itemTextStyle='text-gray-700'
-            id={pageData.data[0].headline_three.id}
-          />
+          <div className='scroll-mt-24' id='five'>
+            <div className='relative w-full'>
+              <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+                <div>
+                  <LinkIcon className='w-6 h-6 text-gray-800' />
+                </div>
+                <div className='text-lg'>Five</div>
+              </div>
+            </div>
+            <EditableThreeColumWithHeadline
+              items={[
+                pageData.data[0].headline_four.row_items[0].grid_item,
+                pageData.data[0].headline_four.row_items[1].grid_item,
+                pageData.data[0].headline_four.row_items[2].grid_item,
+              ]}
+              headline={pageData.data[0].headline_four.title}
+              itemTextStyle='text-gray-700'
+              id={pageData.data[0].headline_three.id}
+            />
+          </div>
         </div>
       </div>
     </main>
