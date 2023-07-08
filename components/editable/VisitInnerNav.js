@@ -14,7 +14,7 @@ const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-const WatchInnerNav = ({ subNav, search }) => {
+const VisitInnerNav = ({ subNav, search }) => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [isSubnav, setIsSubnav] = useState(subNav && subNav);
   const [isEditing, setIsEditing] = useState(false);
@@ -23,7 +23,7 @@ const WatchInnerNav = ({ subNav, search }) => {
   const [isItemLink, setIsItemLink] = useState('');
 
   const getAndSetNewSubNav = async () => {
-    const subnav = await supabase.from('watch_subnav').select('*');
+    const subnav = await supabase.from('visit_subnav').select('*');
     console.log('getAndSet');
     setIsSubnav(subnav.data);
   };
@@ -41,12 +41,14 @@ const WatchInnerNav = ({ subNav, search }) => {
           return 4;
         case '#five':
           return 5;
+        case '#six':
+          return 6;
         default:
           return 1;
       }
     };
 
-    await supabase.from('watch_subnav').insert([
+    await supabase.from('visit_subnav').insert([
       {
         value: isItemValue,
         link: isItemLink ? isItemLink : '#one',
@@ -56,7 +58,6 @@ const WatchInnerNav = ({ subNav, search }) => {
 
     getAndSetNewSubNav();
   };
-
   return (
     <div className='w-full flex justify-center gap-12 py-3 md:py-8 bg-khaki sticky top-0 z-[90] drop-shadow-sm'>
       <div
@@ -97,7 +98,7 @@ const WatchInnerNav = ({ subNav, search }) => {
                   value={item.value}
                   key={item.id}
                   link={item.link}
-                  table={'watch_subnav'}
+                  table={'visit_subnav'}
                   setNew={() => getAndSetNewSubNav()}
                 />
               ))}
@@ -132,6 +133,9 @@ const WatchInnerNav = ({ subNav, search }) => {
                     <option value='#five' className='uppercase'>
                       #five
                     </option>
+                    <option value='#six' className='uppercase'>
+                      #six
+                    </option>
                   </select>
                 </div>
                 <div
@@ -150,4 +154,4 @@ const WatchInnerNav = ({ subNav, search }) => {
   );
 };
 
-export default WatchInnerNav;
+export default VisitInnerNav;
