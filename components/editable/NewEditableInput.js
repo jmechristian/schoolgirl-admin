@@ -76,7 +76,7 @@ const NewEditableInputItem = ({ id, value, link, order, table, setNew }) => {
           <select
             className='w-full h-full py-3 rounded-md border-0 pl-3 pr-10 text-slate-600 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6'
             onChange={(e) => setIsLink(e.target.value)}
-            defaultValue='#one'
+            defaultValue={isLink}
           >
             <option value='#one' className='uppercase'>
               #one

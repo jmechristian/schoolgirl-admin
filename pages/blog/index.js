@@ -8,6 +8,7 @@ import InstagramGrid from '../../components/shared/InstagramGrid';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import { getPostsForBlogHome, getClassroomInspoPosts } from '../../lib/API';
 import { createClient } from '@supabase/supabase-js';
+import NewSubnav from '../../components/shared/NewSubnav';
 
 const subNav = [
   {
@@ -73,10 +74,10 @@ const collectionItems = [
   },
 ];
 
-const Index = ({ posts, inspo, pageData }) => {
+const Index = ({ posts, inspo, pageData, subnav }) => {
   return (
-    <main className='relative pb-16' id='home'>
-      <InnerPageSubNav subNav={subNav} search={true} />
+    <main className='relative pb-16' id='one'>
+      <NewSubnav subNav={subnav.data} search={true} />
       <Hero
         side='md:bg-gradient-to-l'
         heading={pageData.data[0].hero_main.heading}
@@ -91,13 +92,13 @@ const Index = ({ posts, inspo, pageData }) => {
         link={pageData.data[0].hero_main.cta_link}
         theme={pageData.data[0].hero_main.theme}
       />
-      <div className='flex flex-col gap-16 pt-16'>
+      <div className='flex flex-col gap-16 pt-16 scroll-mt-16' id='two'>
         <ScrollerWithHeadline
           items={posts?.nodes}
           itemTextStyle='text-gray-700'
           headline='Read The Latest'
         />
-        <div id='inspiration' className='scroll-m-16'>
+        <div id='three' className='scroll-m-16'>
           <Hero
             side='md:bg-gradient-to-r md:from-white/80'
             heading={pageData.data[0].hero_two.heading}
@@ -113,6 +114,7 @@ const Index = ({ posts, inspo, pageData }) => {
             theme={pageData.data[0].hero_two.theme}
           />
         </div>
+        <div className='scroll-mt-16' id='four' />
         <ScrollerWithHeadline
           items={inspo?.nodes}
           itemTextStyle='text-gray-700'
@@ -120,6 +122,7 @@ const Index = ({ posts, inspo, pageData }) => {
           price
         />
         <div className='flex flex-col'>
+          <div className='scroll-mt-16' id='five' />
           <Hero
             side='md:bg-gradient-to-l md:from-white/60'
             heading={pageData.data[0].hero_three.heading}
@@ -135,7 +138,7 @@ const Index = ({ posts, inspo, pageData }) => {
             theme={pageData.data[0].hero_three.theme}
           />
           <FullWidthQuote quote='We&ensp;believe&ensp;in&ensp;the&ensp;power&ensp;of&ensp;classroom&ensp;decor&ensp;to&ensp;turn&ensp;classrooms&ensp;into&ensp;home-away-from-homes.' />
-          <div id='dècor' className='scroll-m-16'>
+          <div id='six' className='scroll-m-16'>
             <Hero
               side='md:bg-gradient-to-r md:from-white/60'
               heading={pageData.data[0].hero_four.heading}
@@ -152,7 +155,7 @@ const Index = ({ posts, inspo, pageData }) => {
             />
           </div>
         </div>
-        <div className='scroll-mt-16' id='backtoschool'>
+        <div className='scroll-mt-16' id='seven'>
           <RandomScrollerWithHeadline
             items={collectionItems}
             itemTextStyle='text-gray-700'
@@ -180,11 +183,14 @@ export const getStaticProps = async () => {
   const data = await getPostsForBlogHome();
   const inspo = await getClassroomInspoPosts();
 
+  const subnav = await supabase.from('blog_subnav').select('*');
+
   return {
     props: {
       posts: data,
       inspo: inspo,
       pageData,
+      subnav,
     },
     revalidate: 10,
   };
