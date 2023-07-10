@@ -18,6 +18,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/:year/:month/:slug',
+        destination: '/blog/:slug',
+        permanent: true,
+      },
+      {
         source: '/wp-content/uploads/2017/04/How-to-Edit-an-Editable-PDF.pdf',
         destination:
           'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/04/How-to-Edit-an-Editable-PDF.pdf',
