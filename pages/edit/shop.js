@@ -195,6 +195,7 @@ const Index = ({ pageData, subnav }) => {
             headline={pageData.data[0].headline_three.title}
             itemTextStyle='uppercase text-gray-500/80 text-base md:text-lg'
             background={true}
+            id={pageData.data[0].headline_three.id}
           />
         </div>
         <div className='scroll-mt-24' id='seven'>
