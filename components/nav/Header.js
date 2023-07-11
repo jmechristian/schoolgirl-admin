@@ -49,7 +49,7 @@ export default function Header() {
         <motion.div className='flex justify-start items-center lg:w-0 lg:flex-1'>
           <Link href='/'>
             <span className='sr-only'>Schoolgirl Style</span>
-            <motion.div className='fill-brand-red stroke-brand-red stroke-1 w-48 sm:w-60 md:w-72 lg:w-80 block'>
+            <motion.div className='fill-gray-900 stroke-gray-900 stroke-1 w-48 sm:w-60 md:w-72 lg:w-80 block'>
               <Logo />
             </motion.div>
           </Link>

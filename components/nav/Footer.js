@@ -273,7 +273,7 @@ const Footer = () => {
               </div>
             </div>
             <div className='w-full flex flex-col items-center gap-5 z-10'>
-              <div className=' fill-brand-red stroke-brand-red  max-w-md w-full'>
+              <div className=' fill-gray-900 stroke-gray-900  max-w-md w-full'>
                 <Logo />
               </div>
               <div
