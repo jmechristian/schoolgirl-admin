@@ -5,6 +5,7 @@ export default function Document() {
   return (
     <Html lang='en' style={{ scrollBehavior: 'smooth' }}>
       <Head>
+        <link rel='icon' type='image/svg' href='/favicon.svg' />
         <Script
           strategy='afterInteractive'
           src='https://www.googletagmanager.com/gtag/js?id=G-9F83QDNG7D'
