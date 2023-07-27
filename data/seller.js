@@ -85,7 +85,7 @@ export const sellers = [
     link: 'https://shopschoolgirlstyle.com/pages/seller-profile/kinder-and-kindness',
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Courtney-Brink-Kinder-and-Kindness.png',
-    category: ['Lifestyle'],
+    category: ['Lifestyle', 'Curriculum'],
   },
   {
     name: 'Alisha Peare',
@@ -133,14 +133,6 @@ export const sellers = [
     link: 'https://shopschoolgirlstyle.com/pages/seller-profile/miss-decarbo',
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Christina-DeCarbo-Miss-DeCarbo.png',
-    category: ['Curriculum'],
-  },
-  {
-    name: 'Courtney Brink',
-    shopName: 'Kinder and Kindness',
-    link: 'https://shopschoolgirlstyle.com/pages/seller-profile/kinder-and-kindness',
-    image:
-      'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Courtney-Brink-Kinder-and-Kindness.png',
     category: ['Curriculum'],
   },
   {
@@ -258,7 +250,7 @@ export const sellers = [
   {
     name: 'Jennifer Weeks',
     shopName: 'Little Journeys in Pre-K & K ',
-    link: 'https://shopschoolgirlstyle.com/pages/seller-profile/hello-mrs-harwick',
+    link: 'https://shopschoolgirlstyle.com/pages/seller-profile/little-journeys-in-prek-and-k',
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Jennifer-Weeks-Little-Journeys-in-PreK-and-K.png',
     category: ['Curriculum'],

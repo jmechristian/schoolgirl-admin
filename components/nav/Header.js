@@ -73,6 +73,16 @@ export default function Header() {
             Shop
           </Link>
           <Link
+            href='/hey-teach'
+            className={`font-medium ${
+              router.route === '/hey-teach'
+                ? 'text-brand-red font-bold font-brown-bold'
+                : 'text-gray-500 font-brown'
+            } hover:text-gray-900  tracking-wider text-sm`}
+          >
+            Hey, Teach!
+          </Link>
+          <Link
             href='/watch'
             className={`font-medium ${
               router.route === '/watch'
