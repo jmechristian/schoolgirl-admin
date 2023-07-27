@@ -192,6 +192,13 @@ export default function Header() {
                 </Popover.Button>
                 <Popover.Button
                   as={Link}
+                  href='/hey-teach'
+                  className='font-canela text-5xl text-gray-700'
+                >
+                  <HeadlineMotion>Hey, Teach!</HeadlineMotion>
+                </Popover.Button>
+                <Popover.Button
+                  as={Link}
                   href='/watch'
                   className='font-canela text-5xl text-gray-700'
                 >
@@ -225,20 +232,6 @@ export default function Header() {
                 >
                   <HeadlineMotion>About</HeadlineMotion>
                 </Popover.Button>
-              </div>
-              <div className='mt-6'>
-                <a
-                  href='#'
-                  className='flex w-full items-center justify-center rounded-md border border-transparent bg-brand-red px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-warm-brown'
-                >
-                  Sign up
-                </a>
-                <p className='mt-6 text-center text-base font-medium text-gray-500'>
-                  Existing customer?{' '}
-                  <a href='#' className='text-brand-red hover:text-warm-brown'>
-                    Sign in
-                  </a>
-                </p>
               </div>
             </div>
           </div>
