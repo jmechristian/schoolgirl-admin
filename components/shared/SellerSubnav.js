@@ -35,14 +35,14 @@ const SellerSubnav = ({ subNav, search, changeFilter }) => {
         <div className='font-sm font-brown text-gray-600 uppercase text-sm'>
           <a href='#top'>Top</a>
         </div>
-        <div className='flex gap-2 items-end relative'>
+        <div className='flex gap-2 items-end relative text-center'>
           <div className='font-sm font-brown text-gray-600 uppercase text-sm'>
             <div>Sort By</div>
           </div>
           <select
             name='filter'
             id='filter'
-            className='bg-transparent text-sm font-brown text-center uppercase border-b border-b-gray-500 pb-1'
+            className='bg-transparent text-sm font-brown text-center uppercase border-b border-b-gray-500 md:pb-1'
             onChange={(e) => changeFilter(e.target.value)}
           >
             <option value='all'>All</option>
