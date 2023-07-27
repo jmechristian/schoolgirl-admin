@@ -29,7 +29,7 @@ const SellerSubnav = ({ subNav, search, changeFilter }) => {
   return (
     <div className='w-full flex justify-center gap-12 py-3 md:py-8 bg-khaki sticky top-0 z-50 drop-shadow-sm'>
       <div
-        className='flex lg:justify-center items-center gap-12 w-full max-w-7xl mx-auto px-6 overflow-auto'
+        className='flex justify-center items-center gap-12 w-full max-w-7xl mx-auto px-6 overflow-auto'
         id='scrollers'
       >
         <div className='font-sm font-brown text-gray-600 uppercase text-sm'>

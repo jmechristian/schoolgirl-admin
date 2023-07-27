@@ -60,13 +60,23 @@ const Index = () => {
   return (
     <div className='flex flex-col'>
       <div className='max-w-7xl mx-auto'>
-        <div className='w-full h-auto'>
+        <div className='w-full h-auto hidden md:block'>
           <Image
             width={'1800'}
             height={'800'}
             alt='Hey, Teach! Marketplace'
             src={
               'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Hey-Teach-2023-MM-1800x800-1.jpg'
+            }
+          />
+        </div>
+        <div className='w-full h-auto md:hidden'>
+          <Image
+            width={'1200'}
+            height={'800'}
+            alt='Hey, Teach! Marketplace'
+            src={
+              'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Hey-Teach-2023-MM-1200x800-1.jpg'
             }
           />
         </div>
