@@ -8,6 +8,7 @@ import SellerFlexItem from '../../components/shared/SellerFlexItem';
 import SellerSubnav from '../../components/shared/SellerSubnav';
 import { GridItem } from '../../components/shared/GridItem';
 import ScrollerWithHeadline from '../../components/shared/ScrollerWithHeadline';
+import HeyTeachScroller from '../../components/shared/HeyTeachScroller';
 
 const Index = () => {
   const [filteredValue, setFilteredValue] = useState('all');
@@ -177,7 +178,7 @@ const Index = () => {
         </div>
       </div> */}
       <div className='py-16'>
-        <ScrollerWithHeadline
+        <HeyTeachScroller
           items={items}
           headline={'Popularity Contest'}
           itemTextStyle={'uppercase text-gray-500/80 text-base md:text-lg'}

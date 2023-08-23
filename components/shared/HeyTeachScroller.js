@@ -3,6 +3,7 @@ import { motion, useMotionValue, animate, useScroll } from 'framer-motion';
 import ShopScrollerItem from './ShopScrollerItem';
 import HeadlineMotion from './HeadlineMotion';
 import NewScroller from './NewScroller';
+import HeyTeachScrollerItem from './HeyTeachScrollerItem';
 
 const HeyTeachScroller = ({
   items,
@@ -24,17 +25,13 @@ const HeyTeachScroller = ({
                 className='w-[250px] md:w-[300px] h-full snap-x snap-mandatory snap-always touch-manipulation'
                 key={it.id}
               >
-                <ShopScrollerItem
-                  image={it.images ? it.images[0].src : ''}
-                  alt={
-                    it.featuredImage ? it.featuredImage.node.altText : it.alt
-                  }
+                <HeyTeachScrollerItem
+                  image={it.image}
                   headline={it.title ? it.title : it.headline}
                   text={itemTextStyle}
                   subheadline={it.subheadline}
                   background={background}
-                  price={it.variants[0].price.amount}
-                  slug={it.onlineStoreUrl}
+                  slug={it.link}
                 />
               </motion.div>
             ))}
