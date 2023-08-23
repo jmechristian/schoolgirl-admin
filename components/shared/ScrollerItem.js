@@ -57,7 +57,7 @@ const ScrollerItem = ({
           />
         </motion.div>
         <motion.div
-          className={`${background} w-full flex ${
+          className={`${background ? 'bg-khaki' : ''} w-full flex ${
             bookmark ? 'justify-between' : 'justify-center'
           } items-start overflow-hidden py-4 h-16`}
         >

@@ -7,6 +7,7 @@ import { sellers } from '../../data/seller';
 import SellerFlexItem from '../../components/shared/SellerFlexItem';
 import SellerSubnav from '../../components/shared/SellerSubnav';
 import { GridItem } from '../../components/shared/GridItem';
+import ScrollerWithHeadline from '../../components/shared/ScrollerWithHeadline';
 
 const Index = () => {
   const [filteredValue, setFilteredValue] = useState('all');
@@ -18,31 +19,87 @@ const Index = () => {
 
   const items = [
     {
+      link: 'https://shopschoolgirlstyle.com/collections/hey-teach-classroom-management-resources-digital-and-printable',
+      headline: 'Classroom Management',
+      image:
+        'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Classroom-Managemet.png',
+      background: true,
+    },
+    {
+      link: 'https://shopschoolgirlstyle.com/products/fall-collection-uprint',
+      headline: 'Fall',
+      image:
+        'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Fall.jpg',
+      background: true,
+    },
+    {
+      link: 'https://shopschoolgirlstyle.com/collections/teacher-lanyards-stylish-teacher-accessories-schoolgirl-style',
+      headline: 'Lanyards',
+      image:
+        'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Lanyard.jpg',
+      background: true,
+    },
+    {
+      link: 'https://shopschoolgirlstyle.com/collections/hey-teach-no-prep',
+      headline: 'No-Prep',
+      image:
+        'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/No-Prep-scaled.jpg',
+      background: true,
+    },
+    {
+      link: 'https://shopschoolgirlstyle.com/collections/hey-teach-teacher-planners',
+      headline: 'Planners',
+      image:
+        'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Planner.jpg',
+      background: true,
+    },
+    {
+      link: 'https://shopschoolgirlstyle.com/collections/hey-teach-t-shirts-teacher-apparel-accessories-for-teachers',
+      headline: 'Teacher T-Shirts',
+      image:
+        'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Teacher-t-shirts-scaled.jpg',
+      background: true,
+    },
+    {
       link: 'https://shopschoolgirlstyle.com/pages/hey-teach-teacher-lifestyle-marketplace',
-      headline: 'Teacher Life Style',
+      headline: 'Teacher Lifestyle',
       image:
-        'https://www.schoolgirlstyle.com/_next/image?url=https%3A%2F%2Fschoolgirlstyle.purveu.a2hosted.com%2Fwp-content%2Fuploads%2F2023%2F07%2FIT9A1703-2-2.jpg&w=384&q=75',
-      background: true,
-    },
-    {
-      link: 'https://shopschoolgirlstyle.com/collections/hey-teach-drinkware-coasters-coffee-sleeves-glass-cans-koozies-mugs',
-      headline: 'Stay Hydrated, Teach!',
-      image:
-        'https://www.schoolgirlstyle.com/_next/image?url=https%3A%2F%2Fschoolgirlstyle.purveu.a2hosted.com%2Fwp-content%2Fuploads%2F2023%2F07%2FIT9A1943-e1688655598683.jpg&w=384&q=75',
-      background: true,
-    },
-    {
-      link: 'https://shopschoolgirlstyle.com/pages/hey-teach-teacher-curriculum-marketplace',
-      headline: 'Curriculum',
-      image:
-        'https://www.schoolgirlstyle.com/_next/image?url=https%3A%2F%2Fschoolgirlstyle.purveu.a2hosted.com%2Fwp-content%2Fuploads%2F2023%2F07%2Fschoolgirlstyle_sugarpop_classroomdecor78.jpg&w=384&q=75',
+        'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Teacher-Lifestyle.jpg',
       background: true,
     },
     {
       link: 'https://shopschoolgirlstyle.com/collections/hey-teach-back-to-school-resources-digital-and-printable',
-      headline: 'Back To School',
+      headline: 'Curriculum',
       image:
-        'https://www.schoolgirlstyle.com/_next/image?url=https%3A%2F%2Fschoolgirlstyle.purveu.a2hosted.com%2Fwp-content%2Fuploads%2F2023%2F07%2FIT9A1665-2.jpg&w=384&q=75',
+        'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Curriculum-scaled.jpg',
+      background: true,
+    },
+    {
+      link: 'https://shopschoolgirlstyle.com/collections/hey-teach-jewelry-bracelets-earrings-pins',
+      headline: 'Teacher Jewelry',
+      image:
+        'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Teacher-Jewelry.jpg',
+      background: true,
+    },
+    {
+      link: 'https://shopschoolgirlstyle.com/collections/hey-teach-stem-curriculum-digital-and-printable-classroom-resources',
+      headline: 'STEM',
+      image:
+        'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/STEM.jpg',
+      background: true,
+    },
+    {
+      link: 'https://shopschoolgirlstyle.com/collections/hey-teach-science-of-reading-digital-and-printable-resources',
+      headline: 'Science of Reading',
+      image:
+        'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Science-of-Reading.jpg',
+      background: true,
+    },
+    {
+      link: 'https://shopschoolgirlstyle.com/collections/hey-teach-classroom-organization',
+      headline: 'Classroom Organization',
+      image:
+        'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Classroom-Organization.jpg',
       background: true,
     },
   ];
@@ -99,7 +156,7 @@ const Index = () => {
             </div>
           ))}
       </div>
-      <div className='w-full flex flex-col items-center gap-8 cursor-pointer'>
+      {/* <div className='w-full flex flex-col items-center gap-8 cursor-pointer'>
         <div className='text-3xl mt-12 md:text-5xl px-6 text-center font-canela text-gray-600 font-light pb-2 mb-2'>
           <HeadlineMotion>Shop the Marketplace</HeadlineMotion>
         </div>
@@ -118,6 +175,14 @@ const Index = () => {
               </div>
             ))}
         </div>
+      </div> */}
+      <div className='py-16'>
+        <ScrollerWithHeadline
+          items={items}
+          headline={'Popularity Contest'}
+          itemTextStyle={'uppercase text-gray-500/80 text-base md:text-lg'}
+          background={true}
+        />
       </div>
     </div>
   );
