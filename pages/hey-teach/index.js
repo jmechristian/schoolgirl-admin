@@ -177,7 +177,7 @@ const Index = () => {
             ))}
         </div>
       </div> */}
-      <div className='py-16'>
+      <div className='pt-16 pb-24'>
         <HeyTeachScroller
           items={items}
           headline={'Popularity Contest'}
