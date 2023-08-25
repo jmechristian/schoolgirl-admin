@@ -9,7 +9,19 @@
   }
 
   .blogContent > p {
-    @apply my-9;
+    @apply my-9 overflow-hidden;
+  }
+
+  video {
+    @apply max-w-full;
+  }
+
+  .wp-block-embed__wrapper {
+    @apply max-w-sm !important;
+  }
+
+  iframe {
+    @apply max-w-full max-h-72 md:max-h-full;
   }
 }
 

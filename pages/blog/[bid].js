@@ -74,7 +74,7 @@ const Index = ({ post, latest }) => {
   return (
     <main className='relative pb-16' id='home'>
       <div className='flex flex-col pt-20'>
-        <div className='lg:max-w-6xl w-full mx-auto flex flex-col gap-16'>
+        <div className='lg:max-w-6xl w-full mx-auto flex flex-col gap-16 overflow-hidden'>
           <div className='flex flex-col gap-3 max-w-3xl mx-auto px-6 lg:px-0'>
             <div className='font-sweet-bold text-sm uppercase tracking-wider'>
               {formattedDate && formattedDate}
@@ -83,7 +83,7 @@ const Index = ({ post, latest }) => {
               {post.title}
             </div>
             <div
-              className='text-xl md:text-xl mt-4 leading-normal'
+              className='text-xl md:text-xl mt-4 leading-normal max-w-full overflow-hidden'
               dangerouslySetInnerHTML={{ __html: post.excerpt }}
             ></div>
           </div>
