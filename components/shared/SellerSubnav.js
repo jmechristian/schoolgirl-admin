@@ -7,24 +7,10 @@ import {
 } from '@heroicons/react/24/outline';
 import SearchPanel from './SearchPanel';
 
-const filter = [
-  {
-    id: 'all',
-    name: 'All',
-  },
-  {
-    id: 'curriculum',
-    name: 'Curriculum',
-  },
-  {
-    id: 'lifestyle',
-    name: 'Lifestyle',
-  },
-];
-
-const SellerSubnav = ({ subNav, search, changeFilter }) => {
+const SellerSubnav = ({ subNav, search, changeFilter, changeSearch }) => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('all');
+  const [sellerSearch, setIsSellerSearch] = useState('');
 
   return (
     <div className='w-full flex justify-center gap-12 py-3 md:py-8 bg-khaki sticky top-0 z-50 drop-shadow-sm'>
@@ -46,20 +32,23 @@ const SellerSubnav = ({ subNav, search, changeFilter }) => {
             onChange={(e) => changeFilter(e.target.value)}
           >
             <option value='all'>All</option>
-            <option value='curriculum'>Curriculum</option>
+            <option value='curriculum'>Classroom Resources</option>
             <option value='lifestyle'>Lifestyle</option>
           </select>
         </div>
 
-        {search && (
-          <div
-            className='flex gap-2 items-center cursor-pointer'
-            onClick={() => setSearchOpen(true)}
-          >
-            <MagnifyingGlassIcon className='w-5 h-5' />
-            <div className='text-gray-600 uppercase text-sm'>Search</div>
+        <div className='flex gap-2 items-end relative text-center'>
+          <div className='font-sm font-brown text-gray-600 uppercase text-sm'>
+            <div>Search</div>
           </div>
-        )}
+          <input
+            type='text'
+            id='sellerSearch'
+            name='sellerSearch'
+            className='bg-neutral-100 px-3'
+            onChange={(e) => changeSearch(e.target.value)}
+          />
+        </div>
       </div>
       <SearchPanel open={searchOpen} setClose={() => setSearchOpen(false)} />
     </div>

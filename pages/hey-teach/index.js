@@ -1,21 +1,25 @@
-import React, { useState, useMemo } from 'react';
-import NewSubnav from '../../components/shared/NewSubnav';
+import React, { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import HeadlineMotion from '../../components/shared/HeadlineMotion';
-import { FlexGridItem } from '../../components/shared/FlexGridItem';
 import { sellers } from '../../data/seller';
 import SellerFlexItem from '../../components/shared/SellerFlexItem';
 import SellerSubnav from '../../components/shared/SellerSubnav';
-import { GridItem } from '../../components/shared/GridItem';
-import ScrollerWithHeadline from '../../components/shared/ScrollerWithHeadline';
 import HeyTeachScroller from '../../components/shared/HeyTeachScroller';
+import { motion, useScroll, AnimatePresence } from 'framer-motion';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 
 const Index = () => {
   const [filteredValue, setFilteredValue] = useState('all');
   const [filteredSellers, setFilteredSellers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setIsSearch] = useState('');
 
   const changeFilter = (val) => {
     setFilteredValue(val);
+  };
+
+  const changeSearch = (val) => {
+    setIsSearch(val);
   };
 
   const items = [
@@ -27,14 +31,14 @@ const Index = () => {
       background: true,
     },
     {
-      link: 'https://shopschoolgirlstyle.com/products/fall-collection-uprint',
+      link: 'https://shopschoolgirlstyle.com/collections/schoolgirl-style-seasonal-products',
       headline: 'Fall',
       image:
         'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Fall.jpg',
       background: true,
     },
     {
-      link: 'https://shopschoolgirlstyle.com/collections/teacher-lanyards-stylish-teacher-accessories-schoolgirl-style',
+      link: 'https://shopschoolgirlstyle.com/collections/hey-teach-lanyards',
       headline: 'Lanyards',
       image:
         'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Lanyard.jpg',
@@ -69,7 +73,7 @@ const Index = () => {
       background: true,
     },
     {
-      link: 'https://shopschoolgirlstyle.com/collections/hey-teach-back-to-school-resources-digital-and-printable',
+      link: 'https://shopschoolgirlstyle.com/pages/hey-teach-teacher-curriculum-marketplace',
       headline: 'Curriculum',
       image:
         'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/08/Curriculum-scaled.jpg',
@@ -107,13 +111,53 @@ const Index = () => {
 
   const sellersToShow = useMemo(() => {
     if (filteredValue === 'all') {
-      return sellers;
+      return sellers.filter(
+        (o) =>
+          o.name.toLowerCase().includes(search.toLowerCase()) ||
+          o.shopName.toLowerCase().includes(search.toLowerCase())
+      );
     } else if (filteredValue === 'curriculum') {
-      return sellers.filter((o) => o.category.includes('Curriculum'));
+      return sellers.filter(
+        (o) =>
+          (o.category.includes('Curriculum') &&
+            o.name.toLowerCase().includes(search.toLowerCase())) ||
+          o.shopName.toLowerCase().includes(search.toLowerCase())
+      );
     } else if (filteredValue === 'lifestyle') {
-      return sellers.filter((o) => o.category.includes('Lifestyle'));
+      return (
+        sellers.filter(
+          (o) =>
+            o.category.includes('Lifestyle') &&
+            o.name.toLowerCase().includes(search.toLowerCase())
+        ) || o.shopName.toLowerCase().includes(search.toLowerCase())
+      );
     }
-  }, [filteredValue, sellers]);
+  }, [filteredValue, search]);
+
+  const paginated = () => {};
+
+  useEffect(() => {
+    const paginate = () => {
+      let pag = [];
+      let itemsPerPage = 12;
+
+      for (var i = 0; i < sellersToShow.length; i++) {
+        if (
+          i >= (currentPage - 1) * itemsPerPage &&
+          i < currentPage * itemsPerPage
+        ) {
+          pag.push(sellersToShow[i]);
+        }
+      }
+
+      return pag;
+    };
+
+    paginate();
+    console.log(paginate());
+    console.log(currentPage);
+    setFilteredSellers(paginate());
+  }, [sellersToShow, currentPage]);
 
   return (
     <div className='flex flex-col'>
@@ -139,13 +183,17 @@ const Index = () => {
           />
         </div>
       </div>
-      <SellerSubnav subNav={[]} changeFilter={changeFilter} />
+      <SellerSubnav
+        subNav={[]}
+        changeFilter={changeFilter}
+        changeSearch={changeSearch}
+      />
       <div className='text-3xl md:text-5xl px-6 text-center font-canela text-gray-600 font-light py-16'>
         <HeadlineMotion>Teacher Marketplace</HeadlineMotion>
       </div>
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-7xl px-6 md:px-8 mx-auto gap-16 pb-16'>
-        {sellersToShow &&
-          sellersToShow.map((it, i) => (
+        {filteredSellers.length > 0 &&
+          filteredSellers.map((it, i) => (
             <div key={i}>
               <SellerFlexItem
                 image={it.image}
@@ -157,27 +205,30 @@ const Index = () => {
             </div>
           ))}
       </div>
-      {/* <div className='w-full flex flex-col items-center gap-8 cursor-pointer'>
-        <div className='text-3xl mt-12 md:text-5xl px-6 text-center font-canela text-gray-600 font-light pb-2 mb-2'>
-          <HeadlineMotion>Shop the Marketplace</HeadlineMotion>
+      <div className='flex gap-20 items-center justify-center max-w-4xl mx-auto'>
+        <div className='flex justify-center'>
+          <motion.div
+            className='flex w-16 h-16 rounded-full cursor-pointer bg-gray-900 shadow-lg backdrop-blur-sm justify-center items-center z-40'
+            onClick={() => setCurrentPage(currentPage - 1)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <ArrowRightIcon className='w-8 h-8 stroke-white stroke-2' />
+          </motion.div>
         </div>
-        <div className='grid grid-cols-2 md:grid-cols-4 w-full max-w-7xl px-6 mx-auto gap-9 overflow-hidden mb-24'>
-          {items &&
-            items.map((it, i) => (
-              <div key={i}>
-                <GridItem
-                  image={it.image}
-                  alt={it.headline}
-                  headline={it.headline}
-                  text='uppercase text-gray-500/80 text-base md:text-lg'
-                  link={it.link}
-                  background={true}
-                />
-              </div>
-            ))}
+        <div className='flex justify-center'>
+          <motion.div
+            className='flex w-16 h-16 rounded-full cursor-pointer bg-gray-900 shadow-lg backdrop-blur-sm justify-center items-center z-40'
+            onClick={() => setCurrentPage(currentPage + 1)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <ArrowRightIcon className='w-8 h-8 stroke-white stroke-2' />
+          </motion.div>
         </div>
-      </div> */}
-      <div className='pt-16 pb-24'>
+      </div>
+
+      <div className='pt-36 pb-24'>
         <HeyTeachScroller
           items={items}
           headline={'Popularity Contest'}

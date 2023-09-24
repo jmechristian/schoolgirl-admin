@@ -23,7 +23,7 @@ const HeyTeachScroller = ({
             items.map((it, i) => (
               <motion.div
                 className='w-[250px] md:w-[300px] h-full snap-x snap-mandatory snap-always touch-manipulation'
-                key={it.id}
+                key={i}
               >
                 <HeyTeachScrollerItem
                   image={it.image}
