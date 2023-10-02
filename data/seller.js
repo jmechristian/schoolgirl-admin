@@ -6,6 +6,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Dana-DiBenedetto-DD-Design-Co.png',
     category: ['Lifestyle'],
+    subtitle: 'Shop polymer clay lanyards & errings!',
   },
   {
     name: 'Daniela Haro',
@@ -14,6 +15,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Daniela-Haro-Sprinkles-and-Beads.png',
     category: ['Lifestyle'],
+    subtitle: 'Shop one-of-a-kind bracelets!',
   },
   {
     name: 'Danielle Harper Chastain',
@@ -22,6 +24,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Danielle-Harper-Chastain-The-Pineapple-Girl-Design-Co.png',
     category: ['Lifestyle'],
+    subtitle: 'Office accessories, stickers, stationary & more!',
   },
   {
     name: 'Jenny Lloyd',
@@ -30,14 +33,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Jenny-Lloyd-Love-Jenny-Lanyards.png',
     category: ['Lifestyle'],
-  },
-  {
-    name: 'Jill Ezrig',
-    shopName: 'Shop It’s a Star',
-    link: 'https://shopschoolgirlstyle.com/pages/seller-profile/shop-its-a-star',
-    image:
-      'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Jill-Ezrig-Shop-Its-a-Star.png',
-    category: ['Lifestyle'],
+    subtitle: 'Shop COLORFUL & STYLISH clay lanyards!',
   },
   {
     name: 'Joy Sumner',
@@ -46,6 +42,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Joy-Sumner-Olive-and-Ivory.png',
     category: ['Lifestyle'],
+    subtitle: 'Shop apparel, stickers, lanyards & more!',
   },
   {
     name: 'Mayra Aguilar',
@@ -54,6 +51,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Mayra-Aguilar-Crafting-by-Mayra.png',
     category: ['Lifestyle'],
+    subtitle: 'Shop glass tumblers & mugs, mouse pads and more!',
   },
   {
     name: 'Alyssa Broome',
@@ -62,6 +60,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Alyssa-Broome-Teacher-Noire.png',
     category: ['Lifestyle', 'Curriculum'],
+    subtitle: 'Shop the CUTEST teacher earrings & more!',
   },
   {
     name: 'Dulce Villanueva',
@@ -70,6 +69,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Dulce-Villanueva-Pom-Poms-and-Fringe.png',
     category: ['Lifestyle'],
+    subtitle: 'Shop beautiful classroom tapestries!',
   },
   {
     name: 'Madison Whitworth',
@@ -78,6 +78,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Madison-Whitworth-Modern-Made-Company.png',
     category: ['Lifestyle'],
+    subtitle: 'Beautiful teacher lanyards!',
   },
   {
     name: 'Courtney Brink',
@@ -86,6 +87,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Courtney-Brink-Kinder-and-Kindness.png',
     category: ['Lifestyle', 'Curriculum'],
+    subtitle: 'Shop teacher tees & sweatshirts!',
   },
   {
     name: 'Alisha Peare',
@@ -94,6 +96,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Alisha-Peare-The-Bubbly-Blonde-Teacher.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop English language resources with a focus on Kindergarten-5th grade!',
   },
   {
     name: 'Angie Brezina',
@@ -102,6 +106,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Angie-Brezina-Glitter-and-Glue-and-PreK-Too.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop printable activities for Preschool, Pre-K, Kindergarten and Special Education Classrooms.',
   },
   {
     name: 'Annie Moffatt',
@@ -110,6 +116,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Annie-Moffatt-The-Moffatt-Girls.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop resources for students to meet grade-level math and language standards for preschool-3rd grade.',
   },
   {
     name: 'Ashley Sharp',
@@ -118,6 +126,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Ashley-Sharp-One-Sharp-Bunch.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop an educational store where play, creativity, and content collide!',
   },
   {
     name: 'Brooke Brown',
@@ -126,6 +136,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Brooke-Brown-Teach-Outside-the-Box.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop low-prep, standard-aligned resources for STEM, Makerspaces, coding, robotics, and hands-on literacy!',
   },
   {
     name: 'Christina DeCarbo',
@@ -134,6 +146,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Christina-DeCarbo-Miss-DeCarbo.png',
     category: ['Curriculum'],
+    subtitle: 'Shop research-based literacy resources!',
   },
   {
     name: 'Danielle Harper Chastain',
@@ -142,6 +155,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Danielle-Harper-Chastain-Aloha-Kindergarten.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop Teacher templates like Morning Meeting Slides, Meet the Teacher, and so much more!',
   },
   {
     name: 'Emily Kraus',
@@ -150,6 +165,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Emily-Kraus-Kraus-Math.png',
     category: ['Curriculum'],
+    subtitle: 'Shop Math Resources for grades Kindergarten through 8th!',
   },
   {
     name: 'Hannah Pace',
@@ -158,6 +174,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Hannah-Pace-Miss-West-Best.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop tools for organizational, classroom management, goal setting, parent communication, and more!',
   },
   {
     name: 'Joey Udovich ',
@@ -166,6 +184,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Joey-Udovich-Joey-Udovich.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop unique door decor and organizational resources for your classroom!',
   },
   {
     name: 'Marsha McGuire',
@@ -174,6 +194,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Marsha-McGuire-Differentiated-Kindergarten.png',
     category: ['Curriculum'],
+    subtitle: 'Shop fun and engaging developmentally appropriate activities!',
   },
   {
     name: 'Meredith Morgan',
@@ -182,6 +203,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Meredith-Morgan-Miss-M_s-Reading-Resources.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop early literacy, Kindergarten-focused, and purposeful classroom decor digital downloads!',
   },
   {
     name: 'Patrice Jenkins',
@@ -190,6 +213,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Patrice-Jenkins-Tales-of-Patty-Pepper.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop thematic lessons, reading guides, and monthly school decor themes!',
   },
   {
     name: 'Melody Munch',
@@ -198,6 +223,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Melody-Munch-Mrs-Munchs-Munchkins.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop resources to make meaningful memories and connections with your students as well as making your life easier!',
   },
   {
     name: 'Andrea Sanzari',
@@ -206,6 +233,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Andrea-Sanzari-Keepin-up-with-the-Kinders.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop Kindergarten resources with a focus on writing, crafts, and reward sytems!',
   },
   {
     name: 'Rindy Roberts',
@@ -214,6 +243,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Rindy-Roberts-Learning-With-Heart.png',
     category: ['Curriculum'],
+    subtitle: 'Shop simple Science of Reading resources!',
   },
   {
     name: 'Allie Szczecinski',
@@ -222,6 +252,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Allie-Szczecinski-Miss-Behavior.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop CASEL-aligned, evidence and research based resources to support social emotional learning and healthy behavior practices in your classroom!',
   },
   {
     name: 'Brittany Milius',
@@ -230,6 +262,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Brittany-Milius-Fun-in-Elementary.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop teacher resources with the focus on creating an engaging environment and fun memories in your classroom!',
   },
   {
     name: 'Aris Rossi',
@@ -238,6 +272,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Aris-Rossi-Teaching-with-Aris.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop time savers and time management resources that make a big impact in your classroom!',
   },
   {
     name: 'Haylee Harwick ',
@@ -246,6 +282,8 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Haylee-Harwick-Hello-Mrs-Harwick.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop daily worksheets and study guides with an emphasis on engagement, creativity, and technology!',
   },
   {
     name: 'Jennifer Weeks',
@@ -254,5 +292,7 @@ export const sellers = [
     image:
       'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Jennifer-Weeks-Little-Journeys-in-PreK-and-K.png',
     category: ['Curriculum'],
+    subtitle:
+      'Shop Pre-K and Kindergarten resources where children can learn through play!',
   },
 ];

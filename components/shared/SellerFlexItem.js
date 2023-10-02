@@ -11,6 +11,7 @@ const SellerFlexItem = ({
   background,
   subheadline,
   link,
+  subtitle,
 }) => {
   const itemRef = useRef();
   const inView = useInView(itemRef);
@@ -41,16 +42,16 @@ const SellerFlexItem = ({
   };
 
   return (
-    <AnimatePresence>
+    <AnimatePresence className='w-full h-full'>
       <motion.div
-        className='w-full h-full flex flex-col'
+        className='w-full h-full py-3 flex flex-col'
         variants={variants}
         initial='hide'
         animate={inView ? 'show' : 'hide'}
         ref={itemRef}
       >
         <motion.div
-          className='block relative w-full h-full cursor-pointer aspect-square'
+          className='block relative w-full h-full cursor-pointer aspect-square mb-3'
           onClick={goElsewhere}
         >
           <Image src={image} fill alt={alt} className='object-contain' />
@@ -60,13 +61,18 @@ const SellerFlexItem = ({
         >
           <motion.div className='flex flex-col text-center'>
             <motion.div
+              className={`font-brown text-sm tracking-wide ${text} uppercase text-xs`}
+            >
+              {subheadline}
+            </motion.div>
+            <motion.div
               className={`font-brown-bold tracking-wide ${text} cursor-pointer`}
               onClick={goElsewhere}
             >
               {headline}
             </motion.div>
-            <motion.div className={`font-brown text-sm tracking-wide ${text}`}>
-              {subheadline}
+            <motion.div className='my-2 text-sm text-neutral-500'>
+              {subtitle}
             </motion.div>
           </motion.div>
           {/* <motion.div onClick={() => setIsBookmarked(!isBookmarked)}>

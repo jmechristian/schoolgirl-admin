@@ -114,14 +114,16 @@ const Index = () => {
       return sellers.filter(
         (o) =>
           o.name.toLowerCase().includes(search.toLowerCase()) ||
-          o.shopName.toLowerCase().includes(search.toLowerCase())
+          o.shopName.toLowerCase().includes(search.toLowerCase()) ||
+          o.subtitle.toLowerCase().includes(search.toLowerCase())
       );
     } else if (filteredValue === 'curriculum') {
       return sellers.filter(
         (o) =>
           (o.category.includes('Curriculum') &&
             o.name.toLowerCase().includes(search.toLowerCase())) ||
-          o.shopName.toLowerCase().includes(search.toLowerCase())
+          o.shopName.toLowerCase().includes(search.toLowerCase()) ||
+          o.subtitle.toLowerCase().includes(search.toLowerCase())
       );
     } else if (filteredValue === 'lifestyle') {
       return (
@@ -129,7 +131,9 @@ const Index = () => {
           (o) =>
             o.category.includes('Lifestyle') &&
             o.name.toLowerCase().includes(search.toLowerCase())
-        ) || o.shopName.toLowerCase().includes(search.toLowerCase())
+        ) ||
+        o.shopName.toLowerCase().includes(search.toLowerCase()) ||
+        o.subtitle.toLowerCase().includes(search.toLowerCase())
       );
     }
   }, [filteredValue, search]);
@@ -191,16 +195,17 @@ const Index = () => {
       <div className='text-3xl md:text-5xl px-6 text-center font-canela text-gray-600 font-light py-16'>
         <HeadlineMotion>Teacher Marketplace</HeadlineMotion>
       </div>
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-7xl px-6 md:px-8 mx-auto gap-16 pb-16'>
+      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-7xl px-6 md:px-8 mx-auto gap-x-16 gap-y-20 pb-24'>
         {filteredSellers.length > 0 &&
           filteredSellers.map((it, i) => (
-            <div key={i}>
+            <div key={i} className='h-full w-full'>
               <SellerFlexItem
                 image={it.image}
                 alt={it.shopName}
                 headline={it.shopName}
                 subheadline={it.name}
                 link={it.link}
+                subtitle={it.subtitle}
               />
             </div>
           ))}
@@ -213,7 +218,7 @@ const Index = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            <ArrowRightIcon className='w-8 h-8 stroke-white stroke-2' />
+            <ArrowLeftIcon className='w-8 h-8 stroke-white stroke-2' />
           </motion.div>
         </div>
         <div className='flex justify-center'>
