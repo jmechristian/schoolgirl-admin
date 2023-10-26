@@ -187,14 +187,24 @@ const Index = () => {
           />
         </div>
       </div>
+      <div className='pt-36 pb-24'>
+        <HeyTeachScroller
+          items={items}
+          headline={'Popularity Contest'}
+          itemTextStyle={'uppercase text-gray-500/80 text-base md:text-lg'}
+          background={true}
+        />
+      </div>
       <SellerSubnav
         subNav={[]}
         changeFilter={changeFilter}
         changeSearch={changeSearch}
       />
+
       <div className='text-3xl md:text-5xl px-6 text-center font-canela text-gray-600 font-light py-16'>
         <HeadlineMotion>Teacher Marketplace</HeadlineMotion>
       </div>
+
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-7xl px-6 md:px-8 mx-auto gap-x-16 gap-y-20 pb-24'>
         {filteredSellers.length > 0 &&
           filteredSellers.map((it, i) => (
@@ -210,7 +220,7 @@ const Index = () => {
             </div>
           ))}
       </div>
-      <div className='flex gap-20 items-center justify-center max-w-4xl mx-auto'>
+      <div className='flex gap-20 items-center justify-center max-w-4xl mx-auto mb-20'>
         <div className='flex justify-center'>
           <motion.div
             className='flex w-16 h-16 rounded-full cursor-pointer bg-gray-900 shadow-lg backdrop-blur-sm justify-center items-center z-40'
@@ -231,15 +241,6 @@ const Index = () => {
             <ArrowRightIcon className='w-8 h-8 stroke-white stroke-2' />
           </motion.div>
         </div>
-      </div>
-
-      <div className='pt-36 pb-24'>
-        <HeyTeachScroller
-          items={items}
-          headline={'Popularity Contest'}
-          itemTextStyle={'uppercase text-gray-500/80 text-base md:text-lg'}
-          background={true}
-        />
       </div>
     </div>
   );
