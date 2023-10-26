@@ -222,14 +222,16 @@ const Index = () => {
       </div>
       <div className='flex gap-20 items-center justify-center max-w-4xl mx-auto mb-20'>
         <div className='flex justify-center'>
-          <motion.div
-            className='flex w-16 h-16 rounded-full cursor-pointer bg-gray-900 shadow-lg backdrop-blur-sm justify-center items-center z-40'
-            onClick={() => setCurrentPage(currentPage - 1)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <ArrowLeftIcon className='w-8 h-8 stroke-white stroke-2' />
-          </motion.div>
+          {currentPage != 1 && (
+            <motion.div
+              className='flex w-16 h-16 rounded-full cursor-pointer bg-gray-900 shadow-lg backdrop-blur-sm justify-center items-center z-40'
+              onClick={() => setCurrentPage(currentPage - 1)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              <ArrowLeftIcon className='w-8 h-8 stroke-white stroke-2' />
+            </motion.div>
+          )}
         </div>
         <div className='flex justify-center'>
           <motion.div
