@@ -41,6 +41,11 @@ const projects = [
     name: 'About',
     href: '/edit/about',
   },
+  {
+    id: 7,
+    name: 'Hey, Teach!',
+    href: '/edit/heyteach',
+  },
 ];
 
 function classNames(...classes) {
