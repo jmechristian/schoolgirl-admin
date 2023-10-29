@@ -200,7 +200,7 @@ export default function Home({ pageData }) {
           pageData.data[0].headline_one.row_items[0].grid_item,
           pageData.data[0].headline_one.row_items[1].grid_item,
           pageData.data[0].headline_one.row_items[2].grid_item,
-          pageData.data[0].headline_one.row_items[3].grid_item,
+          // pageData.data[0].headline_one.row_items[3].grid_item,
         ]}
         headline={pageData.data[0].headline_one.title}
         itemTextStyle='uppercase text-gray-500/80 text-base md:text-lg'
