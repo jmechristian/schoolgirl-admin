@@ -6,6 +6,7 @@ import { createClient } from '@supabase/supabase-js';
 
 import HeadlineMotion from '../../components/shared/HeadlineMotion';
 import EditableScroller from '../../components/editable/EditableScroller';
+import SellersGrid from '../../components/editable/SellersGrid';
 
 const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -173,6 +174,7 @@ const Page = ({ pageData, rowData }) => {
       <div className='text-3xl md:text-5xl px-6 text-center font-canela text-gray-600 font-light py-16'>
         <HeadlineMotion>Teacher Marketplace</HeadlineMotion>
       </div>
+      <SellersGrid />
     </div>
   );
 };

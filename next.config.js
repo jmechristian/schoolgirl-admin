@@ -9,6 +9,7 @@ const nextConfig = {
       'schoolgirlstyle.purveu.a2hosted.com',
       'shopschoolgirlstyle.com',
       'www.schoolgirlstyle.com',
+      'schoolgirlstyle.purveu.sa2hosted.com',
     ],
   },
   async redirects() {
