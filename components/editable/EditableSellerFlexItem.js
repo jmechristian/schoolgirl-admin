@@ -102,7 +102,7 @@ const EditableSellerFlexItem = ({
         ref={itemRef}
       >
         {isDeleting && (
-          <div className='fixed inset-0 bg-black/50 z-50 flex items-center justify-center'>
+          <div className='fixed inset-0 bg-black/50 z-[100] flex items-center justify-center'>
             <div className='bg-white rounded-lg p-6 w-[500px] h-[320px] flex flex-col gap-6 justify-center items-center'>
               <div>
                 <BellAlertIcon className='w-12 h-12 fill-red-600' />
