@@ -133,10 +133,7 @@ const EditableSellerFlexItem = ({
         {isEditing && (
           <motion.div className='absolute z-50 -top-24 -left-6 -right-6 -bottom-6  bg-black/40 backdrop-blur flex justify-center items-center'>
             <motion.div className='bg-white/80 p-3 max-w-5xl w-full h-full flex justify-center items-center'>
-              <motion.form
-                className='flex flex-col gap-1 w-full'
-                onSubmit={(event) => gridItemSubmitHandler(event)}
-              >
+              <motion.form className='flex flex-col gap-1 w-full'>
                 <motion.div className='grid grid-cols-1 gap-1'>
                   <TextInput
                     type='text'
@@ -211,8 +208,11 @@ const EditableSellerFlexItem = ({
                       className='bg-black rounded-lg px-4 py-2'
                       type='submit'
                     >
-                      <motion.div className='text-white font-bold'>
-                        {isLoading ? 'Sending...' : 'Update'}
+                      <motion.div
+                        className='text-white font-bold'
+                        onClick={(event) => gridItemSubmitHandler(event)}
+                      >
+                        {isLoading ? 'Sending...' : 'Create'}
                       </motion.div>
                     </motion.button>
                   </motion.div>

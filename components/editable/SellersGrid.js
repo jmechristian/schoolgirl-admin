@@ -85,7 +85,7 @@ const SellersGrid = () => {
               />
             </div>
           ))}
-        <div className='w-full h-full border-4 border-neutral-300 border-dashed flex justify-center items-center relative'>
+        <div className='w-full h-full min-h-[345px] border-4 border-neutral-300 border-dashed flex justify-center items-center relative'>
           {isCreating && (
             <motion.div className='absolute z-50 -top-24 -left-6 -right-12 -bottom-12  bg-black/40 backdrop-blur flex justify-center items-center'>
               <motion.div className='bg-white/80 p-3 max-w-5xl w-full h-full flex justify-center items-center'>
