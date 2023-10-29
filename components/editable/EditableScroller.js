@@ -5,12 +5,14 @@ import {
   CloudArrowUpIcon,
   PencilSquareIcon,
   CheckCircleIcon,
+  PlusCircleIcon,
 } from '@heroicons/react/24/solid';
 
 import HeadlineMotion from '../shared/HeadlineMotion';
 import NewScroller from '../shared/NewScroller';
 import HeyTeachScrollerItem from '../shared/HeyTeachScrollerItem';
 import EditableHeyTeachScrollerItem from './EditableHeyTeachScrollerItem';
+import TextInput from '../shared/TextInput';
 
 const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -29,6 +31,13 @@ const EditableScroller = ({
   const [isEditingHeadline, setIsEditingHeadline] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmited, setIsSubmited] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isItemSubmitted, setItemSubmitted] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [isItemBg, setIsItemBg] = useState('');
+  const [isItemLink, setIsItemLink] = useState('');
+  const [isItemHeadline, setIsItemHeadline] = useState('');
+  const [isItemSubheadline, setIsItemSubheadline] = useState('');
 
   const gridItemSubmitHandler = async (e) => {
     e.preventDefault();
@@ -48,6 +57,8 @@ const EditableScroller = ({
     }
     console.log('data', data);
   };
+
+  const newItemHandler = async () => {};
 
   const submitNewHeadlineHandler = () => {
     setIsEditingHeadline(false);
@@ -127,6 +138,87 @@ const EditableScroller = ({
                 />
               </motion.div>
             ))}
+          {/* <motion.div className='flex items-center justify-center border-4 border-neutral-400 border-dashed w-[250px] md:w-[300px] h-full snap-x snap-mandatory snap-always touch-manipulation'>
+            {isEditing ? (
+              <motion.div className='absolute z-50 top-0 left-0 bottom-0 right-0 bg-black/40 backdrop-blur flex justify-center items-center'>
+                <motion.div className='bg-white/80 p-3 max-w-3xl w-full h-full flex justify-center items-center'>
+                  <motion.form
+                    className='flex flex-col gap-1 w-full'
+                    onSubmit={(event) => gridItemSubmitHandler(event)}
+                  >
+                    <motion.div className='grid grid-cols-1 gap-1'>
+                      <TextInput
+                        type='text'
+                        name='background'
+                        id='background'
+                        placeholder='new background...'
+                        value={isItemBg}
+                        changeHandler={(val) => setIsItemBg(val)}
+                      />
+                      <TextInput
+                        type='text'
+                        name='headline'
+                        id='headline'
+                        placeholder='if headline...'
+                        value={isItemHeadline}
+                        changeHandler={(val) => setIsItemHeadline(val)}
+                      />
+                      <TextInput
+                        type='text'
+                        name='link'
+                        id='link'
+                        placeholder='new link...'
+                        value={isItemLink}
+                        changeHandler={(val) => setIsItemLink(val)}
+                      />
+                      <TextInput
+                        type='text'
+                        name='subheadline'
+                        id='subheadline'
+                        placeholder='if subheadline...'
+                        value={isItemSubheadline}
+                        changeHandler={(val) => setIsItemSubheadline(val)}
+                      />
+                    </motion.div>
+                    <motion.div className='flex justify-between items-center w-full'>
+                      <motion.div className='flex justify-end items-center mt-4 gap-4'>
+                        <motion.div className='font-medium text-green-700 text-lg'>
+                          {isItemSubmitted && (
+                            <div className='flex items-center gap-1 text-green-700 text-sm'>
+                              <CheckCircleIcon className='w-5 h-5 fill-green-700' />
+                              Updated!
+                            </div>
+                          )}
+                        </motion.div>
+                      </motion.div>
+                      <motion.div className='flex justify-end items-center mt-4 gap-4'>
+                        <motion.div
+                          className='bg-black/40 rounded-lg px-4 py-2'
+                          onClick={() => setIsEditing(false)}
+                        >
+                          <motion.div className='text-white font-bold cursor-pointer'>
+                            {isItemSubmitted ? 'Close' : 'Cancel'}
+                          </motion.div>
+                        </motion.div>
+                        <motion.button
+                          className='bg-black rounded-lg px-4 py-2'
+                          type='submit'
+                        >
+                          <motion.div className='text-white font-bold'>
+                            {isLoading ? 'Sending...' : 'Create'}
+                          </motion.div>
+                        </motion.button>
+                      </motion.div>
+                    </motion.div>
+                  </motion.form>
+                </motion.div>
+              </motion.div>
+            ) : (
+              <div onClick={() => setIsEditing(true)}>
+                <PlusCircleIcon className='w-16 h-16 fill-indigo-600 shadow rounded-full cursor-pointer' />
+              </div>
+            )}
+          </motion.div> */}
         </NewScroller>
       </div>
     </div>

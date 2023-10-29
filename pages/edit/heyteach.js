@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -6,6 +6,11 @@ import { createClient } from '@supabase/supabase-js';
 
 import HeadlineMotion from '../../components/shared/HeadlineMotion';
 import EditableScroller from '../../components/editable/EditableScroller';
+
+const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+const rowID = '926b329e-07ea-4959-97e7-3e3b002bc667';
 
 const items = [
   {
@@ -96,6 +101,7 @@ const items = [
 
 const Page = ({ pageData, rowData }) => {
   const { user } = useSelector((state) => state.auth);
+  const [isUpdateItems, setIsUpdatedItems] = useState(undefined);
 
   const router = useRouter();
 
@@ -103,7 +109,27 @@ const Page = ({ pageData, rowData }) => {
     if (!user) {
       router.push('/admin');
     }
+
+    supabase
+      .channel('custom-all-channel')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'row_items' },
+        () => {
+          getAndSetNewSubNav();
+          console.log('row change!');
+        }
+      )
+      .subscribe();
   });
+
+  const getAndSetNewSubNav = async () => {
+    const newItems = await supabase
+      .from('row_items')
+      .select('grid_item(*)')
+      .eq('row_id', rowID);
+    setIsUpdatedItems(newItems.data);
+  };
 
   return (
     <div className='flex flex-col'>
@@ -131,7 +157,7 @@ const Page = ({ pageData, rowData }) => {
       </div>
       <div className='pt-36 pb-24'>
         <EditableScroller
-          items={pageData && pageData.data}
+          items={isUpdateItems ? isUpdateItems : pageData && pageData.data}
           headline={rowData && rowData.data[0].title}
           itemTextStyle={'uppercase text-gray-500/80 text-base md:text-lg'}
           background={true}
