@@ -3,6 +3,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { createClient } from '@supabase/supabase-js';
+import {
+  CheckCircleIcon,
+  CloudArrowUpIcon,
+  PencilSquareIcon,
+} from '@heroicons/react/20/solid';
 
 import HeadlineMotion from '../../components/shared/HeadlineMotion';
 import EditableScroller from '../../components/editable/EditableScroller';
@@ -100,9 +105,17 @@ const items = [
   },
 ];
 
-const Page = ({ pageData, rowData }) => {
+const Page = ({ pageData, rowData, sellerHeader }) => {
+  console.log(sellerHeader);
   const { user } = useSelector((state) => state.auth);
   const [isUpdateItems, setIsUpdatedItems] = useState(undefined);
+  const [isHeadlineHover, setIsHeadlineHover] = useState(false);
+  const [isEditingHeadline, setIsEditingHeadline] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSellerHeadline, setIsSellerHeadline] = useState(
+    sellerHeader && sellerHeader.data[0].text
+  );
 
   const router = useRouter();
 
@@ -130,6 +143,25 @@ const Page = ({ pageData, rowData }) => {
       .select('grid_item(*)')
       .eq('row_id', rowID);
     setIsUpdatedItems(newItems.data);
+  };
+
+  const gridItemSubmitHandler = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    const { data, error } = await supabase
+      .from('rando_inputs')
+      .update({
+        text: isSellerHeadline,
+      })
+      .eq('id', 1)
+      .select();
+
+    if (!error) {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      setIsEditingHeadline(false);
+    }
+    console.log('data', data);
   };
 
   return (
@@ -170,10 +202,58 @@ const Page = ({ pageData, rowData }) => {
         changeFilter={changeFilter}
         changeSearch={changeSearch}
       /> */}
-
-      <div className='text-3xl md:text-5xl px-6 text-center font-canela text-gray-600 font-light py-16'>
-        <HeadlineMotion>Teacher Marketplace</HeadlineMotion>
+      <div
+        className=' max-w-5xl w-full mx-auto text-3xl md:text-5xl px-6 mb-9 text-center font-canela text-gray-600 font-light hover:bg-neutral-100 hover:py-2 transition-all ease-in relative'
+        onMouseEnter={() => setIsHeadlineHover(true)}
+        onMouseLeave={() => setIsHeadlineHover(false)}
+      >
+        <div
+          className={`absolute ${
+            isHeadlineHover || isEditingHeadline ? 'flex' : 'hidden'
+          } items-center top-1/2 mr-3 -translate-y-1/2 right-0 transition-all ease-in`}
+        >
+          {isEditingHeadline ? (
+            <div onClick={gridItemSubmitHandler}>
+              <CloudArrowUpIcon
+                className={`w-9 h-9 fill-black cursor-pointer bg-white rounded-full ${
+                  isSubmitting ? 'animate-pulse' : ''
+                }`}
+              />
+            </div>
+          ) : (
+            <div onClick={() => setIsEditingHeadline(true)}>
+              <PencilSquareIcon className='w-7 h-7 fill-black cursor-pointer' />
+            </div>
+          )}
+          <div>
+            <CheckCircleIcon
+              className={`w-8 h-8 ${
+                isSubmitted ? 'fill-green-700' : 'fill-neutral-300'
+              } ${isSubmitting ? 'animate-bounce' : ''}`}
+            />
+          </div>
+        </div>
+        {isEditingHeadline ? (
+          <div>
+            <input
+              type='text'
+              id='newHeadline'
+              name='newHeadline'
+              placeholder={
+                isSellerHeadline ? isSellerHeadline : 'Enter Headline'
+              }
+              className='placeholder:text-gray-400 p-1.5 w-full max-w-4xl text-center'
+              value={isSellerHeadline}
+              onChange={(e) => setIsSellerHeadline(e.target.value)}
+            />
+          </div>
+        ) : (
+          <HeadlineMotion>{isSellerHeadline}</HeadlineMotion>
+        )}
       </div>
+      {/* <div className='text-3xl md:text-5xl px-6 text-center font-canela text-gray-600 font-light py-16'>
+        <HeadlineMotion>{sellerHeader.data[0].text}</HeadlineMotion>
+      </div> */}
       <SellersGrid />
     </div>
   );
@@ -192,10 +272,16 @@ export async function getServerSideProps() {
 
   const rowData = await supabase.from('site_row').select('*').eq('id', rowID);
 
+  const sellerHeader = await supabase
+    .from('rando_inputs')
+    .select('*')
+    .eq('id', 1);
+
   return {
     props: {
       pageData,
       rowData,
+      sellerHeader,
     },
   };
 }
