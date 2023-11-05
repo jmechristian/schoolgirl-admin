@@ -203,7 +203,7 @@ const Page = ({ pageData, rowData, sellerHeader }) => {
         changeSearch={changeSearch}
       /> */}
       <div
-        className=' max-w-5xl w-full mx-auto text-3xl md:text-5xl px-6 mb-9 text-center font-canela text-gray-600 font-light hover:bg-neutral-100 hover:py-2 transition-all ease-in relative'
+        className=' max-w-5xl w-full mx-auto text-3xl md:text-5xl px-6 mb-12 text-center font-canela text-gray-600 font-light hover:bg-neutral-100 hover:py-2 transition-all ease-in relative'
         onMouseEnter={() => setIsHeadlineHover(true)}
         onMouseLeave={() => setIsHeadlineHover(false)}
       >

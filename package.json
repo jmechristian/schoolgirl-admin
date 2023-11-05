@@ -24,6 +24,8 @@
     "next-seo": "^5.15.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-gesture-responder": "^2.1.0",
+    "react-grid-dnd": "^2.1.2",
     "react-instagram-authless-feed": "github:jamesmoriarty/react-instagram-authless-feed",
     "react-mailchimp-form": "^1.0.2",
     "react-player": "^2.11.2",
