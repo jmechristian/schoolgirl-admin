@@ -233,7 +233,7 @@ const Page = () => {
           </div>
         </div> */}
       </div>
-      <div className='max-w-7xl mx-auto py-24 flex flex-col gap-9'>
+      <div className='max-w-7xl mx-auto py-20 flex flex-col gap-9'>
         <GridContextProvider onChange={onChange}>
           <GridDropZone
             id='items'
@@ -250,7 +250,7 @@ const Page = () => {
             ))}
           </GridDropZone>
         </GridContextProvider>
-        <div className='flex items-center gap-6 mt-16'>
+        <div className='flex items-center gap-6 mt-10'>
           <div
             className='bg-black text-white items-center flex gap-2 font-brown-bold text-lg px-9 py-4 rounded-lg w-fit cursor-pointer'
             onClick={setOrderHandler}
