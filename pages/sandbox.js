@@ -20,9 +20,9 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const Page = () => {
   const [isSellers, setIsSellers] = useState([]);
   const [isOrderedSellers, setIsOrderedSellers] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
   const [isImage, setIsImage] = useState('');
   const [isName, setIsName] = useState('');
   const [isShopname, setIsShopname] = useState('');
