@@ -12,6 +12,7 @@ import {
 import HeadlineMotion from '../../components/shared/HeadlineMotion';
 import EditableScroller from '../../components/editable/EditableScroller';
 import SellersGrid from '../../components/editable/SellersGrid';
+import TextInput from '../../components/shared/TextInput';
 
 const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -105,16 +106,22 @@ const items = [
   },
 ];
 
-const Page = ({ pageData, rowData, sellerHeader }) => {
-  console.log(sellerHeader);
+const Page = ({ pageData, rowData, sellerHeader, heroes }) => {
+  console.log(heroes);
   const { user } = useSelector((state) => state.auth);
   const [isUpdateItems, setIsUpdatedItems] = useState(undefined);
   const [isHeadlineHover, setIsHeadlineHover] = useState(false);
   const [isEditingHeadline, setIsEditingHeadline] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSellerHeadline, setIsSellerHeadline] = useState(
     sellerHeader && sellerHeader.data[0].text
+  );
+  const [isHeroImage, setIsHeroImage] = useState(heroes.data[0].image);
+  const [isMobileHeroImage, setIsMobileHeroImage] = useState(
+    heroes.data[0].mobileImage
   );
 
   const router = useRouter();
@@ -164,29 +171,90 @@ const Page = ({ pageData, rowData, sellerHeader }) => {
     console.log('data', data);
   };
 
+  const heroImageHandler = async (e) => {
+    setIsLoading(true);
+    e.preventDefault();
+    const { data, error } = await supabase
+      .from('hey_teach_row')
+      .update({ image: isHeroImage, mobileImage: isMobileHeroImage })
+      .eq('id', 1)
+      .select();
+
+    if (!error) {
+      setIsLoading(false);
+      setIsSubmitted(true);
+    }
+  };
+
   return (
     <div className='flex flex-col'>
-      <div className='max-w-7xl mx-auto'>
-        <div className='w-full h-auto hidden md:block'>
-          <Image
-            width={'1800'}
-            height={'800'}
-            alt='Hey, Teach! Marketplace'
-            src={
-              'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Hey-Teach-2023-MM-1800x800-1.jpg'
-            }
-          />
+      <div className='max-w-7xl w-full mx-auto relative'>
+        <div
+          onClick={() => setIsEditing(!isEditing)}
+          className='absolute right-3 top-3 bg-white rounded-full cursor-pointer w-12 shadow h-12 flex items-center justify-center'
+        >
+          <PencilSquareIcon className='w-7 h-7 fill-black' />
         </div>
-        <div className='w-full h-auto md:hidden'>
-          <Image
-            width={'1200'}
-            height={'800'}
-            alt='Hey, Teach! Marketplace'
-            src={
-              'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Hey-Teach-2023-MM-1200x800-1.jpg'
-            }
-          />
-        </div>
+        {isEditing ? (
+          <div className='w-full h-[600px] bg-neutral-200 justify-center items-center'>
+            <form
+              className='flex flex-col gap-12 justify-center items-center h-full w-[full] max-w-7xl mx-auto'
+              onSubmit={(e) => heroImageHandler(e)}
+            >
+              <div className='flex flex-col w-full max-w-3xl gap-3'>
+                <div className='font-brown-bold text-lg'>Hero Image</div>
+                <TextInput
+                  type='text'
+                  id='image'
+                  value={isHeroImage}
+                  changeHandler={(val) => setIsHeroImage(val)}
+                />
+                <div>1800x800 px</div>
+              </div>
+              <div className='flex flex-col w-full max-w-3xl gap-3'>
+                <div className='font-brown-bold text-lg'>Mobile Hero Image</div>
+                <TextInput
+                  type='text'
+                  id='image'
+                  value={isHeroImage}
+                  changeHandler={(val) => setIsHeroImage(val)}
+                />
+                <div>1200x800 px</div>
+              </div>
+              <button
+                type='submit'
+                className={`${
+                  isSubmitted ? 'bg-green-700' : 'bg-black'
+                } rounded-lg text-white font-medium text-sm p-2 font-brown`}
+              >
+                {isLoading
+                  ? 'Sending....'
+                  : isSubmitted
+                  ? 'Updated!'
+                  : 'Update'}
+              </button>
+            </form>
+          </div>
+        ) : (
+          <>
+            <div className='w-full h-auto hidden md:block'>
+              <Image
+                width={'1800'}
+                height={'800'}
+                alt='Hey, Teach! Marketplace'
+                src={isHeroImage}
+              />
+            </div>
+            <div className='w-full h-auto md:hidden'>
+              <Image
+                width={'1200'}
+                height={'800'}
+                alt='Hey, Teach! Marketplace'
+                src={isMobileHeroImage}
+              />
+            </div>
+          </>
+        )}
       </div>
       <div className='pt-36 pb-24'>
         <EditableScroller
@@ -277,11 +345,14 @@ export async function getServerSideProps() {
     .select('*')
     .eq('id', 1);
 
+  const heroes = await supabase.from('hey_teach_row').select('*').eq('id', 1);
+
   return {
     props: {
       pageData,
       rowData,
       sellerHeader,
+      heroes,
     },
   };
 }

@@ -46,7 +46,8 @@ const SellersGrid = () => {
     }
   };
 
-  const createItemHandler = async () => {
+  const createItemHandler = async (e) => {
+    e.preventDefault();
     const { data, error } = await supabase
       .from('sellers')
       .insert([

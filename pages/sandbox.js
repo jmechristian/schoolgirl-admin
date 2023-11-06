@@ -9,7 +9,7 @@ import {
   swap,
 } from 'react-grid-dnd';
 
-import EditableSellerFlexItem from '../components/editable/EditableSellerFlexItem';
+import SellerFlexItem from '../components/shared/SellerFlexItem';
 import TextInput from '../components/shared/TextInput';
 import { CloudArrowUpIcon } from '@heroicons/react/24/outline';
 
@@ -20,9 +20,9 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const Page = () => {
   const [isSellers, setIsSellers] = useState([]);
   const [isOrderedSellers, setIsOrderedSellers] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isCreating, setIsCreating] = useState(false);
+  const [isSubmitted, setSubmitted] = useState(false);
   const [isImage, setIsImage] = useState('');
   const [isName, setIsName] = useState('');
   const [isShopname, setIsShopname] = useState('');
@@ -42,8 +42,17 @@ const Page = () => {
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'sellers' },
-        () => {
+        (payload) => {
+          console.log('payload', JSON.stringify(payload));
           getSellers();
+          getOrdered();
+          console.log('hey', JSON.stringify(payload));
+          if (payload.eventType === 'DELETE' && payload.table === 'sellers') {
+            setIsOrderedSellers(
+              isOrderedSellers.filter((seller) => seller.id != payload.old.id)
+            );
+            setOrderHandler();
+          }
         }
       )
       .subscribe();
@@ -112,7 +121,7 @@ const Page = () => {
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-7xl px-6 md:px-8 mx-auto gap-x-16 gap-y-20 pb-24'>
         {isOrderedSellers.map((it, i) => (
           <div key={i} className='h-full w-full'>
-            <EditableSellerFlexItem
+            <SellerFlexItem
               image={it.image}
               alt={it.shop_name}
               headline={it.shop_name}
@@ -124,7 +133,7 @@ const Page = () => {
             />
           </div>
         ))}
-        <div className='w-full h-full min-h-[345px] border-4 border-neutral-300 border-dashed flex justify-center items-center relative'>
+        {/* <div className='w-full h-full min-h-[345px] border-4 border-neutral-300 border-dashed flex justify-center items-center relative'>
           {isCreating && (
             <motion.div className='absolute z-50 -top-24 -left-6 -right-12 -bottom-12  bg-black/40 backdrop-blur flex justify-center items-center'>
               <motion.div className='bg-white/80 p-3 max-w-5xl w-full h-full flex justify-center items-center'>
@@ -222,9 +231,9 @@ const Page = () => {
           >
             <PlusCircleIcon className='w-20 h-20 fill-indigo-600' />
           </div>
-        </div>
+        </div> */}
       </div>
-      <div className='max-w-7xl mx-auto py-24 flex flex-col gap-16'>
+      <div className='max-w-7xl mx-auto py-24 flex flex-col gap-9'>
         <GridContextProvider onChange={onChange}>
           <GridDropZone
             id='items'
@@ -241,7 +250,7 @@ const Page = () => {
             ))}
           </GridDropZone>
         </GridContextProvider>
-        <div className='flex flex-col items-center gap-9'>
+        <div className='flex items-center gap-6 mt-16'>
           <div
             className='bg-black text-white items-center flex gap-2 font-brown-bold text-lg px-9 py-4 rounded-lg w-fit cursor-pointer'
             onClick={setOrderHandler}

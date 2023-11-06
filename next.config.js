@@ -10,6 +10,7 @@ const nextConfig = {
       'shopschoolgirlstyle.com',
       'www.schoolgirlstyle.com',
       'schoolgirlstyle.purveu.sa2hosted.com',
+      'placehold.co',
     ],
   },
   async redirects() {
