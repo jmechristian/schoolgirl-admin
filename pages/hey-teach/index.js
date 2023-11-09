@@ -2,13 +2,14 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import HeadlineMotion from '../../components/shared/HeadlineMotion';
 import { sellers } from '../../data/seller';
+import { createClient } from '@supabase/supabase-js';
 import SellerFlexItem from '../../components/shared/SellerFlexItem';
 import SellerSubnav from '../../components/shared/SellerSubnav';
 import HeyTeachScroller from '../../components/shared/HeyTeachScroller';
 import { motion, useScroll, AnimatePresence } from 'framer-motion';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 
-const Index = () => {
+const Index = ({ pageData, rowData, sellerHeader, heroes, dbsellers }) => {
   const [filteredValue, setFilteredValue] = useState('all');
   const [filteredSellers, setFilteredSellers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -111,32 +112,59 @@ const Index = () => {
 
   const sellersToShow = useMemo(() => {
     if (filteredValue === 'all') {
-      return sellers.filter(
-        (o) =>
-          o.name.toLowerCase().includes(search.toLowerCase()) ||
-          o.shopName.toLowerCase().includes(search.toLowerCase()) ||
-          o.subtitle.toLowerCase().includes(search.toLowerCase())
-      );
+      return dbsellers.data
+        .sort((a, b) => {
+          if (a.order < b.order) {
+            return -1;
+          }
+          if (a.order > b.order) {
+            return 1;
+          }
+        })
+        .filter(
+          (o) =>
+            o.name.toLowerCase().includes(search.toLowerCase()) ||
+            o.shop_name.toLowerCase().includes(search.toLowerCase()) ||
+            o.description.toLowerCase().includes(search.toLowerCase())
+        );
     } else if (filteredValue === 'curriculum') {
-      return sellers.filter(
-        (o) =>
-          (o.category.includes('Curriculum') &&
-            o.name.toLowerCase().includes(search.toLowerCase())) ||
-          o.shopName.toLowerCase().includes(search.toLowerCase()) ||
-          o.subtitle.toLowerCase().includes(search.toLowerCase())
-      );
+      return dbsellers.data
+        .sort((a, b) => {
+          if (a.order < b.order) {
+            return -1;
+          }
+          if (a.order > b.order) {
+            return 1;
+          }
+        })
+        .filter(
+          (o) =>
+            (o.category.includes('Curriculum') &&
+              o.name.toLowerCase().includes(search.toLowerCase())) ||
+            o.shop_name.toLowerCase().includes(search.toLowerCase()) ||
+            o.description.toLowerCase().includes(search.toLowerCase())
+        );
     } else if (filteredValue === 'lifestyle') {
       return (
-        sellers.filter(
-          (o) =>
-            o.category.includes('Lifestyle') &&
-            o.name.toLowerCase().includes(search.toLowerCase())
-        ) ||
-        o.shopName.toLowerCase().includes(search.toLowerCase()) ||
-        o.subtitle.toLowerCase().includes(search.toLowerCase())
+        dbsellers.data
+          .sort((a, b) => {
+            if (a.order < b.order) {
+              return -1;
+            }
+            if (a.order > b.order) {
+              return 1;
+            }
+          })
+          .filter(
+            (o) =>
+              o.category.includes('Lifestyle') &&
+              o.name.toLowerCase().includes(search.toLowerCase())
+          ) ||
+        o.shop_name.toLowerCase().includes(search.toLowerCase()) ||
+        o.description.toLowerCase().includes(search.toLowerCase())
       );
     }
-  }, [filteredValue, search]);
+  }, [filteredValue, search, dbsellers]);
 
   const paginated = () => {};
 
@@ -158,22 +186,28 @@ const Index = () => {
     };
 
     paginate();
-    console.log(paginate());
-    console.log(currentPage);
+
     setFilteredSellers(paginate());
   }, [sellersToShow, currentPage]);
 
   return (
     <div className='flex flex-col'>
       <div className='max-w-7xl mx-auto'>
-        <div className='w-full h-auto hidden md:block'>
+        <div
+          className={`w-full h-auto hidden md:block ${
+            heroes.data && heroes.data[0].link ? 'cursor-pointer' : ''
+          }`}
+          onClick={
+            heroes.data && heroes.data[0].link != 'NULL'
+              ? () => window.open(heroes.data[0].link, '_blank')
+              : () => {}
+          }
+        >
           <Image
             width={'1800'}
             height={'800'}
             alt='Hey, Teach! Marketplace'
-            src={
-              'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Hey-Teach-2023-MM-1800x800-1.jpg'
-            }
+            src={heroes.data && heroes.data[0].image}
           />
         </div>
         <div className='w-full h-auto md:hidden'>
@@ -181,16 +215,14 @@ const Index = () => {
             width={'1200'}
             height={'800'}
             alt='Hey, Teach! Marketplace'
-            src={
-              'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2023/07/Hey-Teach-2023-MM-1200x800-1.jpg'
-            }
+            src={heroes.data && heroes.data[0].mobileImage}
           />
         </div>
       </div>
       <div className='pt-36 pb-24'>
         <HeyTeachScroller
-          items={items}
-          headline={'Popularity Contest'}
+          items={pageData && pageData.data}
+          headline={rowData && rowData.data[0].title}
           itemTextStyle={'uppercase text-gray-500/80 text-base md:text-lg'}
           background={true}
         />
@@ -202,7 +234,9 @@ const Index = () => {
       />
 
       <div className='text-3xl md:text-5xl px-6 text-center font-canela text-gray-600 font-light py-16'>
-        <HeadlineMotion>Teacher Marketplace</HeadlineMotion>
+        <HeadlineMotion>
+          {sellerHeader && sellerHeader.data[0].text}
+        </HeadlineMotion>
       </div>
 
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-7xl px-6 md:px-8 mx-auto gap-x-16 gap-y-20 pb-24'>
@@ -211,11 +245,12 @@ const Index = () => {
             <div key={i} className='h-full w-full'>
               <SellerFlexItem
                 image={it.image}
-                alt={it.shopName}
-                headline={it.shopName}
+                alt={it.shop_name}
+                headline={it.shop_name}
                 subheadline={it.name}
                 link={it.link}
-                subtitle={it.subtitle}
+                subtitle={it.description}
+                order={it.order}
               />
             </div>
           ))}
@@ -247,5 +282,38 @@ const Index = () => {
     </div>
   );
 };
+
+export async function getServerSideProps() {
+  const rowID = '926b329e-07ea-4959-97e7-3e3b002bc667';
+  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+  const supabaseKey = process.env.VITE_SUPABASE_KEY;
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  const pageData = await supabase
+    .from('row_items')
+    .select('grid_item(*)')
+    .eq('row_id', rowID);
+
+  const rowData = await supabase.from('site_row').select('*').eq('id', rowID);
+
+  const sellerHeader = await supabase
+    .from('rando_inputs')
+    .select('*')
+    .eq('id', 1);
+
+  const heroes = await supabase.from('hey_teach_row').select('*').eq('id', 1);
+
+  const dbsellers = await supabase.from('sellers').select('*');
+
+  return {
+    props: {
+      pageData,
+      rowData,
+      sellerHeader,
+      heroes,
+      dbsellers,
+    },
+  };
+}
 
 export default Index;

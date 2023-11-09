@@ -26,12 +26,16 @@ const HeyTeachScroller = ({
                 key={i}
               >
                 <HeyTeachScrollerItem
-                  image={it.image}
-                  headline={it.title ? it.title : it.headline}
+                  image={it.grid_item.image}
+                  headline={
+                    it.grid_item.title
+                      ? it.grid_item.title
+                      : it.grid_item.headline
+                  }
                   text={itemTextStyle}
-                  subheadline={it.subheadline}
+                  subheadline={it.grid_item.subheadline}
                   background={background}
-                  slug={it.link}
+                  slug={it.grid_item.link}
                 />
               </motion.div>
             ))}

@@ -72,20 +72,29 @@ const SellersGrid = () => {
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-7xl px-6 md:px-8 mx-auto gap-x-16 gap-y-20 pb-24'>
         {isSellers &&
           isSellers.length > 0 &&
-          isSellers.map((it, i) => (
-            <div key={i} className='h-full w-full'>
-              <EditableSellerFlexItem
-                image={it.image}
-                alt={it.shop_name}
-                headline={it.shop_name}
-                subheadline={it.name}
-                link={it.link}
-                subtitle={it.description}
-                id={it.id}
-                category={it.category}
-              />
-            </div>
-          ))}
+          isSellers
+            .sort((a, b) => {
+              if (a.order < b.order) {
+                return -1;
+              }
+              if (a.order > b.order) {
+                return 1;
+              }
+            })
+            .map((it, i) => (
+              <div key={i} className='h-full w-full'>
+                <EditableSellerFlexItem
+                  image={it.image}
+                  alt={it.shop_name}
+                  headline={it.shop_name}
+                  subheadline={it.name}
+                  link={it.link}
+                  subtitle={it.description}
+                  id={it.id}
+                  category={it.category}
+                />
+              </div>
+            ))}
         <div className='w-full h-full min-h-[345px] border-4 border-neutral-300 border-dashed flex justify-center items-center relative'>
           {isCreating && (
             <motion.div className='absolute z-50 -top-24 -left-6 -right-12 -bottom-12  bg-black/40 backdrop-blur flex justify-center items-center'>

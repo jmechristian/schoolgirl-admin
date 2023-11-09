@@ -9,8 +9,8 @@ import {
   swap,
 } from 'react-grid-dnd';
 
-import SellerFlexItem from '../components/shared/SellerFlexItem';
-import TextInput from '../components/shared/TextInput';
+import SellerFlexItem from '../../components/shared/SellerFlexItem';
+import TextInput from '../../components/shared/TextInput';
 import { CloudArrowUpIcon } from '@heroicons/react/24/outline';
 
 const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
@@ -114,17 +114,7 @@ const Page = () => {
       })
       .eq('id', id)
       .select();
-    // console.log(
-    //   'id',
-    //   id,
-    //   'index',
-    //   index
-    //     .toLocaleString('en-US', {
-    //       minimumIntegerDigits: 2,
-    //       useGrouping: false,
-    //     })
-    //     .toString()
-    // );
+
     if (error) {
       console.log(error);
     }
@@ -132,21 +122,13 @@ const Page = () => {
 
   const setOrderHandler = async () => {
     setIsSettingOrder(true);
+    setIsSubmitted(false);
     isOrderedSellers.forEach((seller, index) =>
       updateSellerOrder(seller.id, index)
     );
 
-    // setIsSettingOrder(true);
-    // const { data, error } = await supabase
-    //   .from('seller_order')
-    //   .update([{ order: JSON.stringify(isSellers) }])
-    //   .eq('id', 1)
-    //   .select();
-
-    // if (!error) {
-    //   setIsSettingOrder(false);
-    // }
     setIsSettingOrder(false);
+    setIsSubmitted(true);
   };
 
   return (
@@ -175,105 +157,6 @@ const Page = () => {
               />
             </div>
           ))}
-        {/* <div className='w-full h-full min-h-[345px] border-4 border-neutral-300 border-dashed flex justify-center items-center relative'>
-          {isCreating && (
-            <motion.div className='absolute z-50 -top-24 -left-6 -right-12 -bottom-12  bg-black/40 backdrop-blur flex justify-center items-center'>
-              <motion.div className='bg-white/80 p-3 max-w-5xl w-full h-full flex justify-center items-center'>
-                <motion.form
-                  className='flex flex-col gap-1 w-full'
-                  onSubmit={(event) => createItemHandler(event)}
-                >
-                  <motion.div className='grid grid-cols-1 gap-1'>
-                    <TextInput
-                      type='text'
-                      name='image'
-                      id='image'
-                      placeholder='new image...'
-                      value={isImage}
-                      changeHandler={(val) => setIsImage(val)}
-                    />
-                    <TextInput
-                      type='text'
-                      name='name'
-                      id='name'
-                      placeholder='Name...'
-                      value={isName}
-                      changeHandler={(val) => setIsName(val)}
-                    />
-                    <TextInput
-                      type='text'
-                      name='shopname'
-                      id='shopname'
-                      placeholder='Shop Name...'
-                      value={isShopname}
-                      changeHandler={(val) => setIsShopname(val)}
-                    />
-                    <TextInput
-                      type='text'
-                      name='description'
-                      id='description'
-                      placeholder='Description...'
-                      value={isDescription}
-                      changeHandler={(val) => setIsDescription(val)}
-                    />
-                    <TextInput
-                      type='text'
-                      name='link'
-                      id='link'
-                      placeholder='new link...'
-                      value={isLink}
-                      changeHandler={(val) => setIsLink(val)}
-                    />
-                    <TextInput
-                      type='text'
-                      name='category'
-                      id='category'
-                      placeholder='Lifestyle, Curriculum...'
-                      value={isCategory}
-                      changeHandler={(val) => setIsCategory(val)}
-                    />
-                  </motion.div>
-                  <motion.div className='flex justify-between items-center w-full'>
-                    <motion.div className='flex justify-end items-center mt-4 gap-4'>
-                      <motion.div className='font-medium text-green-700 text-lg'>
-                        {isSubmitted && (
-                          <div className='flex items-center gap-1 text-green-700 text-sm'>
-                            <CheckCircleIcon className='w-5 h-5 fill-green-700' />
-                            Updated!
-                          </div>
-                        )}
-                      </motion.div>
-                    </motion.div>
-                    <motion.div className='flex justify-end items-center mt-4 gap-4'>
-                      <motion.div
-                        className='bg-black/40 rounded-lg px-4 py-2'
-                        onClick={() => setIsCreating(false)}
-                      >
-                        <motion.div className='text-white font-bold cursor-pointer'>
-                          {isSubmitted ? 'Close' : 'Cancel'}
-                        </motion.div>
-                      </motion.div>
-                      <motion.button
-                        className='bg-black rounded-lg px-4 py-2'
-                        type='submit'
-                      >
-                        <motion.div className='text-white font-bold'>
-                          {isLoading ? 'Sending...' : 'Update'}
-                        </motion.div>
-                      </motion.button>
-                    </motion.div>
-                  </motion.div>
-                </motion.form>
-              </motion.div>
-            </motion.div>
-          )}
-          <div
-            className='w-full h-full flex justify-center items-center cursor-pointer'
-            onClick={() => setIsCreating(true)}
-          >
-            <PlusCircleIcon className='w-20 h-20 fill-indigo-600' />
-          </div>
-        </div> */}
       </div>
       <div className='max-w-7xl mx-auto py-20 flex flex-col gap-9'>
         <GridContextProvider onChange={onChange}>
@@ -298,14 +181,18 @@ const Page = () => {
             className='bg-black text-white items-center flex gap-2 font-brown-bold text-lg px-9 py-4 rounded-lg w-fit cursor-pointer'
             onClick={setOrderHandler}
           >
-            <div>Set Order</div>
+            <div>{isSettingOrder ? 'Updating...' : 'Set Order'}</div>
             {isSettingOrder && (
               <div>
                 <CloudArrowUpIcon className='w-7 h-7 animate-bounce' />
               </div>
             )}
           </div>
-          <div>Make sure to refresh after setting order.</div>
+          {isSubmitted && (
+            <div>
+              <CheckCircleIcon className='w-12 h-12 fill-green-600' />
+            </div>
+          )}
         </div>
       </div>
     </div>

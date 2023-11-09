@@ -107,7 +107,6 @@ const items = [
 ];
 
 const Page = ({ pageData, rowData, sellerHeader, heroes }) => {
-  console.log(heroes);
   const { user } = useSelector((state) => state.auth);
   const [isUpdateItems, setIsUpdatedItems] = useState(undefined);
   const [isHeadlineHover, setIsHeadlineHover] = useState(false);
@@ -123,6 +122,7 @@ const Page = ({ pageData, rowData, sellerHeader, heroes }) => {
   const [isMobileHeroImage, setIsMobileHeroImage] = useState(
     heroes.data[0].mobileImage
   );
+  const [isHeroLink, setIsHeroLink] = useState(heroes && heroes.data[0].link);
 
   const router = useRouter();
 
@@ -138,7 +138,6 @@ const Page = ({ pageData, rowData, sellerHeader, heroes }) => {
         { event: '*', schema: 'public', table: 'row_items' },
         () => {
           getAndSetNewSubNav();
-          console.log('row change!');
         }
       )
       .subscribe();
@@ -176,7 +175,11 @@ const Page = ({ pageData, rowData, sellerHeader, heroes }) => {
     e.preventDefault();
     const { data, error } = await supabase
       .from('hey_teach_row')
-      .update({ image: isHeroImage, mobileImage: isMobileHeroImage })
+      .update({
+        image: isHeroImage,
+        mobileImage: isMobileHeroImage,
+        link: isHeroLink,
+      })
       .eq('id', 1)
       .select();
 
@@ -220,6 +223,15 @@ const Page = ({ pageData, rowData, sellerHeader, heroes }) => {
                   changeHandler={(val) => setIsHeroImage(val)}
                 />
                 <div>1200x800 px</div>
+              </div>
+              <div className='flex flex-col w-full max-w-3xl gap-3'>
+                <div className='font-brown-bold text-lg'>Link</div>
+                <TextInput
+                  type='text'
+                  id='link'
+                  value={isHeroLink}
+                  changeHandler={(val) => setIsHeroLink(val)}
+                />
               </div>
               <button
                 type='submit'

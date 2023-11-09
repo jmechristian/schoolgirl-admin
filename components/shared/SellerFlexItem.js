@@ -12,6 +12,7 @@ const SellerFlexItem = ({
   subheadline,
   link,
   subtitle,
+  order,
 }) => {
   const itemRef = useRef();
   const inView = useInView(itemRef);

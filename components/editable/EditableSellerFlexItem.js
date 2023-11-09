@@ -84,7 +84,6 @@ const EditableSellerFlexItem = ({
       setIsLoading(false);
       setSubmitted(true);
     }
-    console.log('data', data);
   };
 
   const deleteItemHandler = async () => {
