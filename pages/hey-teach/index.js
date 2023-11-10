@@ -195,10 +195,12 @@ const Index = ({ pageData, rowData, sellerHeader, heroes, dbsellers }) => {
       <div className='max-w-7xl mx-auto'>
         <div
           className={`w-full h-auto hidden md:block ${
-            heroes.data && heroes.data[0].link ? 'cursor-pointer' : ''
+            heroes.data && heroes.data[0].link && heroes.data[0].link != 'NULL'
+              ? 'cursor-pointer'
+              : ''
           }`}
           onClick={
-            heroes.data && heroes.data[0].link != 'NULL'
+            heroes.data && heroes.data[0].link && heroes.data[0].link != 'NULL'
               ? () => window.open(heroes.data[0].link, '_blank')
               : () => {}
           }
@@ -239,7 +241,7 @@ const Index = ({ pageData, rowData, sellerHeader, heroes, dbsellers }) => {
         </HeadlineMotion>
       </div>
 
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-7xl px-6 md:px-8 mx-auto gap-x-16 gap-y-20 pb-24'>
+      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full max-w-7xl px-6 md:px-8 mx-auto gap-x-16 gap-y-10 lg:gap-y-20 pb-24'>
         {filteredSellers.length > 0 &&
           filteredSellers.map((it, i) => (
             <div key={i} className='h-full w-full'>
