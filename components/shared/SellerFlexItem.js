@@ -72,7 +72,7 @@ const SellerFlexItem = ({
             >
               {headline}
             </motion.div>
-            <motion.div className='my-2 text-sm text-neutral-500'>
+            <motion.div className='my-2 text-sm text-neutral-500 md:line-clamp-2 lg:line-clamp-none'>
               {subtitle}
             </motion.div>
           </motion.div>
