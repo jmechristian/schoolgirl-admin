@@ -9,7 +9,12 @@ import ScrollerWithHeadline from '../../components/shared/ScrollerWithHeadline';
 import RandomScrollerWithHeadline from '../../components/shared/RandoScrollerWithHeadline';
 import InstagramGrid from '../../components/shared/InstagramGrid';
 import EmailSubscription from '../../components/shared/EmailSubscription';
-import { getPostsForBlogHome, getClassroomInspoPosts } from '../../lib/API';
+import EditableBlogCategoryScroller from '../../components/editable/EditableBlogCategoryScroller';
+import {
+  getPostsForBlogHome,
+  getClassroomInspoPosts,
+  getPostCategories,
+} from '../../lib/API';
 import { createClient } from '@supabase/supabase-js';
 import BlogEditableNav from '../../components/editable/BlogEditableNav';
 import { LinkIcon } from '@heroicons/react/24/outline';
@@ -78,7 +83,7 @@ const collectionItems = [
   },
 ];
 
-const Index = ({ posts, inspo, pageData, subnav }) => {
+const Index = ({ posts, inspo, pageData, subnav, categories }) => {
   const { user } = useSelector((state) => state.auth);
   const router = useRouter();
 
@@ -161,10 +166,12 @@ const Index = ({ posts, inspo, pageData, subnav }) => {
             <div className='text-lg'>Four</div>
           </div>
         </div>
-        <ScrollerWithHeadline
-          items={inspo?.nodes}
+        <EditableBlogCategoryScroller
+          // items={inspo?.nodes}
           itemTextStyle='text-gray-700'
-          headline='More Classroom Inspiration'
+          headline={pageData.data[0].category_headline}
+          category={pageData.data[0].category}
+          categories={categories}
           price
         />
         <div className='flex flex-col scro;;-mt-16' id='five'>
@@ -252,16 +259,18 @@ export const getStaticProps = async () => {
     );
 
   const data = await getPostsForBlogHome();
-  const inspo = await getClassroomInspoPosts();
+  // const inspo = await getClassroomInspoPosts(pageData.data[0].category);
+  const categories = await getPostCategories();
 
   const subnav = await supabase.from('blog_subnav').select('*');
 
   return {
     props: {
       posts: data,
-      inspo: inspo,
+      // inspo: inspo,
       pageData,
       subnav,
+      categories,
     },
     revalidate: 10,
   };
