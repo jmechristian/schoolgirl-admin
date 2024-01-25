@@ -181,7 +181,7 @@ export const getStaticProps = async () => {
     );
 
   const data = await getPostsForBlogHome();
-  const inspo = await getClassroomInspoPosts();
+  const inspo = await getClassroomInspoPosts('Classroom Inspiration');
 
   const subnav = await supabase.from('blog_subnav').select('*');
 
