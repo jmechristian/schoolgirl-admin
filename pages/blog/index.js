@@ -6,8 +6,10 @@ import ScrollerWithHeadline from '../../components/shared/ScrollerWithHeadline';
 import RandomScrollerWithHeadline from '../../components/shared/RandoScrollerWithHeadline';
 import InstagramGrid from '../../components/shared/InstagramGrid';
 import EmailSubscription from '../../components/shared/EmailSubscription';
+import BlogCategoryScroller from '../../components/shared/BlogCategoryScroller';
 import { getPostsForBlogHome, getClassroomInspoPosts } from '../../lib/API';
 import { createClient } from '@supabase/supabase-js';
+import { getPostCategories } from '../../lib/API';
 import NewSubnav from '../../components/shared/NewSubnav';
 
 const subNav = [
@@ -74,7 +76,7 @@ const collectionItems = [
   },
 ];
 
-const Index = ({ posts, inspo, pageData, subnav }) => {
+const Index = ({ posts, inspo, pageData, subnav, categories }) => {
   return (
     <main className='relative pb-16' id='one'>
       <NewSubnav subNav={subnav.data} search={true} />
@@ -115,10 +117,12 @@ const Index = ({ posts, inspo, pageData, subnav }) => {
           />
         </div>
         <div className='scroll-mt-16' id='four' />
-        <ScrollerWithHeadline
-          items={inspo?.nodes}
+        <BlogCategoryScroller
+          // items={inspo?.nodes}
           itemTextStyle='text-gray-700'
-          headline='More Classroom Inspiration'
+          headline={pageData.data[0].category_headline}
+          category={pageData.data[0].category}
+          categories={categories}
           price
         />
         <div className='flex flex-col'>
@@ -182,7 +186,7 @@ export const getStaticProps = async () => {
 
   const data = await getPostsForBlogHome();
   const inspo = await getClassroomInspoPosts('Classroom Inspiration');
-
+  const categories = await getPostCategories();
   const subnav = await supabase.from('blog_subnav').select('*');
 
   return {
@@ -190,6 +194,7 @@ export const getStaticProps = async () => {
       posts: data,
       inspo: inspo,
       pageData,
+      categories,
       subnav,
     },
     revalidate: 10,
