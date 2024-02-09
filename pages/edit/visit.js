@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
@@ -15,15 +15,39 @@ import EmailSubscription from '../../components/shared/EmailSubscription';
 import { createClient } from '@supabase/supabase-js';
 import VisitInnerNav from '../../components/editable/VisitInnerNav';
 import { LinkIcon } from '@heroicons/react/24/outline';
+import EditableStoreList from '../../components/editable/EditableStoreList';
+const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Index = ({ pageData, locations, subnav }) => {
   const { user } = useSelector((state) => state.auth);
   const router = useRouter();
 
+  const [isLocations, setLocations] = useState(locations && locations.data);
+
+  const getLocations = async () => {
+    const locations = await supabase.from('locations').select('*');
+    setLocations(locations.data);
+  };
+
   useEffect(() => {
     if (!user) {
       router.push('/admin');
     }
+  });
+
+  useEffect(() => {
+    const channels = supabase
+      .channel('custom-all-channel')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'locations' },
+        (payload) => {
+          getLocations();
+        }
+      )
+      .subscribe();
   });
 
   return (
@@ -131,7 +155,10 @@ const Index = ({ pageData, locations, subnav }) => {
             <div className='text-lg'>Four</div>
           </div>
         </div>
-        <StoreList headline='At a Store Near You' locations={locations.data} />
+        <EditableStoreList
+          headline='At a Store Near You'
+          locations={isLocations}
+        />
       </div>
       <div className='scroll-m-8 flex flex-col' id='five'>
         <div className='relative w-full'>
