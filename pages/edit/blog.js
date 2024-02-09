@@ -18,6 +18,7 @@ import {
 import { createClient } from '@supabase/supabase-js';
 import BlogEditableNav from '../../components/editable/BlogEditableNav';
 import { LinkIcon } from '@heroicons/react/24/outline';
+import EditableRandomScrollerWithHeadline from '../../components/editable/EditableRandoScrollerWithHeadline';
 
 const subNav = [
   {
@@ -83,7 +84,7 @@ const collectionItems = [
   },
 ];
 
-const Index = ({ posts, inspo, pageData, subnav, categories }) => {
+const Index = ({ posts, tips, pageData, subnav, categories }) => {
   const { user } = useSelector((state) => state.auth);
   const router = useRouter();
 
@@ -234,10 +235,10 @@ const Index = ({ posts, inspo, pageData, subnav, categories }) => {
               <div className='text-lg'>Seven</div>
             </div>
           </div>
-          <RandomScrollerWithHeadline
-            items={collectionItems}
+          <EditableRandomScrollerWithHeadline
+            items={tips && tips.data}
             itemTextStyle='text-gray-700'
-            headline='Teacher Tips & Tools'
+            headline={pageData && pageData.data[0].tips_headline}
           />
         </div>
         <InstagramGrid />
@@ -263,6 +264,7 @@ export const getStaticProps = async () => {
   const categories = await getPostCategories();
 
   const subnav = await supabase.from('blog_subnav').select('*');
+  const tips = await supabase.from('tips').select('*');
 
   return {
     props: {
@@ -271,6 +273,7 @@ export const getStaticProps = async () => {
       pageData,
       subnav,
       categories,
+      tips,
     },
     revalidate: 10,
   };
