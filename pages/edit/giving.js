@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import { useSelector } from 'react-redux';
 import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
 import VideoPlayer from '../../components/shared/VideoPlayer';
@@ -73,31 +74,35 @@ const Page = ({ pageData }) => {
   });
 
   return (
-    <main className='relative pb-16' id='home'>
-      {/* <InnerPageSubNav subNav={subNav} /> */}
-      <EditableVideoPlayer
-        placeholder={pageData.data[0].video_hero_placeholder}
-        url={pageData.data[0].video_hero_link}
-        field_one='video_hero_placeholder'
-        field_two='video_hero_link'
-        table='giving'
-        id={1}
-      />
-      <div
-        className='bg-gradient-to-b from-khaki space-y-16 pt-6 scroll-mt-24'
-        id='makeovers'
-      >
-        <VariableHeadlineWithSpan
-          pre='Ready To'
-          spanText='Transform'
-          post='Your Classroom?'
-          subtext='Enter for your chance to win!'
-          buttonText='Share Your Story - Enter Here!'
-          buttonLink='https://schoolgirlstylemakeover.wufoo.com/forms/z1tea82s13o1uwu/'
+    <>
+      <Head>
+        <meta name='robots' content='noindex,nofollow' />
+      </Head>
+      <main className='relative pb-16' id='home'>
+        {/* <InnerPageSubNav subNav={subNav} /> */}
+        <EditableVideoPlayer
+          placeholder={pageData.data[0].video_hero_placeholder}
+          url={pageData.data[0].video_hero_link}
+          field_one='video_hero_placeholder'
+          field_two='video_hero_link'
+          table='giving'
+          id={1}
         />
-      </div>
-      <div className='flex flex-col gap-16 scroll-mt-24' id='registry'>
-        {/* <Hero
+        <div
+          className='bg-gradient-to-b from-khaki space-y-16 pt-6 scroll-mt-24'
+          id='makeovers'
+        >
+          <VariableHeadlineWithSpan
+            pre='Ready To'
+            spanText='Transform'
+            post='Your Classroom?'
+            subtext='Enter for your chance to win!'
+            buttonText='Share Your Story - Enter Here!'
+            buttonLink='https://schoolgirlstylemakeover.wufoo.com/forms/z1tea82s13o1uwu/'
+          />
+        </div>
+        <div className='flex flex-col gap-16 scroll-mt-24' id='registry'>
+          {/* <Hero
           side='md:bg-gradient-to-r md:from-white/60'
           heading='Registry'
           headline='Gift List'
@@ -109,13 +114,13 @@ const Page = ({ pageData }) => {
           textColor='text-gray-700'
           bodyColor='text-gray-700'
         /> */}
-        {/* <FourColGridWithHeading
+          {/* <FourColGridWithHeading
           items={seasonItems}
           headline="Mel's Spring Selections"
           itemTextStyle='text-gray-500/80 text-base md:text-lg md:leading-tight'
           background={true}
         /> */}
-        {/* <div className='flex flex-col scroll-mt-24' id='scholarships'>
+          {/* <div className='flex flex-col scroll-mt-24' id='scholarships'>
           <Hero
             side='md:bg-gradient-to-l md:from-white/60'
             heading='Scholarship'
@@ -143,9 +148,10 @@ const Page = ({ pageData }) => {
             bodyColor='text-gray-700'
           />
         </div> */}
-        <EmailSubscription />
-      </div>
-    </main>
+          <EmailSubscription />
+        </div>
+      </main>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -190,152 +191,160 @@ const Page = ({ pageData, rowData, sellerHeader, heroes }) => {
   };
 
   return (
-    <div className='flex flex-col'>
-      <div className='max-w-7xl w-full mx-auto relative'>
-        <div
-          onClick={() => setIsEditing(!isEditing)}
-          className='absolute right-3 top-3 bg-white rounded-full cursor-pointer w-12 shadow h-12 flex items-center justify-center'
-        >
-          <PencilSquareIcon className='w-7 h-7 fill-black' />
-        </div>
-        {isEditing ? (
-          <div className='w-full h-[600px] bg-neutral-200 justify-center items-center'>
-            <form
-              className='flex flex-col gap-12 justify-center items-center h-full w-[full] max-w-7xl mx-auto'
-              onSubmit={(e) => heroImageHandler(e)}
-            >
-              <div className='flex flex-col w-full max-w-3xl gap-3'>
-                <div className='font-brown-bold text-lg'>Hero Image</div>
-                <TextInput
-                  type='text'
-                  id='image'
-                  value={isHeroImage}
-                  changeHandler={(val) => setIsHeroImage(val)}
-                />
-                <div>1800x800 px</div>
-              </div>
-              <div className='flex flex-col w-full max-w-3xl gap-3'>
-                <div className='font-brown-bold text-lg'>Mobile Hero Image</div>
-                <TextInput
-                  type='text'
-                  id='image'
-                  value={isHeroImage}
-                  changeHandler={(val) => setIsHeroImage(val)}
-                />
-                <div>1200x800 px</div>
-              </div>
-              <div className='flex flex-col w-full max-w-3xl gap-3'>
-                <div className='font-brown-bold text-lg'>Link</div>
-                <TextInput
-                  type='text'
-                  id='link'
-                  value={isHeroLink}
-                  changeHandler={(val) => setIsHeroLink(val)}
-                />
-              </div>
-              <button
-                type='submit'
-                className={`${
-                  isSubmitted ? 'bg-green-700' : 'bg-black'
-                } rounded-lg text-white font-medium text-sm p-2 font-brown`}
-              >
-                {isLoading
-                  ? 'Sending....'
-                  : isSubmitted
-                  ? 'Updated!'
-                  : 'Update'}
-              </button>
-            </form>
+    <>
+      <Head>
+        <meta name='robots' content='noindex,nofollow' />
+      </Head>
+
+      <div className='flex flex-col'>
+        <div className='max-w-7xl w-full mx-auto relative'>
+          <div
+            onClick={() => setIsEditing(!isEditing)}
+            className='absolute right-3 top-3 bg-white rounded-full cursor-pointer w-12 shadow h-12 flex items-center justify-center'
+          >
+            <PencilSquareIcon className='w-7 h-7 fill-black' />
           </div>
-        ) : (
-          <>
-            <div className='w-full h-auto hidden md:block'>
-              <Image
-                width={'1800'}
-                height={'800'}
-                alt='Hey, Teach! Marketplace'
-                src={isHeroImage}
-              />
+          {isEditing ? (
+            <div className='w-full h-[600px] bg-neutral-200 justify-center items-center'>
+              <form
+                className='flex flex-col gap-12 justify-center items-center h-full w-[full] max-w-7xl mx-auto'
+                onSubmit={(e) => heroImageHandler(e)}
+              >
+                <div className='flex flex-col w-full max-w-3xl gap-3'>
+                  <div className='font-brown-bold text-lg'>Hero Image</div>
+                  <TextInput
+                    type='text'
+                    id='image'
+                    value={isHeroImage}
+                    changeHandler={(val) => setIsHeroImage(val)}
+                  />
+                  <div>1800x800 px</div>
+                </div>
+                <div className='flex flex-col w-full max-w-3xl gap-3'>
+                  <div className='font-brown-bold text-lg'>
+                    Mobile Hero Image
+                  </div>
+                  <TextInput
+                    type='text'
+                    id='image'
+                    value={isHeroImage}
+                    changeHandler={(val) => setIsHeroImage(val)}
+                  />
+                  <div>1200x800 px</div>
+                </div>
+                <div className='flex flex-col w-full max-w-3xl gap-3'>
+                  <div className='font-brown-bold text-lg'>Link</div>
+                  <TextInput
+                    type='text'
+                    id='link'
+                    value={isHeroLink}
+                    changeHandler={(val) => setIsHeroLink(val)}
+                  />
+                </div>
+                <button
+                  type='submit'
+                  className={`${
+                    isSubmitted ? 'bg-green-700' : 'bg-black'
+                  } rounded-lg text-white font-medium text-sm p-2 font-brown`}
+                >
+                  {isLoading
+                    ? 'Sending....'
+                    : isSubmitted
+                    ? 'Updated!'
+                    : 'Update'}
+                </button>
+              </form>
             </div>
-            <div className='w-full h-auto md:hidden'>
-              <Image
-                width={'1200'}
-                height={'800'}
-                alt='Hey, Teach! Marketplace'
-                src={isMobileHeroImage}
-              />
-            </div>
-          </>
-        )}
-      </div>
-      <div className='pt-36 pb-24'>
-        <EditableScroller
-          items={isUpdateItems ? isUpdateItems : pageData && pageData.data}
-          headline={rowData && rowData.data[0].title}
-          itemTextStyle={'uppercase text-gray-500/80 text-base md:text-lg'}
-          background={true}
-          row={'926b329e-07ea-4959-97e7-3e3b002bc667'}
-        />
-      </div>
-      {/* <SellerSubnav
+          ) : (
+            <>
+              <div className='w-full h-auto hidden md:block'>
+                <Image
+                  width={'1800'}
+                  height={'800'}
+                  alt='Hey, Teach! Marketplace'
+                  src={isHeroImage}
+                />
+              </div>
+              <div className='w-full h-auto md:hidden'>
+                <Image
+                  width={'1200'}
+                  height={'800'}
+                  alt='Hey, Teach! Marketplace'
+                  src={isMobileHeroImage}
+                />
+              </div>
+            </>
+          )}
+        </div>
+        <div className='pt-36 pb-24'>
+          <EditableScroller
+            items={isUpdateItems ? isUpdateItems : pageData && pageData.data}
+            headline={rowData && rowData.data[0].title}
+            itemTextStyle={'uppercase text-gray-500/80 text-base md:text-lg'}
+            background={true}
+            row={'926b329e-07ea-4959-97e7-3e3b002bc667'}
+          />
+        </div>
+        {/* <SellerSubnav
         subNav={[]}
         changeFilter={changeFilter}
         changeSearch={changeSearch}
       /> */}
-      <div
-        className=' max-w-5xl w-full mx-auto text-3xl md:text-5xl px-6 mb-12 text-center font-canela text-gray-600 font-light hover:bg-neutral-100 hover:py-2 transition-all ease-in relative'
-        onMouseEnter={() => setIsHeadlineHover(true)}
-        onMouseLeave={() => setIsHeadlineHover(false)}
-      >
         <div
-          className={`absolute ${
-            isHeadlineHover || isEditingHeadline ? 'flex' : 'hidden'
-          } items-center top-1/2 mr-3 -translate-y-1/2 right-0 transition-all ease-in`}
+          className=' max-w-5xl w-full mx-auto text-3xl md:text-5xl px-6 mb-12 text-center font-canela text-gray-600 font-light hover:bg-neutral-100 hover:py-2 transition-all ease-in relative'
+          onMouseEnter={() => setIsHeadlineHover(true)}
+          onMouseLeave={() => setIsHeadlineHover(false)}
         >
+          <div
+            className={`absolute ${
+              isHeadlineHover || isEditingHeadline ? 'flex' : 'hidden'
+            } items-center top-1/2 mr-3 -translate-y-1/2 right-0 transition-all ease-in`}
+          >
+            {isEditingHeadline ? (
+              <div onClick={gridItemSubmitHandler}>
+                <CloudArrowUpIcon
+                  className={`w-9 h-9 fill-black cursor-pointer bg-white rounded-full ${
+                    isSubmitting ? 'animate-pulse' : ''
+                  }`}
+                />
+              </div>
+            ) : (
+              <div onClick={() => setIsEditingHeadline(true)}>
+                <PencilSquareIcon className='w-7 h-7 fill-black cursor-pointer' />
+              </div>
+            )}
+            <div>
+              <CheckCircleIcon
+                className={`w-8 h-8 ${
+                  isSubmitted ? 'fill-green-700' : 'fill-neutral-300'
+                } ${isSubmitting ? 'animate-bounce' : ''}`}
+              />
+            </div>
+          </div>
           {isEditingHeadline ? (
-            <div onClick={gridItemSubmitHandler}>
-              <CloudArrowUpIcon
-                className={`w-9 h-9 fill-black cursor-pointer bg-white rounded-full ${
-                  isSubmitting ? 'animate-pulse' : ''
-                }`}
+            <div>
+              <input
+                type='text'
+                id='newHeadline'
+                name='newHeadline'
+                placeholder={
+                  isSellerHeadline ? isSellerHeadline : 'Enter Headline'
+                }
+                className='placeholder:text-gray-400 p-1.5 w-full max-w-4xl text-center'
+                value={isSellerHeadline}
+                onChange={(e) => setIsSellerHeadline(e.target.value)}
               />
             </div>
           ) : (
-            <div onClick={() => setIsEditingHeadline(true)}>
-              <PencilSquareIcon className='w-7 h-7 fill-black cursor-pointer' />
-            </div>
+            <HeadlineMotion>{isSellerHeadline}</HeadlineMotion>
           )}
-          <div>
-            <CheckCircleIcon
-              className={`w-8 h-8 ${
-                isSubmitted ? 'fill-green-700' : 'fill-neutral-300'
-              } ${isSubmitting ? 'animate-bounce' : ''}`}
-            />
-          </div>
         </div>
-        {isEditingHeadline ? (
-          <div>
-            <input
-              type='text'
-              id='newHeadline'
-              name='newHeadline'
-              placeholder={
-                isSellerHeadline ? isSellerHeadline : 'Enter Headline'
-              }
-              className='placeholder:text-gray-400 p-1.5 w-full max-w-4xl text-center'
-              value={isSellerHeadline}
-              onChange={(e) => setIsSellerHeadline(e.target.value)}
-            />
-          </div>
-        ) : (
-          <HeadlineMotion>{isSellerHeadline}</HeadlineMotion>
-        )}
-      </div>
-      {/* <div className='text-3xl md:text-5xl px-6 text-center font-canela text-gray-600 font-light py-16'>
+        {/* <div className='text-3xl md:text-5xl px-6 text-center font-canela text-gray-600 font-light py-16'>
         <HeadlineMotion>{sellerHeader.data[0].text}</HeadlineMotion>
       </div> */}
-      <SellersGrid />
-    </div>
+        <SellersGrid />
+      </div>
+    </>
   );
 };
 

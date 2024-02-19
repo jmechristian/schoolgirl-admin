@@ -124,7 +124,7 @@ const Index = ({ post, latest }) => {
 };
 
 export const getServerSideProps = async ({ params }) => {
-  const data = await getPostBySlug(params?.bid);
+  const data = await getPostBySlug(params && params.bid);
   const latest = await getPostsForBlogHome();
 
   if (!data.post) {
@@ -138,15 +138,19 @@ export const getServerSideProps = async ({ params }) => {
       post: data.post,
       latest: latest,
     },
+    // revalidate: 10,
   };
 };
 
 // export const getStaticPaths = async () => {
 //   const allPosts = await getAllPostsWithSlug();
-
+//   const paths = allPosts.nodes.map((post) => ({
+//     params: { bid: post.slug },
+//   }));
+//   // console.log('paths', paths);
 //   return {
-//     paths: allPosts.edges.map(({ node }) => `/blog/${node.slug}`) || [],
-//     fallback: false,
+//     paths: paths,
+//     fallback: 'blocking',
 //   };
 // };
 

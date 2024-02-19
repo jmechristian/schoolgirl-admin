@@ -7,3 +7,4 @@ Host: https://www.schoolgirlstyle.com
 
 # Sitemaps
 Sitemap: https://www.schoolgirlstyle.com/sitemap.xml
+Sitemap: https://www.schoolgirlstyle.com/server-sitemap-index.xml

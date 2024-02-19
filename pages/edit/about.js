@@ -14,6 +14,7 @@ import InstagramGrid from '../../components/shared/InstagramGrid';
 import { createClient } from '@supabase/supabase-js';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import { useSelector } from 'react-redux';
+import Head from 'next/head';
 
 const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -163,59 +164,64 @@ const Page = ({ pageData, staff }) => {
   });
 
   return (
-    <main className='relative pb-16' id='home'>
-      <EditableVideoPlayer
-        placeholder={pageData.data[0].hero_placeholder}
-        url={pageData.data[0].hero_link}
-        field_one='hero_placeholder'
-        field_two='hero_link'
-        table='about'
-        id={1}
-      />
-      <div className='bg-gradient-to-b from-khaki space-y-16 pt-6'>
-        <VariableHeadlineWithSpan
-          pre='Inspiring'
-          spanText='Creativity'
-          post='in the Classroom'
-          subtext={[
-            'Founded in 2011 by Melanie Ralbusky, the Schoolgirl Style brand has since become synonymous with trend-setting classroom décor. Infusing an element of fashion in every design, Schoolgirl Style invites teachers and students alike to tap into their creativity and enjoy the fun of learning.',
-            'Now in over 10,000 stores, Schoolgirl Style™ is widely recognized as the most innovative and influential source for classroom resources, having built a loyal community of over 400,000 followers on social media with tens of millions of views. Schoolgirl Style™ delivers creative design solutions that celebrate the classroom as a fun and functional atmosphere where children can thrive.',
-          ]}
-          buttonText='Melanie'
+    <>
+      <Head>
+        <meta name='robots' content='noindex,nofollow' />
+      </Head>
+      <main className='relative pb-16' id='home'>
+        <EditableVideoPlayer
+          placeholder={pageData.data[0].hero_placeholder}
+          url={pageData.data[0].hero_link}
+          field_one='hero_placeholder'
+          field_two='hero_link'
+          table='about'
+          id={1}
         />
-      </div>
-      <EditablePolkaTwoRows items={polkaItems} table={'about'} id={1} />
-      <FullWidthQuote quote='Teachers are heroes of the world and we love supporting them in their decorating endeavors!' />
-      <EditableHero
-        side='md:bg-gradient-to-r md:from-white/60'
-        heading={pageData.data[0].hero_one.heading}
-        headline={pageData.data[0].hero_one.headline}
-        subtext={pageData.data[0].hero_one.subheadline}
-        buttonText={pageData.data[0].hero_one.cta_text}
-        buttonColor=''
-        bg={pageData.data[0].hero_one.image}
-        textSide='left-10'
-        textColor='text-neutral-brown'
-        bodyColor='text-gray-600'
-        link={pageData.data[0].hero_one.cta_link}
-        id={pageData.data[0].hero_one.id}
-        theme={pageData.data[0].hero_one.theme}
-      />
-      <div className='bg-polka-light scroll-mt-24' id='team'>
-        <div className='flex flex-col gap-12 max-w-6xl mx-auto py-16'>
-          <EditableFourColStaffGrid
-            items={isStaff}
-            headline='Best In Class'
-            itemTextStyle=' text-gray-500/80 text-sm leading-tight'
+        <div className='bg-gradient-to-b from-khaki space-y-16 pt-6'>
+          <VariableHeadlineWithSpan
+            pre='Inspiring'
+            spanText='Creativity'
+            post='in the Classroom'
+            subtext={[
+              'Founded in 2011 by Melanie Ralbusky, the Schoolgirl Style brand has since become synonymous with trend-setting classroom décor. Infusing an element of fashion in every design, Schoolgirl Style invites teachers and students alike to tap into their creativity and enjoy the fun of learning.',
+              'Now in over 10,000 stores, Schoolgirl Style™ is widely recognized as the most innovative and influential source for classroom resources, having built a loyal community of over 400,000 followers on social media with tens of millions of views. Schoolgirl Style™ delivers creative design solutions that celebrate the classroom as a fun and functional atmosphere where children can thrive.',
+            ]}
+            buttonText='Melanie'
           />
         </div>
-      </div>
-      {/* <PerfectPairing headline='Perfect Pairing' /> */}
-      <div className='flex flex-col gap-16 pt-20'>
-        <InstagramGrid />
-        <EmailSubscription />
-      </div>
-    </main>
+        <EditablePolkaTwoRows items={polkaItems} table={'about'} id={1} />
+        <FullWidthQuote quote='Teachers are heroes of the world and we love supporting them in their decorating endeavors!' />
+        <EditableHero
+          side='md:bg-gradient-to-r md:from-white/60'
+          heading={pageData.data[0].hero_one.heading}
+          headline={pageData.data[0].hero_one.headline}
+          subtext={pageData.data[0].hero_one.subheadline}
+          buttonText={pageData.data[0].hero_one.cta_text}
+          buttonColor=''
+          bg={pageData.data[0].hero_one.image}
+          textSide='left-10'
+          textColor='text-neutral-brown'
+          bodyColor='text-gray-600'
+          link={pageData.data[0].hero_one.cta_link}
+          id={pageData.data[0].hero_one.id}
+          theme={pageData.data[0].hero_one.theme}
+        />
+        <div className='bg-polka-light scroll-mt-24' id='team'>
+          <div className='flex flex-col gap-12 max-w-6xl mx-auto py-16'>
+            <EditableFourColStaffGrid
+              items={isStaff}
+              headline='Best In Class'
+              itemTextStyle=' text-gray-500/80 text-sm leading-tight'
+            />
+          </div>
+        </div>
+        {/* <PerfectPairing headline='Perfect Pairing' /> */}
+        <div className='flex flex-col gap-16 pt-20'>
+          <InstagramGrid />
+          <EmailSubscription />
+        </div>
+      </main>
+    </>
   );
 };
 

@@ -2,5 +2,10 @@
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://www.schoolgirlstyle.com',
   generateRobotsTxt: true, // (optional)
-  // ...other options
+  exclude: ['/edit/*', '/server-sitemap-index.xml'],
+  robotsTxtOptions: {
+    additionalSitemaps: [
+      'https://www.schoolgirlstyle.com/server-sitemap-index.xml', // <==== Add here
+    ],
+  },
 };

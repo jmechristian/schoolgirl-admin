@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
+import Head from 'next/head';
 import FullWidthQuote from '../../components/shared/FullWidthQuote';
 import Hero from '../../components/shared/Hero';
 import EditableHero from '../../components/editable/EditableHero';
@@ -94,157 +95,162 @@ const Index = ({ posts, tips, pageData, subnav, categories }) => {
     }
   });
   return (
-    <main className='relative pb-16' id='one'>
-      <BlogEditableNav subNav={subnav.data} search={true} />
-      <div className='relative w-full'>
-        <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
-          <div>
-            <LinkIcon className='w-6 h-6 text-gray-800' />
-          </div>
-          <div className='text-lg'>One</div>
-        </div>
-      </div>
-      <EditableHero
-        side='md:bg-gradient-to-l'
-        heading={pageData.data[0].hero_main.heading}
-        headline={pageData.data[0].hero_main.headline}
-        subtext={pageData.data[0].hero_main.subheadline}
-        buttonText={pageData.data[0].hero_main.cta_text}
-        buttonColor='bg-salmon'
-        bg={pageData.data[0].hero_main.image}
-        textSide='right-10'
-        textColor='text-salmon'
-        bodyColor='text-gray-600'
-        link={pageData.data[0].hero_main.cta_link}
-        id={pageData.data[0].hero_main.id}
-        theme={pageData.data[0].hero_main.theme}
-      />
-      <div className='flex flex-col gap-16 pt-16 scroll-mt-16' id='two'>
+    <>
+      <Head>
+        <meta name='robots' content='noindex,nofollow' />
+      </Head>
+      <main className='relative pb-16' id='one'>
+        <BlogEditableNav subNav={subnav.data} search={true} />
         <div className='relative w-full'>
           <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
             <div>
               <LinkIcon className='w-6 h-6 text-gray-800' />
             </div>
-            <div className='text-lg'>Two</div>
+            <div className='text-lg'>One</div>
           </div>
         </div>
-        <ScrollerWithHeadline
-          items={posts?.nodes}
-          itemTextStyle='text-gray-700'
-          headline='Read The Latest'
+        <EditableHero
+          side='md:bg-gradient-to-l'
+          heading={pageData.data[0].hero_main.heading}
+          headline={pageData.data[0].hero_main.headline}
+          subtext={pageData.data[0].hero_main.subheadline}
+          buttonText={pageData.data[0].hero_main.cta_text}
+          buttonColor='bg-salmon'
+          bg={pageData.data[0].hero_main.image}
+          textSide='right-10'
+          textColor='text-salmon'
+          bodyColor='text-gray-600'
+          link={pageData.data[0].hero_main.cta_link}
+          id={pageData.data[0].hero_main.id}
+          theme={pageData.data[0].hero_main.theme}
         />
-        <div id='three' className='scroll-m-16'>
+        <div className='flex flex-col gap-16 pt-16 scroll-mt-16' id='two'>
           <div className='relative w-full'>
             <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
               <div>
                 <LinkIcon className='w-6 h-6 text-gray-800' />
               </div>
-              <div className='text-lg'>Three</div>
+              <div className='text-lg'>Two</div>
             </div>
           </div>
-          <EditableHero
-            side='md:bg-gradient-to-r md:from-white/80'
-            heading={pageData.data[0].hero_two.heading}
-            headline={pageData.data[0].hero_two.headline}
-            subtext={pageData.data[0].hero_two.subheadline}
-            buttonText={pageData.data[0].hero_two.cta_text}
-            buttonColor='bg-salmon'
-            bg={pageData.data[0].hero_two.image}
-            textSide='left-10'
-            textColor='text-salmon'
-            bodyColor='text-gray-600'
-            link={pageData.data[0].hero_two.cta_link}
-            id={pageData.data[0].hero_two.id}
-            theme={pageData.data[0].hero_two.theme}
+          <ScrollerWithHeadline
+            items={posts?.nodes}
+            itemTextStyle='text-gray-700'
+            headline='Read The Latest'
           />
-        </div>
-        <div id='four' className='scroll-m-16'></div>
-        <div className='relative w-full'>
-          <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
-            <div>
-              <LinkIcon className='w-6 h-6 text-gray-800' />
-            </div>
-            <div className='text-lg'>Four</div>
-          </div>
-        </div>
-        <EditableBlogCategoryScroller
-          // items={inspo?.nodes}
-          itemTextStyle='text-gray-700'
-          headline={pageData.data[0].category_headline}
-          category={pageData.data[0].category}
-          categories={categories}
-          price
-        />
-        <div className='flex flex-col scro;;-mt-16' id='five'>
-          <div className='relative w-full'>
-            <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
-              <div>
-                <LinkIcon className='w-6 h-6 text-gray-800' />
-              </div>
-              <div className='text-lg'>Five</div>
-            </div>
-          </div>
-          <EditableHero
-            side='md:bg-gradient-to-l md:from-white/60'
-            heading={pageData.data[0].hero_three.heading}
-            headline={pageData.data[0].hero_three.headline}
-            subtext={pageData.data[0].hero_three.subheadline}
-            buttonText={pageData.data[0].hero_three.cta_text}
-            buttonColor='bg-salmon'
-            bg={pageData.data[0].hero_three.image}
-            textSide='right-10'
-            textColor='text-salmon'
-            bodyColor='text-gray-600'
-            link={pageData.data[0].hero_three.cta_link}
-            id={pageData.data[0].hero_three.id}
-            theme={pageData.data[0].hero_three.theme}
-          />
-          <FullWidthQuote quote=' We believe in the power of classroom decor to turn classrooms into home-away-from-homes.' />
-          <div id='six' className='scroll-m-16'>
+          <div id='three' className='scroll-m-16'>
             <div className='relative w-full'>
               <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
                 <div>
                   <LinkIcon className='w-6 h-6 text-gray-800' />
                 </div>
-                <div className='text-lg'>Six</div>
+                <div className='text-lg'>Three</div>
               </div>
             </div>
             <EditableHero
-              side='md:bg-gradient-to-r md:from-white/60'
-              heading={pageData.data[0].hero_four.heading}
-              headline={pageData.data[0].hero_four.headline}
-              subtext={pageData.data[0].hero_four.subheadline}
-              buttonText={pageData.data[0].hero_four.cta_text}
+              side='md:bg-gradient-to-r md:from-white/80'
+              heading={pageData.data[0].hero_two.heading}
+              headline={pageData.data[0].hero_two.headline}
+              subtext={pageData.data[0].hero_two.subheadline}
+              buttonText={pageData.data[0].hero_two.cta_text}
               buttonColor='bg-salmon'
-              bg={pageData.data[0].hero_four.image}
+              bg={pageData.data[0].hero_two.image}
               textSide='left-10'
               textColor='text-salmon'
               bodyColor='text-gray-600'
-              link={pageData.data[0].hero_four.cta_link}
-              id={pageData.data[0].hero_four.id}
-              theme={pageData.data[0].hero_four.theme}
+              link={pageData.data[0].hero_two.cta_link}
+              id={pageData.data[0].hero_two.id}
+              theme={pageData.data[0].hero_two.theme}
             />
           </div>
-        </div>
-        <div className='scroll-mt-16' id='seven'>
+          <div id='four' className='scroll-m-16'></div>
           <div className='relative w-full'>
             <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
               <div>
                 <LinkIcon className='w-6 h-6 text-gray-800' />
               </div>
-              <div className='text-lg'>Seven</div>
+              <div className='text-lg'>Four</div>
             </div>
           </div>
-          <EditableRandomScrollerWithHeadline
-            items={tips && tips.data}
+          <EditableBlogCategoryScroller
+            // items={inspo?.nodes}
             itemTextStyle='text-gray-700'
-            headline={pageData && pageData.data[0].tips_headline}
+            headline={pageData.data[0].category_headline}
+            category={pageData.data[0].category}
+            categories={categories}
+            price
           />
+          <div className='flex flex-col scro;;-mt-16' id='five'>
+            <div className='relative w-full'>
+              <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+                <div>
+                  <LinkIcon className='w-6 h-6 text-gray-800' />
+                </div>
+                <div className='text-lg'>Five</div>
+              </div>
+            </div>
+            <EditableHero
+              side='md:bg-gradient-to-l md:from-white/60'
+              heading={pageData.data[0].hero_three.heading}
+              headline={pageData.data[0].hero_three.headline}
+              subtext={pageData.data[0].hero_three.subheadline}
+              buttonText={pageData.data[0].hero_three.cta_text}
+              buttonColor='bg-salmon'
+              bg={pageData.data[0].hero_three.image}
+              textSide='right-10'
+              textColor='text-salmon'
+              bodyColor='text-gray-600'
+              link={pageData.data[0].hero_three.cta_link}
+              id={pageData.data[0].hero_three.id}
+              theme={pageData.data[0].hero_three.theme}
+            />
+            <FullWidthQuote quote=' We believe in the power of classroom decor to turn classrooms into home-away-from-homes.' />
+            <div id='six' className='scroll-m-16'>
+              <div className='relative w-full'>
+                <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+                  <div>
+                    <LinkIcon className='w-6 h-6 text-gray-800' />
+                  </div>
+                  <div className='text-lg'>Six</div>
+                </div>
+              </div>
+              <EditableHero
+                side='md:bg-gradient-to-r md:from-white/60'
+                heading={pageData.data[0].hero_four.heading}
+                headline={pageData.data[0].hero_four.headline}
+                subtext={pageData.data[0].hero_four.subheadline}
+                buttonText={pageData.data[0].hero_four.cta_text}
+                buttonColor='bg-salmon'
+                bg={pageData.data[0].hero_four.image}
+                textSide='left-10'
+                textColor='text-salmon'
+                bodyColor='text-gray-600'
+                link={pageData.data[0].hero_four.cta_link}
+                id={pageData.data[0].hero_four.id}
+                theme={pageData.data[0].hero_four.theme}
+              />
+            </div>
+          </div>
+          <div className='scroll-mt-16' id='seven'>
+            <div className='relative w-full'>
+              <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>
+                <div>
+                  <LinkIcon className='w-6 h-6 text-gray-800' />
+                </div>
+                <div className='text-lg'>Seven</div>
+              </div>
+            </div>
+            <EditableRandomScrollerWithHeadline
+              items={tips && tips.data}
+              itemTextStyle='text-gray-700'
+              headline={pageData && pageData.data[0].tips_headline}
+            />
+          </div>
+          <InstagramGrid />
+          <EmailSubscription />
         </div>
-        <InstagramGrid />
-        <EmailSubscription />
-      </div>
-    </main>
+      </main>
+    </>
   );
 };
 
