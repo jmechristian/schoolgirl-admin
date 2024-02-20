@@ -6,7 +6,7 @@ export const getServerSideProps = async (ctx) => {
   // Method to source urls from cms
   const allPosts = await getAllPostsWithSlug();
   const paths = allPosts.nodes.map(
-    (post) => 'https://www.schoolgirlstyle.com/' + post.slug
+    (post) => 'https://www.schoolgirlstyle.com/blog/' + post.slug
   );
 
   return getServerSideSitemapIndexLegacy(ctx, paths);
