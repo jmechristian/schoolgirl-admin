@@ -58,7 +58,10 @@ const Index = ({ pageData, locations, subnav }) => {
         </div>
       </div>
       <div className='scroll-m-8 flex flex-col pt-16' id='four'>
-        <StoreList headline='At a Store Near You' locations={locations.data} />
+        <StoreList
+          headline={pageData.data[0].stores_headline}
+          locations={locations.data}
+        />
       </div>
       <div className='scroll-m-8 flex flex-col' id='five'>
         <Hero

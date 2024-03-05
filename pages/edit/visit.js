@@ -23,6 +23,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const Index = ({ pageData, locations, subnav }) => {
   const { user } = useSelector((state) => state.auth);
   const router = useRouter();
+  console.log(pageData);
 
   const [isLocations, setLocations] = useState(locations && locations.data);
 
@@ -156,7 +157,7 @@ const Index = ({ pageData, locations, subnav }) => {
           </div>
         </div>
         <EditableStoreList
-          headline='At a Store Near You'
+          headline={pageData && pageData.data[0].stores_headline}
           locations={isLocations}
         />
       </div>
