@@ -76,12 +76,12 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
         className='flex flex-col pt-16 gap-10 md:gap-16 scroll-mt-24'
         id='two'
       >
-        <ShopScrollerWithHeadline
+        {/* <ShopScrollerWithHeadline
           items={products.products}
           itemTextStyle='text-gray-700'
           headline={pageData.data[0].shop_collection_1_title}
           bookmark={true}
-        />
+        /> */}
         <div className='scroll-mt-24' id='three'>
           <Hero
             side='md:bg-gradient-to-r'
@@ -98,13 +98,13 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
             theme={pageData.data[0].hero_two.theme}
           />
         </div>
-        <div className='scroll-mt-24' id='four'>
+        {/* <div className='scroll-mt-24' id='four'>
           <ShopScrollerWithHeadline
             items={decor.products}
             itemTextStyle='uppercase text-gray-700'
             headline={pageData.data[0].shop_collection_2_title}
           />
-        </div>
+        </div> */}
         <div className='scroll-mt-24' id='five'>
           <Hero
             side='md:bg-gradient-to-l'
@@ -150,7 +150,7 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
             theme={pageData.data[0].hero_four.theme}
           />
         </div>
-        <div className='scroll-mt-24' id='eight'>
+        {/* <div className='scroll-mt-24' id='eight'>
           <ShopScrollerWithHeadline
             items={picks.products}
             itemTextStyle='text-gray-700'
@@ -158,7 +158,7 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
             bookmark={true}
             price
           />
-        </div>
+        </div> */}
         <div className='flex flex-col scroll-mt-24' id='nine'>
           <VideoPlayer
             placeholder={pageData.data[0].shop_video_placeholder}
@@ -188,38 +188,38 @@ export async function getServerSideProps() {
       '*, hero_main:shop_hero_main_fkey(*), hero_two:shop_hero_two_fkey(*), hero_three:shop_hero_three_fkey(*), hero_four:shop_hero_four_fkey(*), headline_three(id, title, row_items(grid_item(*)))'
     );
 
-  const safari = 'gid://shopify/Collection/286718034077';
-  // Fetch all the products
-  const products = await shopifyClient.collection.fetchWithProducts(
-    `gid://shopify/Collection/${pageData.data[0].shop_collection_1}`,
-    {
-      productsFirst: 10,
-    }
-  );
+  // const safari = 'gid://shopify/Collection/286718034077';
+  // // Fetch all the products
+  // const products = await shopifyClient.collection.fetchWithProducts(
+  //   `gid://shopify/Collection/${pageData.data[0].shop_collection_1}`,
+  //   {
+  //     productsFirst: 10,
+  //   }
+  // );
 
-  // const collectionId = 'gid://shopify/Collection/438218719523';
-  // Fetch all the products
+  // // const collectionId = 'gid://shopify/Collection/438218719523';
+  // // Fetch all the products
 
-  const melspicks = await shopifyClient.collection.fetchWithProducts(
-    `gid://shopify/Collection/${pageData.data[0].shop_collection_3}`,
-    { productsFirst: 10 }
-  );
+  // const melspicks = await shopifyClient.collection.fetchWithProducts(
+  //   `gid://shopify/Collection/${pageData.data[0].shop_collection_3}`,
+  //   { productsFirst: 10 }
+  // );
 
-  // const decor = 'gid://shopify/Collection/433233494307';
-  const classDecor = await shopifyClient.collection.fetchWithProducts(
-    `gid://shopify/Collection/${pageData.data[0].shop_collection_2}`,
-    {
-      productsFirst: 10,
-    }
-  );
+  // // const decor = 'gid://shopify/Collection/433233494307';
+  // const classDecor = await shopifyClient.collection.fetchWithProducts(
+  //   `gid://shopify/Collection/${pageData.data[0].shop_collection_2}`,
+  //   {
+  //     productsFirst: 10,
+  //   }
+  // );
 
   const subnav = await supabase.from('shop_subnav').select('*');
 
   return {
     props: {
-      products: parseShopifyResponse(products),
-      picks: parseShopifyResponse(melspicks),
-      decor: parseShopifyResponse(classDecor),
+      // products: parseShopifyResponse(products),
+      // picks: parseShopifyResponse(melspicks),
+      // decor: parseShopifyResponse(classDecor),
       pageData,
       subnav,
     },
