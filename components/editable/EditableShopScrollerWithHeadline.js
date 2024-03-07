@@ -91,7 +91,9 @@ const EditableShopScrollerWithHeadline = ({
                 id='headline'
                 placeholder={'Enter Collection ID'}
                 value={newCollection}
-                changeHandler={(val) => setNewCollection(val)}
+                changeHandler={(val) =>
+                  setNewCollection(val.toString().trim().replace(/\s+/g, ''))
+                }
               />
               <TextInput
                 type='text'
