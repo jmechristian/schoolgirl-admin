@@ -15,6 +15,7 @@ import { createClient } from '@supabase/supabase-js';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
+import EditableFullWidthQuote from '../../components/editable/EditableFullWidthQuote';
 
 const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -190,7 +191,12 @@ const Page = ({ pageData, staff }) => {
           />
         </div>
         <EditablePolkaTwoRows items={polkaItems} table={'about'} id={1} />
-        <FullWidthQuote quote='Teachers are heroes of the world and we love supporting them in their decorating endeavors!' />
+        <EditableFullWidthQuote
+          quote={pageData.data[0].blog_quote}
+          author={pageData.data[0].quote_author}
+          table={'about'}
+          id={1}
+        />
         <EditableHero
           side='md:bg-gradient-to-r md:from-white/60'
           heading={pageData.data[0].hero_one.heading}

@@ -20,6 +20,7 @@ import { createClient } from '@supabase/supabase-js';
 import BlogEditableNav from '../../components/editable/BlogEditableNav';
 import { LinkIcon } from '@heroicons/react/24/outline';
 import EditableRandomScrollerWithHeadline from '../../components/editable/EditableRandoScrollerWithHeadline';
+import EditableFullWidthQuote from '../../components/editable/EditableFullWidthQuote';
 
 const subNav = [
   {
@@ -204,7 +205,12 @@ const Index = ({ posts, tips, pageData, subnav, categories }) => {
               id={pageData.data[0].hero_three.id}
               theme={pageData.data[0].hero_three.theme}
             />
-            <FullWidthQuote quote=' We believe in the power of classroom decor to turn classrooms into home-away-from-homes.' />
+            <EditableFullWidthQuote
+              quote={pageData.data[0].blog_quote}
+              author={pageData.data[0].quote_author}
+              table={'blog'}
+              id={1}
+            />
             <div id='six' className='scroll-m-16'>
               <div className='relative w-full'>
                 <div className='absolute top-0 left-6 z-30 py-4 px-6 shadow-md rounded bg-white/50 backdrop-blur text-gray-800 font-medium text-lg flex gap-1 items-center'>

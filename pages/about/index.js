@@ -119,7 +119,10 @@ const Page = ({ pageData, staff }) => {
         />
       </div>
       <PolkaTwoRows items={polkaItems} />
-      <FullWidthQuote quote='Teachers&ensp;are&ensp;heroes&ensp;of&ensp;the&ensp;world&ensp;and&ensp;we&ensp;love&ensp;supporting&ensp;them&ensp;in&ensp;their&ensp;decorating&ensp;endeavors!' />
+      <FullWidthQuote
+        quote={pageData.data[0].blog_quote}
+        author={pageData.data[0].quote_author}
+      />
       <Hero
         side='md:bg-gradient-to-r md:from-white/60'
         heading={pageData.data[0].hero_one.heading}

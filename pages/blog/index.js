@@ -141,7 +141,10 @@ const Index = ({ posts, inspo, pageData, subnav, categories }) => {
             link={pageData.data[0].hero_three.cta_link}
             theme={pageData.data[0].hero_three.theme}
           />
-          <FullWidthQuote quote='We&ensp;believe&ensp;in&ensp;the&ensp;power&ensp;of&ensp;classroom&ensp;decor&ensp;to&ensp;turn&ensp;classrooms&ensp;into&ensp;home-away-from-homes.' />
+          <FullWidthQuote
+            quote={pageData.data[0].blog_quote}
+            author={pageData.data[0].quote_author}
+          />
           <div id='six' className='scroll-m-16'>
             <Hero
               side='md:bg-gradient-to-r md:from-white/60'
