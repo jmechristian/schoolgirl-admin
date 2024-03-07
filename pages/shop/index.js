@@ -150,7 +150,7 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
             theme={pageData.data[0].hero_four.theme}
           />
         </div>
-        {/* <div className='scroll-mt-24' id='eight'>
+        <div className='scroll-mt-24' id='eight'>
           <ShopScrollerWithHeadline
             items={picks.products}
             itemTextStyle='text-gray-700'
@@ -158,7 +158,7 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
             bookmark={true}
             price
           />
-        </div> */}
+        </div>
         <div className='flex flex-col scroll-mt-24' id='nine'>
           <VideoPlayer
             placeholder={pageData.data[0].shop_video_placeholder}
@@ -197,10 +197,10 @@ export async function getServerSideProps() {
     }
   );
 
-  // const melspicks = await shopifyClient.collection.fetchWithProducts(
-  //   `gid://shopify/Collection/${pageData.data[0].shop_collection_3}`,
-  //   { productsFirst: 10 }
-  // );
+  const melspicks = await shopifyClient.collection.fetchWithProducts(
+    `gid://shopify/Collection/${pageData.data[0].shop_collection_3}`,
+    { productsFirst: 10 }
+  );
 
   const classDecor = await shopifyClient.collection.fetchWithProducts(
     `gid://shopify/Collection/${pageData.data[0].shop_collection_2}`,
@@ -214,7 +214,7 @@ export async function getServerSideProps() {
   return {
     props: {
       products: parseShopifyResponse(products),
-      // picks: parseShopifyResponse(melspicks),
+      picks: parseShopifyResponse(melspicks),
       decor: parseShopifyResponse(classDecor),
       pageData,
       subnav,
