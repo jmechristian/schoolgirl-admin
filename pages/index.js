@@ -14,7 +14,6 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function Home({ pageData }) {
-  console.log(pageData);
   // const user = useUser();
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -175,7 +174,6 @@ export default function Home({ pageData }) {
       if (event === 'SIGNED_IN') {
         dispatch(setUser());
       }
-      // console.log('session', session);
     });
   });
 

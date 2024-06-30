@@ -54,7 +54,6 @@ export const EditableFlexGridItem = ({
 
   const gridItemSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log(id);
     setIsLoading(true);
     const { data, error } = await supabase
       .from('grid_item')
@@ -71,7 +70,6 @@ export const EditableFlexGridItem = ({
       setIsLoading(false);
       setSubmitted(true);
     }
-    console.log('data', data);
   };
 
   const goElsewhere = () => {

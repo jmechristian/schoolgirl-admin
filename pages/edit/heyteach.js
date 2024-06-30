@@ -15,9 +15,7 @@ import EditableScroller from '../../components/editable/EditableScroller';
 import SellersGrid from '../../components/editable/SellersGrid';
 import TextInput from '../../components/shared/TextInput';
 
-const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabase } from '../../lib/API';
 const rowID = '926b329e-07ea-4959-97e7-3e3b002bc667';
 
 const items = [
@@ -168,7 +166,6 @@ const Page = ({ pageData, rowData, sellerHeader, heroes }) => {
       setIsSubmitted(true);
       setIsEditingHeadline(false);
     }
-    console.log('data', data);
   };
 
   const heroImageHandler = async (e) => {
@@ -350,9 +347,6 @@ const Page = ({ pageData, rowData, sellerHeader, heroes }) => {
 
 export async function getServerSideProps() {
   const rowID = '926b329e-07ea-4959-97e7-3e3b002bc667';
-  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
 
   const pageData = await supabase
     .from('row_items')

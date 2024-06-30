@@ -24,7 +24,6 @@ const VisitInnerNav = ({ subNav, search }) => {
 
   const getAndSetNewSubNav = async () => {
     const subnav = await supabase.from('visit_subnav').select('*');
-    console.log('getAndSet');
     setIsSubnav(subnav.data);
   };
 

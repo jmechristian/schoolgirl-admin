@@ -40,7 +40,6 @@ const EditableStoreList = ({ headline, locations }) => {
       setIsLoading(false);
       setSubmitted(true);
     }
-    console.log('data', data);
   };
 
   return (

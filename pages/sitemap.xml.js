@@ -41,7 +41,6 @@ function generateSiteMap(posts) {
            .join('')}
        </urlset>
      `;
-  console.log('posts', posts);
 }
 
 export async function getServerSideProps({ res }) {

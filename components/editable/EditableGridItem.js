@@ -49,7 +49,6 @@ const EditableGridItem = ({
 
   const gridItemSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log(id);
     setIsLoading(true);
     const { data, error } = await supabase
       .from('grid_item')
@@ -65,7 +64,6 @@ const EditableGridItem = ({
       setIsLoading(false);
       setSubmitted(true);
     }
-    console.log('data', data);
   };
 
   return (

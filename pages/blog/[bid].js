@@ -183,16 +183,4 @@ export const getServerSideProps = async ({ params }) => {
   };
 };
 
-// export const getStaticPaths = async () => {
-//   const allPosts = await getAllPostsWithSlug();
-//   const paths = allPosts.nodes.map((post) => ({
-//     params: { bid: post.slug },
-//   }));
-//   // console.log('paths', paths);
-//   return {
-//     paths: paths,
-//     fallback: 'blocking',
-//   };
-// };
-
 export default Index;

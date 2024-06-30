@@ -4,17 +4,12 @@ import EditableHero from '../../components/editable/EditableHero';
 import EditableFourColGridWithHeading from '../../components/editable/EditableFourColGridWithHeadling';
 import EditableThreeColGridNoHeading from '../../components/editable/EditableThreeColGridNoHeadline';
 import InstagramGrid from '../../components/shared/InstagramGrid';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../../lib/API';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../authSlice';
 import { useRouter } from 'next/router';
 
-const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
-
 export default function Home({ pageData }) {
-  console.log(pageData);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();

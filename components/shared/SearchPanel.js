@@ -9,11 +9,9 @@ export default function SearchPanel({ open, setClose }) {
   const [isResults, setIsResults] = useState([]);
 
   const searchClickHandler = async () => {
-    console.log(searchTerm);
     setIsSending(true);
     const posts = await getSearchPosts(searchTerm);
     setIsResults(posts.posts.edges);
-    console.log(posts.posts.edges);
     setIsSending(false);
   };
 

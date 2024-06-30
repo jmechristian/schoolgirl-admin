@@ -15,8 +15,8 @@ import {
   getPostsForBlogHome,
   getClassroomInspoPosts,
   getPostCategories,
+  supabase,
 } from '../../lib/API';
-import { createClient } from '@supabase/supabase-js';
 import BlogEditableNav from '../../components/editable/BlogEditableNav';
 import { LinkIcon } from '@heroicons/react/24/outline';
 import EditableRandomScrollerWithHeadline from '../../components/editable/EditableRandoScrollerWithHeadline';
@@ -261,10 +261,6 @@ const Index = ({ posts, tips, pageData, subnav, categories }) => {
 };
 
 export const getStaticProps = async () => {
-  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
-
   const pageData = await supabase
     .from('blog')
     .select(

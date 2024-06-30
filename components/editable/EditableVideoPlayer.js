@@ -67,7 +67,6 @@ const EditableVideoPlayer = ({
     // } else {
     //   setPlaying(false);
     // }
-    console.log(inView);
   };
 
   const queryData = {
@@ -91,7 +90,6 @@ const EditableVideoPlayer = ({
       setIsLoading(false);
       setSubmitted(true);
     }
-    console.log('data', data);
   };
 
   return (

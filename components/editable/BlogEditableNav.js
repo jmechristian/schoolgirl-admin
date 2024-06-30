@@ -24,7 +24,6 @@ const BlogEditableNav = ({ subNav, search }) => {
 
   const getAndSetNewSubNav = async () => {
     const subnav = await supabase.from('blog_subnav').select('*');
-    console.log('getAndSet');
     setIsSubnav(subnav.data);
   };
 

@@ -24,7 +24,6 @@ const WatchInnerNav = ({ subNav, search }) => {
 
   const getAndSetNewSubNav = async () => {
     const subnav = await supabase.from('watch_subnav').select('*');
-    console.log('getAndSet');
     setIsSubnav(subnav.data);
   };
 

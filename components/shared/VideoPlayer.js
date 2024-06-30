@@ -44,7 +44,6 @@ const VideoPlayer = ({ placeholder, url }) => {
     // } else {
     //   setPlaying(false);
     // }
-    console.log(inView);
   };
 
   return (

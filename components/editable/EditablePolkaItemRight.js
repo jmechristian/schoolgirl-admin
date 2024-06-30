@@ -54,7 +54,6 @@ const EditablePolkaItemRight = ({
       setIsLoading(false);
       setSubmitted(true);
     }
-    console.log('data', data);
   };
 
   return (

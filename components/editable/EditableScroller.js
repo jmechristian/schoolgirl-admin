@@ -55,7 +55,6 @@ const EditableScroller = ({
       setIsSubmited(true);
       setIsEditingHeadline(false);
     }
-    console.log('data', data);
   };
 
   const newItemHandler = async () => {};

@@ -64,7 +64,6 @@ const EditableHeyTeachScrollerItem = ({
 
   const gridItemSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log(id);
     setIsLoading(true);
     const { data, error } = await supabase
       .from('grid_item')
@@ -81,7 +80,6 @@ const EditableHeyTeachScrollerItem = ({
       setIsLoading(false);
       setSubmitted(true);
     }
-    console.log('data', data);
   };
 
   const deleteItemHandler = async () => {

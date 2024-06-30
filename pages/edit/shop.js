@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../../lib/API';
 import EditableHero from '../../components/editable/EditableHero';
 import EditableVideoPlayer from '../../components/editable/EditableVideoPlayer';
 import EditableFourColGridWithHeading from '../../components/editable/EditableFourColGridWithHeadling';
@@ -276,10 +276,6 @@ const Index = ({ pageData, subnav }) => {
 };
 
 export async function getServerSideProps() {
-  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
-
   const subnav = await supabase.from('shop_subnav').select('*');
 
   const pageData = await supabase

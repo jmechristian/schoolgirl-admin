@@ -73,8 +73,6 @@ const EditableScrollerItem = ({
       setIsLoading(false);
       setIsSubmitted(true);
     }
-
-    console.log('data', data);
   };
 
   return (

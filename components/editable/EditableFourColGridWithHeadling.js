@@ -36,7 +36,6 @@ const EditableFourColGridWithHeading = ({
       setIsLoading(false);
       setSubmitted(true);
     }
-    console.log('data', id);
   };
 
   return (

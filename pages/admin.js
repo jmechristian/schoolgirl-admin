@@ -21,7 +21,6 @@ const Page = () => {
       if (event === 'SIGNED_IN') {
         dispatch(setUser());
       }
-      // console.log('session', session);
     });
   });
 

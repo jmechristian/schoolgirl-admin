@@ -60,7 +60,6 @@ const EditableBlogCategoryScroller = ({
       setIsLoading(false);
       setIsSubmitted(true);
     }
-    console.log('data', data);
   };
 
   return (

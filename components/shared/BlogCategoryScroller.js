@@ -60,7 +60,6 @@ const BlogCategoryScroller = ({
       setIsLoading(false);
       setIsSubmitted(true);
     }
-    console.log('data', data);
   };
 
   return (

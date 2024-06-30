@@ -42,9 +42,7 @@ const Page = () => {
         'postgres_changes',
         { event: '*', schema: 'public', table: 'sellers' },
         (payload) => {
-          console.log('payload', JSON.stringify(payload));
           getSellers();
-          console.log('hey', JSON.stringify(payload));
           if (payload.eventType === 'DELETE' && payload.table === 'sellers') {
             setIsOrderedSellers(
               isOrderedSellers.filter((seller) => seller.id != payload.old.id)

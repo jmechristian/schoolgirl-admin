@@ -8,8 +8,8 @@ import InstagramGrid from '../../components/shared/InstagramGrid';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import BlogCategoryScroller from '../../components/shared/BlogCategoryScroller';
 import { getPostsForBlogHome, getClassroomInspoPosts } from '../../lib/API';
-import { createClient } from '@supabase/supabase-js';
 import { getPostCategories } from '../../lib/API';
+import { supabase } from '../../lib/API';
 import NewSubnav from '../../components/shared/NewSubnav';
 
 const subNav = [
@@ -177,10 +177,6 @@ const Index = ({ posts, inspo, pageData, subnav, categories }) => {
 };
 
 export const getStaticProps = async () => {
-  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
-
   const pageData = await supabase
     .from('blog')
     .select(

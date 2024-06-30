@@ -11,15 +11,11 @@ import EditableVideoPlayer from '../../components/editable/EditableVideoPlayer';
 import FourColStaffGrid from '../../components/shared/FourColStaffGrid';
 import EditableFourColStaffGrid from '../../components/editable/EditableFourColStaffGrid';
 import InstagramGrid from '../../components/shared/InstagramGrid';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../../lib/API';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import EditableFullWidthQuote from '../../components/editable/EditableFullWidthQuote';
-
-const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Page = ({ pageData, staff }) => {
   const polkaItems = [
@@ -232,10 +228,6 @@ const Page = ({ pageData, staff }) => {
 };
 
 export async function getServerSideProps() {
-  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
-
   const pageData = await supabase
     .from('about')
     .select('*, hero_one:about_hero_one_fkey(*)');

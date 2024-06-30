@@ -20,8 +20,6 @@ const EditableThreeColumWithHeadline = ({
   const [isSubmitted, setSubmitted] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  console.log(id);
-
   const headlineSubmitHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -37,7 +35,6 @@ const EditableThreeColumWithHeadline = ({
       setIsLoading(false);
       setSubmitted(true);
     }
-    console.log('data', id);
   };
 
   return (
