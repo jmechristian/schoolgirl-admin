@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircleIcon, PlusCircleIcon } from '@heroicons/react/24/solid';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../lib/API';
 import {
   GridContextProvider,
   GridDropZone,
@@ -12,10 +12,6 @@ import {
 import SellerFlexItem from '../components/shared/SellerFlexItem';
 import TextInput from '../components/shared/TextInput';
 import { CloudArrowUpIcon } from '@heroicons/react/24/outline';
-
-const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Page = () => {
   const [isSellers, setIsSellers] = useState([]);

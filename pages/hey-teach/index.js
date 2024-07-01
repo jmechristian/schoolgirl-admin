@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import HeadlineMotion from '../../components/shared/HeadlineMotion';
 import { sellers } from '../../data/seller';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../../lib/API';
 import SellerFlexItem from '../../components/shared/SellerFlexItem';
 import SellerSubnav from '../../components/shared/SellerSubnav';
 import HeyTeachScroller from '../../components/shared/HeyTeachScroller';
@@ -287,9 +287,6 @@ const Index = ({ pageData, rowData, sellerHeader, heroes, dbsellers }) => {
 
 export async function getServerSideProps() {
   const rowID = '926b329e-07ea-4959-97e7-3e3b002bc667';
-  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
 
   const pageData = await supabase
     .from('row_items')

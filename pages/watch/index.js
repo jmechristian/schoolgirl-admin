@@ -1,7 +1,7 @@
 import React from 'react';
 import InnerPageSubNav from '../../components/shared/InnerPageSubNav';
 import Hero from '../../components/shared/Hero';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../../lib/API';
 import ThreeColumWithHeadline from '../../components/shared/ThreeColumWithHeadline';
 import NewSubnav from '../../components/shared/NewSubnav';
 
@@ -202,10 +202,6 @@ const Index = ({ pageData, subnav }) => {
 };
 
 export async function getServerSideProps() {
-  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
-
   const pageData = await supabase
     .from('watch')
     .select(

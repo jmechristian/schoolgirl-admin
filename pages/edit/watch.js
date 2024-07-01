@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import EditableHero from '../../components/editable/EditableHero';
 import EditableThreeColumWithHeadline from '../../components/editable/EditableThreeColumWithHeadline';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../../lib/API';
 import WatchInnerNav from '../../components/editable/WatchInnerNav';
 import { LinkIcon } from '@heroicons/react/24/outline';
 
@@ -132,10 +132,6 @@ const Index = ({ pageData, subnav }) => {
 };
 
 export async function getServerSideProps() {
-  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
-
   const pageData = await supabase
     .from('watch')
     .select(

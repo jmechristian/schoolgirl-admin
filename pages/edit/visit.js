@@ -12,13 +12,10 @@ import Hero from '../../components/shared/Hero';
 import EditableHero from '../../components/editable/EditableHero';
 import InstagramGrid from '../../components/shared/InstagramGrid';
 import EmailSubscription from '../../components/shared/EmailSubscription';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../../lib/API';
 import VisitInnerNav from '../../components/editable/VisitInnerNav';
 import { LinkIcon } from '@heroicons/react/24/outline';
 import EditableStoreList from '../../components/editable/EditableStoreList';
-const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Index = ({ pageData, locations, subnav }) => {
   const { user } = useSelector((state) => state.auth);
@@ -216,10 +213,6 @@ const Index = ({ pageData, locations, subnav }) => {
 };
 
 export async function getServerSideProps() {
-  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
-
   const pageData = await supabase
     .from('visit')
     .select(

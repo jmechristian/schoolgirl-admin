@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 // import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { shopifyClient, parseShopifyResponse } from '../../lib/shopify';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../../lib/API';
 import Hero from '../../components/shared/Hero';
 import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
 import ShopScrollerWithHeadline from '../../components/shared/ShopScrollerWithHeadline';
@@ -178,10 +178,6 @@ const Index = ({ pageData, products, decor, picks, subnav }) => {
 };
 
 export async function getServerSideProps() {
-  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
-
   const pageData = await supabase
     .from('shop')
     .select(

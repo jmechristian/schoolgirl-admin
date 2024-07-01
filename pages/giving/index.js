@@ -6,7 +6,7 @@ import Hero from '../../components/shared/Hero';
 import FourColGridWithHeading from '../../components/shared/FourColGridWithHeading';
 import FullWidthQuote from '../../components/shared/FullWidthQuote';
 import EmailSubscription from '../../components/shared/EmailSubscription';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../../lib/API';
 
 const Page = ({ pageData }) => {
   const subNav = [
@@ -133,10 +133,6 @@ const Page = ({ pageData }) => {
 };
 
 export async function getServerSideProps() {
-  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
-
   const pageData = await supabase.from('giving').select('*');
 
   return {

@@ -5,13 +5,9 @@ import Hero from '../components/shared/Hero';
 import InstagramGrid from '../components/shared/InstagramGrid';
 import ThreeColGridNoHeading from '../components/shared/ThreeColGridNoHeading';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../lib/API';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../authSlice';
-
-const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function Home({ pageData }) {
   // const user = useUser();

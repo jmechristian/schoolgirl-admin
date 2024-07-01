@@ -7,7 +7,7 @@ import StoreList from '../../components/shared/StoreList';
 import Hero from '../../components/shared/Hero';
 import InstagramGrid from '../../components/shared/InstagramGrid';
 import EmailSubscription from '../../components/shared/EmailSubscription';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../../lib/API';
 import NewSubnav from '../../components/shared/NewSubnav';
 
 const Index = ({ pageData, locations, subnav }) => {
@@ -104,10 +104,6 @@ const Index = ({ pageData, locations, subnav }) => {
 };
 
 export async function getServerSideProps() {
-  const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
-  const supabaseKey = process.env.VITE_SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
-
   const pageData = await supabase
     .from('visit')
     .select(
