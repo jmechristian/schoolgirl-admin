@@ -10,7 +10,7 @@ import { LinkIcon } from '@heroicons/react/24/outline';
 const Index = ({ pageData, subnav }) => {
   const { user } = useSelector((state) => state.auth);
   const router = useRouter();
-
+  console.log(pageData);
   useEffect(() => {
     if (!user) {
       router.push('/admin');
@@ -39,7 +39,7 @@ const Index = ({ pageData, subnav }) => {
         textSide='left-10'
         textColor='text-gray-700'
         bodyColor='text-gray-700'
-        link='https://youtu.be/6Aqu5bC4XEk'
+        link={pageData.data[0].hero_main.cta_link}
         id={pageData.data[0].hero_main.id}
       />
       <div
