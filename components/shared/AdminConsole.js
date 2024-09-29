@@ -7,6 +7,11 @@ const statuses = {
 };
 const projects = [
   {
+    id: 0,
+    name: 'Navigation',
+    href: '/edit/nav',
+  },
+  {
     id: 1,
     name: 'Home',
     href: '/edit/home',
@@ -62,12 +67,12 @@ export default function AdminConsole() {
     <div className='pt-16 pb-28'>
       <ul
         role='list'
-        className='divide-y divide-gray-300 max-w-3xl mx-auto px-6 md:px-16 py-12 bg-slate-100 shadow-lg rounded-xl'
+        className='max-w-7xl grid grid-cols-4 gap-12 mx-auto px-6 md:px-16 py-12'
       >
         {projects.map((project) => (
           <li
             key={project.id}
-            className='flex items-center justify-between gap-x-6 py-6'
+            className='flex flex-col items-center justify-between gap-5 p-10 bg-slate-100 shadow-lg rounded-xl'
           >
             <div className='min-w-0'>
               <div className='flex items-start gap-x-3'>
