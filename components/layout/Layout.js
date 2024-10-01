@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { useSelector } from 'react-redux';
 import EditableBanner from '../editable/EditableBanner';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, nav }) => {
   const { user } = useSelector((state) => state.auth);
   return (
     <div className='w-full'>

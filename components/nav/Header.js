@@ -1,4 +1,4 @@
-import { Fragment, useRef } from 'react';
+import { Fragment, useRef, useEffect, useState } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
@@ -11,6 +11,7 @@ import {
 import Link from 'next/link';
 import Logo from '../shared/Logo';
 import HeadlineMotion from '../shared/HeadlineMotion';
+import { supabase } from '../../lib/API';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -18,6 +19,17 @@ function classNames(...classes) {
 
 export default function Header() {
   const router = useRouter();
+  const [nav, setNav] = useState([]);
+
+  useEffect(() => {
+    const fetchNav = async () => {
+      let { data: navigation, error } = await supabase
+        .from('navigation')
+        .select('*');
+      setNav(navigation);
+    };
+    fetchNav();
+  }, []);
 
   const variants = {
     show: {
@@ -62,95 +74,22 @@ export default function Header() {
           <Popover.Overlay className='fixed inset-0 bg-black opacity-50 z-[60]' />
         </motion.div>
         <nav className='hidden space-x-7 xl:space-x-12 xl:flex uppercase'>
-          <Link
-            href='/shop'
-            className={`font-medium ${
-              router.route === '/shop'
-                ? 'text-brand-red font-bold font-brown-bold'
-                : 'text-gray-500 font-brown'
-            } hover:text-gray-900  tracking-wider text-sm`}
-          >
-            Shop
-          </Link>
-          <Link
-            href='/hey-teach'
-            className={`font-medium ${
-              router.route === '/hey-teach'
-                ? 'text-brand-red font-bold font-brown-bold'
-                : 'text-gray-500 font-brown'
-            } hover:text-gray-900  tracking-wider text-sm`}
-          >
-            Hey, Teach!
-          </Link>
-          <Link
-            href='/watch'
-            className={`font-medium ${
-              router.route === '/watch'
-                ? 'text-brand-red font-bold font-brown-bold'
-                : 'text-gray-500 font-brown'
-            } hover:text-gray-900  tracking-wider text-sm`}
-          >
-            Watch
-          </Link>
-          <Link
-            href='/visit'
-            className={`font-medium ${
-              router.route === '/visit'
-                ? 'text-brand-red font-bold font-brown-bold'
-                : 'text-gray-500 font-brown'
-            } hover:text-gray-900  tracking-wider text-sm`}
-          >
-            Visit
-          </Link>
-          <Link
-            href='/blog'
-            className={`font-medium ${
-              router.route === '/blog'
-                ? 'text-brand-red font-bold font-brown-bold'
-                : 'text-gray-500 font-brown'
-            } hover:text-gray-900  tracking-wider text-sm`}
-          >
-            Blog
-          </Link>
-          <Link
-            href='/giving'
-            className={`font-medium ${
-              router.route === '/giving'
-                ? 'text-brand-red font-bold font-brown-bold'
-                : 'text-gray-500 font-brown'
-            } hover:text-gray-900  tracking-wider text-sm`}
-          >
-            Giving Back
-          </Link>
-          <Link
-            href='/about'
-            className={`font-medium ${
-              router.route === '/about'
-                ? 'text-brand-red font-bold font-brown-bold'
-                : 'text-gray-500 font-brown'
-            } hover:text-gray-900  tracking-wider text-sm`}
-          >
-            About
-          </Link>
-          {/* <div>&#10072;</div>
-          <Link
-            href='/signin'
-            className='text-sm font-medium text-gray-500 hover:text-gray-900 font-brown'
-          >
-            Sign In
-          </Link>
-          <Link
-            href='/signup'
-            className='text-sm font-medium text-gray-500 hover:text-gray-900 font-brown'
-          >
-            Sign Up
-          </Link>
-          <div>
-            <BookmarkIcon className='w-5 h-5 stroke-gray-500' />
-          </div>
-          <div>
-            <MagnifyingGlassIcon className='w-5 h-5 stroke-gray-500' />
-          </div> */}
+          {nav &&
+            nav
+              .sort((a, b) => a.order - b.order)
+              .map((item) => (
+                <Link
+                  key={item.id}
+                  href={item.link}
+                  className={`font-medium ${
+                    router.route === item.link
+                      ? 'text-brand-red font-bold font-brown-bold'
+                      : 'text-gray-500 font-brown'
+                  } hover:text-gray-900  tracking-wider text-sm`}
+                >
+                  {item.name}
+                </Link>
+              ))}
         </nav>
       </motion.div>
 
@@ -183,55 +122,18 @@ export default function Header() {
             </div>
             <div className='py-6 px-5'>
               <div className='grid grid-cols-1 gap-3'>
-                <Popover.Button
-                  as={Link}
-                  href='/shop'
-                  className='font-canela text-5xl text-gray-700'
-                >
-                  <HeadlineMotion>Shop</HeadlineMotion>
-                </Popover.Button>
-                <Popover.Button
-                  as={Link}
-                  href='/hey-teach'
-                  className='font-canela text-5xl text-gray-700'
-                >
-                  <HeadlineMotion>Hey, Teach!</HeadlineMotion>
-                </Popover.Button>
-                <Popover.Button
-                  as={Link}
-                  href='/watch'
-                  className='font-canela text-5xl text-gray-700'
-                >
-                  <HeadlineMotion>Watch</HeadlineMotion>
-                </Popover.Button>
-                <Popover.Button
-                  as={Link}
-                  href='/visit'
-                  className='font-canela text-5xl text-gray-700'
-                >
-                  <HeadlineMotion>Visit</HeadlineMotion>
-                </Popover.Button>
-                <Popover.Button
-                  as={Link}
-                  href='/blog'
-                  className='font-canela text-5xl text-gray-700'
-                >
-                  <HeadlineMotion>Blog</HeadlineMotion>
-                </Popover.Button>
-                <Popover.Button
-                  as={Link}
-                  href='/giving'
-                  className='font-canela text-5xl text-gray-700'
-                >
-                  <HeadlineMotion>Giving Back</HeadlineMotion>
-                </Popover.Button>
-                <Popover.Button
-                  as={Link}
-                  href='/about'
-                  className='font-canela text-5xl text-gray-700'
-                >
-                  <HeadlineMotion>About</HeadlineMotion>
-                </Popover.Button>
+                {nav
+                  .sort((a, b) => a.order - b.order)
+                  .map((item) => (
+                    <Popover.Button
+                      key={item.id}
+                      as={Link}
+                      href={item.link}
+                      className='font-canela text-5xl text-gray-700'
+                    >
+                      <HeadlineMotion>{item.name}</HeadlineMotion>
+                    </Popover.Button>
+                  ))}
               </div>
             </div>
           </div>

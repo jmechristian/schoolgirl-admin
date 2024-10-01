@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 
 const Page = ({ navigation }) => {
   const [nav, setNav] = useState(navigation);
+  const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
@@ -18,9 +19,20 @@ const Page = ({ navigation }) => {
     );
   };
 
-  const handleSaveChanges = () => {
-    // Here you would typically save the changes to the database
-    console.log('Updated nav:', nav);
+  const handleSaveChanges = async () => {
+    setIsLoading(true);
+    const data = await nav.forEach(async (item) => {
+      const { data, error } = await supabase
+        .from('navigation')
+        .update({
+          name: item.name,
+          link: item.link,
+          order: item.order,
+        })
+        .eq('id', item.id)
+        .select();
+    });
+    setIsLoading(false);
     setIsModalOpen(false);
   };
 
@@ -198,13 +210,10 @@ const Page = ({ navigation }) => {
                 </button>
                 <button
                   className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded'
-                  onClick={() => {
-                    // Here you would typically save the changes
-                    console.log('Updated nav:', nav);
-                    setIsModalOpen(false);
-                  }}
+                  onClick={handleSaveChanges}
+                  disabled={isLoading}
                 >
-                  Save Changes
+                  {isLoading ? 'Saving...' : 'Save Changes'}
                 </button>
               </div>
             </div>
