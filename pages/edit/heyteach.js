@@ -225,7 +225,7 @@ const Page = ({ pageData, rowData, sellerHeader, heroes }) => {
                     type='text'
                     id='image'
                     value={isHeroImage}
-                    changeHandler={(val) => setIsHeroImage(val)}
+                    changeHandler={(val) => setIsMobileHeroImage(val)}
                   />
                   <div>1200x800 px</div>
                 </div>

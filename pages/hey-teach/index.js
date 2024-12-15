@@ -221,7 +221,7 @@ const Index = ({ pageData, rowData, sellerHeader, heroes, dbsellers }) => {
           />
         </div>
       </div>
-      <div className='pt-36 pb-24'>
+      <div className='lg:pt-36 pb-24 pt-16 md:pt-24'>
         <HeyTeachScroller
           items={pageData && pageData.data}
           headline={rowData && rowData.data[0].title}
