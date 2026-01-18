@@ -175,6 +175,8 @@ const listSeven = [
 const Footer = () => {
   const router = useRouter();
 
+  const currentYear = new Date().getFullYear(); 
+
   const getQuote = () => {
     switch (router.route) {
       case '/watch':
@@ -284,7 +286,7 @@ const Footer = () => {
                   )
                 }
               >
-                © 2023 SCHOOLGIRL STYLE • PRIVACY POLICY • TERMS • ACCESSIBILITY
+                © {currentYear} SCHOOLGIRL STYLE • PRIVACY POLICY • TERMS • ACCESSIBILITY
               </div>
             </div>
           </div>
