@@ -1,4 +1,5 @@
 import { getAllPostsWithSlug } from '../lib/API';
+import { HOUR_CACHE_CONTROL } from '../lib/cache';
 
 const URL = 'https://www.schoolgirlstyle.com';
 
@@ -49,6 +50,10 @@ export async function getServerSideProps({ res }) {
   // Generate the XML sitemap with the blog data
   const sitemap = generateSiteMap(posts.nodes);
 
+  res.setHeader(
+    'Cache-Control',
+    HOUR_CACHE_CONTROL
+  );
   res.setHeader('Content-Type', 'text/xml');
   // Send the XML to the browser
   res.write(sitemap);

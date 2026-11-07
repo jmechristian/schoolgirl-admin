@@ -176,6 +176,7 @@ export default function Home({ pageData }) {
   return (
     <div className='flex flex-col gap-12 md:gap-16 pb-16'>
       <Hero
+        priority
         side='md:bg-gradient-to-l'
         heading={pageData.data[0].hero_main.heading}
         headline={pageData.data[0].hero_main.headline}

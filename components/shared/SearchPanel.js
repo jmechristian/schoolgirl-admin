@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import TextInput from './TextInput';
-import { getSearchPosts, getAllPostsForHome } from '../../lib/API';
+import CoverImage from './CoverImage';
 
 export default function SearchPanel({ open, setClose }) {
   const [searchTerm, setSearchTerm] = useState(undefined);
@@ -10,9 +10,17 @@ export default function SearchPanel({ open, setClose }) {
 
   const searchClickHandler = async () => {
     setIsSending(true);
-    const posts = await getSearchPosts(searchTerm);
-    setIsResults(posts.posts.edges);
-    setIsSending(false);
+    try {
+      const response = await fetch(
+        `/api/search-posts?q=${encodeURIComponent(searchTerm || '')}`
+      );
+      const json = await response.json();
+      setIsResults(json.posts || []);
+    } catch {
+      setIsResults([]);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -65,12 +73,13 @@ export default function SearchPanel({ open, setClose }) {
                       >
                         <div className='flex gap-3'>
                           <div>
-                            <div
-                              className='w-16 h-12 bg-black bg-cover bg-center'
-                              style={{
-                                backgroundImage: `url(${post.node.featuredImage?.node.sourceUrl})`,
-                              }}
-                            ></div>
+                            <div className='relative w-16 h-12 bg-black'>
+                              <CoverImage
+                                src={post.node.featuredImage?.node.sourceUrl}
+                                alt=''
+                                sizes='64px'
+                              />
+                            </div>
                           </div>
                           <div className='font-brown-bold'>
                             {post.node.title}

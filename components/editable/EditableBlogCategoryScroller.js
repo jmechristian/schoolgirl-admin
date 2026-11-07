@@ -11,7 +11,6 @@ import HeadlineMotion from '../shared/HeadlineMotion';
 import NewScroller from '../shared/NewScroller';
 import TextInput from '../shared/TextInput';
 import { createClient } from '@supabase/supabase-js';
-import { getClassroomInspoPosts } from '../../lib/API';
 
 const supabaseUrl = 'https://pqmjfwmbitodwtpedlle.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -28,10 +27,11 @@ const EditableBlogCategoryScroller = ({
   background,
   category,
   categories,
+  initialItems,
   price,
 }) => {
   const [isHeadline, setIsHeadline] = useState(headline && headline);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(initialItems || []);
   const [isCategory, setIsCategory] = useState(category && category);
   const [isEditing, setIsEditing] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -39,13 +39,28 @@ const EditableBlogCategoryScroller = ({
   const [selected, setSelected] = useState(category);
 
   useEffect(() => {
+    if (selected === category && initialItems) {
+      setItems(initialItems);
+      return;
+    }
+
+    let ignore = false;
+
     const getPosts = async () => {
-      const posts = await getClassroomInspoPosts(selected && selected);
-      setItems(posts.nodes);
+      const response = await fetch(
+        `/api/blog-category?category=${encodeURIComponent(selected || '')}`
+      );
+      if (!response.ok) return;
+      const json = await response.json();
+      if (!ignore) setItems(json.posts || []);
     };
 
-    getPosts();
-  }, [selected]);
+    if (selected) getPosts();
+
+    return () => {
+      ignore = true;
+    };
+  }, [selected, category, initialItems]);
 
   const headlineSubmitHandler = async (e) => {
     e.preventDefault();

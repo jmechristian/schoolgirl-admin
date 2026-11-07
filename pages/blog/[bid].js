@@ -4,12 +4,11 @@ import ScrollerWithHeadline from '../../components/shared/ScrollerWithHeadline';
 import SocialShare from '../../components/shared/SocialShare';
 import HeadlineWithSpan from '../../components/shared/HeadlineWithSpan';
 import EmailSubscription from '../../components/shared/EmailSubscription';
-import {
-  getAllPostsWithSlug,
-  getPostBySlug,
-  getPostsForBlogHome,
-} from '../../lib/API';
+import { getPostBySlug, getPostsForBlogHome } from '../../lib/API';
 import Head from 'next/head';
+import CoverImage from '../../components/shared/CoverImage';
+import { PAGE_REVALIDATE_SECONDS } from '../../lib/cache';
+import { publicOptimizerUrl, rewriteContentImages } from '../../lib/wpImages';
 
 const subNav = [
   {
@@ -71,6 +70,11 @@ const collectionItems = [
 
 const Index = ({ post, latest }) => {
   const formattedDate = new Date(post.dateGmt).toDateString();
+  const content = rewriteContentImages(post.content);
+  const ogImage = publicOptimizerUrl(
+    post.featuredImage?.node?.sourceUrl ||
+      'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2024/02/sgs-defaultogimg.png'
+  );
 
   return (
     <>
@@ -81,11 +85,7 @@ const Index = ({ post, latest }) => {
         <meta
           name='image'
           property='og:image'
-          content={
-            post && post.featuredImage
-              ? post.featuredImage.node.sourceUrl
-              : 'https://schoolgirlstyle.purveu.a2hosted.com/wp-content/uploads/2024/02/sgs-defaultogimg.png'
-          }
+          content={ogImage}
           key='image'
         />
         <meta
@@ -128,25 +128,27 @@ const Index = ({ post, latest }) => {
               ></div>
             </div>
           </div>
-          {post.featuredImage && (
-            <div
-              className='aspect-video bg-slate-800 w-full bg-cover my-24'
-              style={{
-                backgroundImage: `url(${post.featuredImage.node.sourceUrl})`,
-              }}
-            ></div>
+          {post.featuredImage?.node?.sourceUrl && (
+            <div className='relative aspect-video bg-slate-800 w-full my-24'>
+              <CoverImage
+                src={post.featuredImage.node.sourceUrl}
+                alt={post.featuredImage.node.altText || post.title || ''}
+                sizes='100vw'
+                priority
+              />
+            </div>
           )}
           <div className='max-w-3xl px-6 lg:px-0 mx-auto flex flex-col gap-16'>
             <div
               className='blogContent prose prose-gray: lg:prose-lg'
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{ __html: content }}
             ></div>
           </div>
           <SocialShare
             title={post.title}
             slug={post.slug}
             desc={post.excerpt}
-            media={post?.featuredImage?.node.sourceUrl}
+            media={ogImage}
           />
           <hr className='my-24' />
           <div className='flex flex-col gap-16'>
@@ -164,23 +166,32 @@ const Index = ({ post, latest }) => {
   );
 };
 
-export const getServerSideProps = async ({ params }) => {
-  const data = await getPostBySlug(params && params.bid);
-  const latest = await getPostsForBlogHome();
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  };
+}
 
-  if (!data.post) {
+export async function getStaticProps({ params }) {
+  const data = await getPostBySlug(params && params.bid);
+
+  if (!data?.post) {
     return {
       notFound: true,
+      revalidate: PAGE_REVALIDATE_SECONDS,
     };
   }
+
+  const latest = await getPostsForBlogHome();
 
   return {
     props: {
       post: data.post,
-      latest: latest,
+      latest,
     },
-    // revalidate: 10,
+    revalidate: PAGE_REVALIDATE_SECONDS,
   };
-};
+}
 
 export default Index;

@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useRouter } from 'next/router';
+import CoverImage from './CoverImage';
+import { isImageSource } from '../../lib/wpImages';
 
 const Hero = ({
   side,
@@ -17,6 +19,7 @@ const Hero = ({
   bodyColor,
   buttonTextColor,
   theme,
+  priority = false,
 }) => {
   const heroRef = useRef();
   const inView = useInView(heroRef);
@@ -121,9 +124,15 @@ const Hero = ({
           className={`absolute bottom-0 right-0 left-0 w-full h-full bg-gradient-to-r via-white/80 from-white/30 to-white/30 ${side} md:from-white z-10 `}
         ></motion.div>
         <motion.div
-          className={`h-96 relative md:h-[543px] flex max-w-[1440px] mx-auto bg-cover bg-center bg-no-repeat`}
-          style={{ backgroundImage: `url(${bg})` }}
+          className={`h-96 relative md:h-[543px] flex max-w-[1440px] mx-auto overflow-hidden bg-cover bg-center ${
+            isImageSource(bg) ? '' : bg || ''
+          }`}
         >
+          <CoverImage
+            src={isImageSource(bg) ? bg : ''}
+            sizes='100vw'
+            priority={priority}
+          />
           <motion.div
             className={`absolute w-[300px] md:h-[543px] flex justify-center items-center top-0 bottom-0 ${textSide} z-20`}
           >

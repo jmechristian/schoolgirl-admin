@@ -8,8 +8,8 @@ import InstagramGrid from '../../components/shared/InstagramGrid';
 import EmailSubscription from '../../components/shared/EmailSubscription';
 import BlogCategoryScroller from '../../components/shared/BlogCategoryScroller';
 import { getPostsForBlogHome, getClassroomInspoPosts } from '../../lib/API';
-import { getPostCategories } from '../../lib/API';
 import { supabase } from '../../lib/API';
+import { PAGE_REVALIDATE_SECONDS } from '../../lib/cache';
 import NewSubnav from '../../components/shared/NewSubnav';
 
 const subNav = [
@@ -76,11 +76,12 @@ const collectionItems = [
   },
 ];
 
-const Index = ({ posts, inspo, pageData, subnav, categories }) => {
+const Index = ({ posts, inspo, pageData, subnav }) => {
   return (
     <main className='relative pb-16' id='one'>
       <NewSubnav subNav={subnav.data} search={true} />
       <Hero
+        priority
         side='md:bg-gradient-to-l'
         heading={pageData.data[0].hero_main.heading}
         headline={pageData.data[0].hero_main.headline}
@@ -118,11 +119,9 @@ const Index = ({ posts, inspo, pageData, subnav, categories }) => {
         </div>
         <div className='scroll-mt-16' id='four' />
         <BlogCategoryScroller
-          // items={inspo?.nodes}
+          items={inspo?.nodes}
           itemTextStyle='text-gray-700'
           headline={pageData.data[0].category_headline}
-          category={pageData.data[0].category}
-          categories={categories}
           price
         />
         <div className='flex flex-col'>
@@ -184,8 +183,10 @@ export const getStaticProps = async () => {
     );
 
   const data = await getPostsForBlogHome();
-  const inspo = await getClassroomInspoPosts('Classroom Inspiration');
-  const categories = await getPostCategories();
+  const category = pageData.data?.[0]?.category;
+  const inspo = category
+    ? await getClassroomInspoPosts(category)
+    : { nodes: [] };
   const subnav = await supabase.from('blog_subnav').select('*');
 
   return {
@@ -193,10 +194,9 @@ export const getStaticProps = async () => {
       posts: data,
       inspo: inspo,
       pageData,
-      categories,
       subnav,
     },
-    revalidate: 10,
+    revalidate: PAGE_REVALIDATE_SECONDS,
   };
 };
 

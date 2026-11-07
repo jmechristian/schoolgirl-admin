@@ -134,6 +134,7 @@ const Index = ({ pageData, subnav }) => {
       {/* <InnerPageSubNav subNav={subNav} /> */}
       <NewSubnav subNav={subnav.data} />
       <Hero
+        priority
         side='md:bg-gradient-to-r md:from-white/30'
         heading={pageData.data[0].hero_main.heading}
         headline={pageData.data[0].hero_main.headline}

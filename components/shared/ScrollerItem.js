@@ -48,13 +48,18 @@ const ScrollerItem = ({
         ref={itemRef}
       >
         <motion.div className='block relative aspect-square cursor-pointer'>
-          <Image
-            src={image}
-            fill
-            alt={headline}
-            className='object-cover'
-            draggable={false}
-          />
+          {image ? (
+            <Image
+              src={image}
+              fill
+              alt={headline || ''}
+              sizes='300px'
+              className='object-cover'
+              draggable={false}
+            />
+          ) : (
+            <div className='absolute inset-0 bg-slate-200' />
+          )}
         </motion.div>
         <motion.div
           className={`${background ? 'bg-khaki' : ''} w-full flex ${

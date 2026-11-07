@@ -1,4 +1,5 @@
 import React from 'react';
+import CoverImage from './CoverImage';
 
 const PolkaItemRight = ({
   heading,
@@ -38,10 +39,13 @@ const PolkaItemRight = ({
           )}
         </div>
       </div>
-      <div
-        className={`bg-cover bg-top aspect-square md:aspect-auto`}
-        style={{ backgroundImage: `url(${bground})` }}
-      ></div>
+      <div className='relative overflow-hidden aspect-square md:aspect-auto'>
+        <CoverImage
+          src={bground}
+          className='object-cover object-top'
+          sizes='(max-width: 768px) 100vw, 50vw'
+        />
+      </div>
     </div>
   );
 };

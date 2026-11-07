@@ -1,4 +1,5 @@
 import React from 'react';
+import CoverImage from './CoverImage';
 
 const PolkaItemLeft = ({
   heading,
@@ -12,10 +13,13 @@ const PolkaItemLeft = ({
 }) => {
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 bg-white md:min-h-[520px]'>
-      <div
-        className={`bg-cover bg-top aspect-square md:aspect-auto`}
-        style={{ backgroundImage: `url(${bground})` }}
-      ></div>
+      <div className='relative overflow-hidden aspect-square md:aspect-auto'>
+        <CoverImage
+          src={bground}
+          className='object-cover object-top'
+          sizes='(max-width: 768px) 100vw, 50vw'
+        />
+      </div>
       <div className='flex justify-center items-center gap-4 max-w-[496px] mx-auto'>
         <div className='flex flex-col col-span-1 max-w-screen-xs gap-4 px-6 mx-auto py-12 lg:py-16'>
           <div className='font-sweet-bold uppercase tracking-widest text-xs text-gray-900'>

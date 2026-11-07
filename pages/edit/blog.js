@@ -17,6 +17,7 @@ import {
   getPostCategories,
   supabase,
 } from '../../lib/API';
+import { PAGE_REVALIDATE_SECONDS } from '../../lib/cache';
 import BlogEditableNav from '../../components/editable/BlogEditableNav';
 import { LinkIcon } from '@heroicons/react/24/outline';
 import EditableRandomScrollerWithHeadline from '../../components/editable/EditableRandoScrollerWithHeadline';
@@ -86,7 +87,7 @@ const collectionItems = [
   },
 ];
 
-const Index = ({ posts, tips, pageData, subnav, categories }) => {
+const Index = ({ posts, tips, pageData, subnav, categories, inspo }) => {
   const { user } = useSelector((state) => state.auth);
   const router = useRouter();
 
@@ -174,7 +175,7 @@ const Index = ({ posts, tips, pageData, subnav, categories }) => {
             </div>
           </div>
           <EditableBlogCategoryScroller
-            // items={inspo?.nodes}
+            initialItems={inspo?.nodes}
             itemTextStyle='text-gray-700'
             headline={pageData.data[0].category_headline}
             category={pageData.data[0].category}
@@ -268,7 +269,10 @@ export const getStaticProps = async () => {
     );
 
   const data = await getPostsForBlogHome();
-  // const inspo = await getClassroomInspoPosts(pageData.data[0].category);
+  const category = pageData.data?.[0]?.category;
+  const inspo = category
+    ? await getClassroomInspoPosts(category)
+    : { nodes: [] };
   const categories = await getPostCategories();
 
   const subnav = await supabase.from('blog_subnav').select('*');
@@ -277,13 +281,13 @@ export const getStaticProps = async () => {
   return {
     props: {
       posts: data,
-      // inspo: inspo,
+      inspo,
       pageData,
       subnav,
       categories,
       tips,
     },
-    revalidate: 10,
+    revalidate: PAGE_REVALIDATE_SECONDS,
   };
 };
 

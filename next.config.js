@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
+    minimumCacheTTL: 60 * 60 * 24 * 30,
     domains: [
       'res.cloudinary.com',
       'schoolgirlstyle.com',
