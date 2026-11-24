@@ -1,3 +1,7 @@
+# ShapBot
+User-agent: ShapBot
+Disallow: /
+
 # *
 User-agent: *
 Allow: /
